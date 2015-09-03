@@ -10,9 +10,19 @@ public class MainCharacter : MonoBehaviour {
 	void Start () {
 	
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.name == "Diamond")
+        {
+            Destroy(col.gameObject);
+            Global.score += 1;
+            Global.UpdateScore();
+        }
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         Rigidbody2D rigid = GetComponent<Rigidbody2D>();
 
@@ -39,6 +49,8 @@ public class MainCharacter : MonoBehaviour {
             }
         }
 
-        rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, -2.25f, 5f), rigid.transform.localPosition.z);
+        rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, -2.25f, 10f), rigid.transform.localPosition.z);
     }
+
+    
 }

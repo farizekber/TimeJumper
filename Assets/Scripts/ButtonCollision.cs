@@ -44,6 +44,7 @@ public class ButtonCollision : MonoBehaviour {
                 MainCharacter.canMove = true;
                 initiatedTime = 0;
                 Global.delay.Stop();
+                buttonsCanMove = true;
                 Destroy(this.gameObject);
             }
         }
@@ -60,6 +61,7 @@ public class ButtonCollision : MonoBehaviour {
         ButtonPushed = true;
         MainCharacter.canMove = false;
         GetComponent<SpriteRenderer>().sprite = spritePushed;
+        buttonsCanMove = false;
         Global.delay.Start();
     }
 

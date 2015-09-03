@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Diagnostics;
 
@@ -10,9 +11,12 @@ public class Global : MonoBehaviour {
 
     public static Stopwatch delay = new Stopwatch();
     public static float speed = 1f;
-    
+    public static int score = 0;
+    public static Text ScoreText; 
+
 	// Use this for initialization
 	void Start () {
+        ScoreText = GetComponentInChildren<Text>();
 	}
 	
 	// Update is called once per frame
@@ -30,12 +34,17 @@ public class Global : MonoBehaviour {
         if(Time.time - lastSpawnTime - (delay.ElapsedMilliseconds / 1000f) > (spawnRate/speed))
         {
             lastSpawnTime = Time.time;
-            GameObject gobject = (GameObject)Instantiate(spawningItem,
+            /*GameObject gobject = (GameObject)*/Instantiate(spawningItem,
                 new Vector3(
                 6.5f,
                 Random.value * 6.0f - 3,
                 0.5f),
                 new Quaternion(0, 0, 0, 0));
         }
+	}
+
+    public static void UpdateScore()
+    {
+        ScoreText.text = "Score : " + score;
     }
 }
