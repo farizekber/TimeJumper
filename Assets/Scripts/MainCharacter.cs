@@ -3,7 +3,8 @@ using System.Collections;
 
 public class MainCharacter : MonoBehaviour {
     
-    public bool canFly = true;
+    public static bool canFly = true;
+    public static bool canMove = true;
 
 	// Use this for initialization
 	void Start () {
@@ -22,7 +23,7 @@ public class MainCharacter : MonoBehaviour {
             rigid.velocity = new Vector2(rigid.velocity.x, 0);
         }
 
-        if (ButtonCollision.ButtonPushed)
+        if (!canMove)
         {
             rigid.velocity = new Vector2(0, 0);
         }

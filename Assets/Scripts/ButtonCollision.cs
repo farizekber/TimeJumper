@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Reflection;
+using System.Collections.Generic;
 
 public class ButtonCollision : MonoBehaviour {
 
     public Sprite sprite;
     public Sprite spritePushed;
     public int twirlTimeInSeconds;
-    public static bool ButtonPushed = false;
+    public bool ButtonPushed = false;
     float initiatedTime = 0;
     Component twirl = null;
+    public static List<GameObject> buttons = new List<GameObject>();
+    public static bool buttonsCanMove = true;
 
 	// Use this for initialization
 	void Start ()
@@ -25,6 +28,11 @@ public class ButtonCollision : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (buttonsCanMove)
+            GetComponent<Rigidbody2D>().velocity = new Vector2(-Global.speed, 0);
+        else
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+
         if (ButtonPushed)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
@@ -33,18 +41,16 @@ public class ButtonCollision : MonoBehaviour {
             if (initiatedTime + twirlTimeInSeconds < Time.time && (((twirl as UnityStandardAssets.ImageEffects.Twirl).angle % 360) == 0))
             {
                 ButtonPushed = false;
+                MainCharacter.canMove = true;
                 initiatedTime = 0;
-                GetComponent<SpriteRenderer>().sprite = sprite;
+                Global.delay.Stop();
+                Destroy(this.gameObject);
             }
-        }
-        else
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(-Global.speed, 0);
         }
 
         if (transform.localPosition.x < -10)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 
@@ -52,7 +58,9 @@ public class ButtonCollision : MonoBehaviour {
     {
         initiatedTime = Time.time;
         ButtonPushed = true;
+        MainCharacter.canMove = false;
         GetComponent<SpriteRenderer>().sprite = spritePushed;
+        Global.delay.Start();
     }
 
     void OnTriggerStay2D(Collider2D other) { }

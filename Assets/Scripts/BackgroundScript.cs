@@ -12,6 +12,6 @@ public class BackgroundScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        GetComponent<MeshRenderer>().material.SetFloat("_TickCount", tickCount += (Time.fixedDeltaTime * 0.075f * Global.speed));
+        GetComponent<MeshRenderer>().material.SetFloat("_TickCount", (tickCount += (Time.fixedDeltaTime * 0.075f * Global.speed)) - Global.delay.ElapsedMilliseconds / 1000.0f);
 	}
 }
