@@ -7,6 +7,7 @@ public class Global : MonoBehaviour {
 
     public GameObject spawningItemButton;
     public GameObject spawningItemDiamond;
+    public GameObject spawningItemBat;
     public float spawnRate = 5;
     float nextSpawn = 0;
     float lastSpawnTimeObstacle = 0;
@@ -38,6 +39,15 @@ public class Global : MonoBehaviour {
         {
             nextSpawn = 10 * Random.value;
             lastSpawnTimeObstacle = Time.time;
+            /*GameObject gobject = (GameObject)*/
+            Instantiate(spawningItemBat,
+                new Vector3(
+                6.5f,
+                Random.value * 6.0f - 1.5f,
+                0.5f),
+                new Quaternion(0, 0, 0, 0));
+
+            lastSpawnTimeObstacle = Time.time;
             /*GameObject gobject = (GameObject)*/Instantiate(spawningItemButton,
                 new Vector3(
                 6.5f,
@@ -56,7 +66,6 @@ public class Global : MonoBehaviour {
                 Random.value * 6.0f - 1.5f,
                 0.5f),
                 new Quaternion(0, 0, 0, 0));
-
         }
     }
 
