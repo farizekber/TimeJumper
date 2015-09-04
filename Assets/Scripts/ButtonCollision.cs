@@ -10,7 +10,6 @@ public class ButtonCollision : MonoBehaviour {
     public bool ButtonPushed = false;
     float initiatedTime = 0;
     Component twirl = null;
-    public static List<GameObject> buttons = new List<GameObject>();
     public static bool buttonsCanMove = true;
 
 	// Use this for initialization

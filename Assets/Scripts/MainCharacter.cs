@@ -22,10 +22,6 @@ public class MainCharacter : MonoBehaviour {
             Global.score += 1;
             Global.UpdateScore();
         }
-        if (col.gameObject.name == "Bat(Clone)")
-        {
-            Destroy(this.gameObject);
-        }
     }
 
     // Update is called once per frame
