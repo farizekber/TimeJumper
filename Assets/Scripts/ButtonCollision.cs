@@ -6,7 +6,6 @@ using System.Collections.Generic;
 public class ButtonCollision : MonoBehaviour {
 
     public Sprite sprite;
-    public Sprite spritePushed;
     public int twirlTimeInSeconds;
     public bool ButtonPushed = false;
     float initiatedTime = 0;
@@ -56,13 +55,15 @@ public class ButtonCollision : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D other)
-    {
-        initiatedTime = Time.time;
-        ButtonPushed = true;
-        MainCharacter.canMove = false;
-        GetComponent<SpriteRenderer>().sprite = spritePushed;
-        buttonsCanMove = false;
-        Global.delay.Start();
+    {   
+        if (other.gameObject.name == "Main Character")
+        {
+            initiatedTime = Time.time;
+            ButtonPushed = true;
+            MainCharacter.canMove = false;
+            buttonsCanMove = false;
+            Global.delay.Start();
+        }
     }
 
     void OnTriggerStay2D(Collider2D other) { }

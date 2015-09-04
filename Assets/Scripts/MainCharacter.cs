@@ -13,7 +13,7 @@ public class MainCharacter : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.name == "Diamond")
+        if (col.gameObject.name == "Diamond(Clone)")
         {
             Destroy(col.gameObject);
             Global.score += 1;
@@ -26,7 +26,7 @@ public class MainCharacter : MonoBehaviour {
     {
         Rigidbody2D rigid = GetComponent<Rigidbody2D>();
 
-        GetComponent<Animator>().speed = (Global.speed < 0 ? 0 : Global.speed);
+        GetComponent<Animator>().speed = (Global.speed < 0 ? 0 : Global.speed/4f);
         
         if (rigid.transform.localPosition.y <= -2.25f)
         {
@@ -50,6 +50,7 @@ public class MainCharacter : MonoBehaviour {
         }
 
         rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, -2.25f, 10f), rigid.transform.localPosition.z);
+
     }
 
     
