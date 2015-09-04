@@ -22,6 +22,10 @@ public class MainCharacter : MonoBehaviour {
             Global.score += 1;
             Global.UpdateScore();
         }
+        if (col.gameObject.name == "Bat(Clone)")
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -31,7 +35,7 @@ public class MainCharacter : MonoBehaviour {
 
         GetComponent<Animator>().speed = (Global.speed < 0 ? 0 : Global.speed/4f);
         
-        if (rigid.transform.localPosition.y <= -2.25f)
+        if (rigid.transform.localPosition.y <= -3.1f)
         {
             rigid.velocity = new Vector2(rigid.velocity.x, 0);
         }
@@ -46,14 +50,14 @@ public class MainCharacter : MonoBehaviour {
             if ((Input.touchCount > 0 || Input.GetMouseButtonDown(0)) && Time.time - previousClickTime > (clickRate / Global.speed))
             {
                 previousClickTime = Time.time;
-                if (canFly || rigid.transform.localPosition.y <= -2.25f)
+                if (canFly || rigid.transform.localPosition.y <= -3.1f)
                 {
                     rigid.AddForce(new Vector2(0, 150));
                 }
             }
         }
 
-        rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, -2.25f, 10f), rigid.transform.localPosition.z);
+        rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, -3.1f, 10f), rigid.transform.localPosition.z);
 
     }
 

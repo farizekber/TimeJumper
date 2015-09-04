@@ -7,7 +7,9 @@ public class Global : MonoBehaviour {
 
     public GameObject spawningItemButton;
     public GameObject spawningItemDiamond;
+    public GameObject spawningItemBat;
     public float spawnRate = 5;
+    float nextSpawn = 0;
     float lastSpawnTimeObstacle = 0;
     float lastSpawnTimeDiamond = 0;
 
@@ -33,13 +35,23 @@ public class Global : MonoBehaviour {
         if (!ButtonCollision.buttonsCanMove)
             return;
 
-        if(Time.time - lastSpawnTimeObstacle - (delay.ElapsedMilliseconds / 1000f) > (spawnRate/speed))
+        if(Time.time - lastSpawnTimeObstacle - (delay.ElapsedMilliseconds / 1000f) > ((spawnRate + nextSpawn)/speed))
         {
+            nextSpawn = 10 * Random.value;
+            lastSpawnTimeObstacle = Time.time;
+            /*GameObject gobject = (GameObject)*/
+            Instantiate(spawningItemBat,
+                new Vector3(
+                6.5f,
+                Random.value * 6.0f - 1.5f,
+                0.5f),
+                new Quaternion(0, 0, 0, 0));
+
             lastSpawnTimeObstacle = Time.time;
             /*GameObject gobject = (GameObject)*/Instantiate(spawningItemButton,
                 new Vector3(
                 6.5f,
-                Random.value * 6.0f - 3,
+                -3.1f,
                 0.5f),
                 new Quaternion(0, 0, 0, 0));
         }
@@ -51,10 +63,9 @@ public class Global : MonoBehaviour {
             Instantiate(spawningItemDiamond,
                 new Vector3(
                 6.5f,
-                Random.value * 6.0f - 3,
+                Random.value * 6.0f - 1.5f,
                 0.5f),
                 new Quaternion(0, 0, 0, 0));
-
         }
     }
 
