@@ -1078,13 +1078,6 @@
         <para>Touch id for when simulating touches on a non touch device.</para>
       </summary>
     </member>
-    <member name="M:UnityEngine.EventSystems.PointerInputModule.CopyFromTo(UnityEngine.EventSystems.PointerEventData,UnityEngine.EventSystems.PointerEventData)">
-      <summary>
-        <para>Copy one [[PointerEventData]] to another.</para>
-      </summary>
-      <param name="from"></param>
-      <param name="to"></param>
-    </member>
     <member name="M:UnityEngine.EventSystems.PointerInputModule.GetPointerData(System.Int32,UnityEngine.EventSystems.PointerEventData&amp;,System.Boolean)">
       <summary>
         <para>Seach the cache for currently active pointers, return true if found.</para>
@@ -1149,11 +1142,6 @@
     <member name="F:UnityEngine.EventSystems.RaycastResult.module">
       <summary>
         <para>[[BaseInputModule]] that raised the hit.</para>
-      </summary>
-    </member>
-    <member name="F:UnityEngine.EventSystems.RaycastResult.screenPosition">
-      <summary>
-        <para>The screen position from which the raycast was generated.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.EventSystems.RaycastResult.sortingLayer">
@@ -1243,48 +1231,6 @@
       <summary>
         <para>See [[BaseInputModule]].</para>
       </summary>
-    </member>
-    <member name="M:UnityEngine.EventSystems.StandaloneInputModule.ProcessMouseEvent">
-      <summary>
-        <para>Itterate through all the different mouse events.</para>
-      </summary>
-      <param name="id">The mouse pointer Event data id to get.</param>
-    </member>
-    <member name="M:UnityEngine.EventSystems.StandaloneInputModule.ProcessMouseEvent(System.Int32)">
-      <summary>
-        <para>Itterate through all the different mouse events.</para>
-      </summary>
-      <param name="id">The mouse pointer Event data id to get.</param>
-    </member>
-    <member name="M:UnityEngine.EventSystems.StandaloneInputModule.ProcessMousePress(UnityEngine.EventSystems.PointerInputModule/MouseButtonEventData)">
-      <summary>
-        <para>Calulate and process any mouse button state changes.</para>
-      </summary>
-      <param name="data">The data pertaining to the current mouse state.</param>
-    </member>
-    <member name="M:UnityEngine.EventSystems.StandaloneInputModule.SendMoveEventToSelectedObject">
-      <summary>
-        <para>Calculate and send a move event to the current selected object.</para>
-      </summary>
-      <returns>
-        <para>If the move event was used by the selected object.</para>
-      </returns>
-    </member>
-    <member name="M:UnityEngine.EventSystems.StandaloneInputModule.SendSubmitEventToSelectedObject">
-      <summary>
-        <para>Calculate and send a submit event to the current selected object.</para>
-      </summary>
-      <returns>
-        <para>If the submit event was used by the selected object.</para>
-      </returns>
-    </member>
-    <member name="M:UnityEngine.EventSystems.StandaloneInputModule.SendUpdateEventToSelectedObject">
-      <summary>
-        <para>Send a update event to the currently selected object.</para>
-      </summary>
-      <returns>
-        <para>If the update event was used by the selected object.</para>
-      </returns>
     </member>
     <member name="M:UnityEngine.EventSystems.StandaloneInputModule.ShouldActivateModule">
       <summary>

@@ -1,45 +1,7 @@
 Base path: C:/Program Files/Unity/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-64bit-2-12972
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-2-40212
 Cmd: getPlatforms
-Cmd: compileSnippet
-  api=9 type=0 insize=7575 outsize=15239 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
-Cmd: compileSnippet
-  api=9 type=0 insize=7575 outsize=16867 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF VERTEXLIGHT_ON ok=1
-Cmd: compileSnippet
-  api=9 type=0 insize=7575 outsize=16660 kw=DIRECTIONAL SHADOWS_SCREEN SHADOWS_NATIVE LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
-Cmd: compileSnippet
-  api=9 type=1 insize=7575 outsize=7 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
-Cmd: compileSnippet
-  api=9 type=0 insize=4384 outsize=13355 kw=POINT SHADOWS_OFF ok=1
-Cmd: compileSnippet
-  api=5 type=0 insize=4384 outsize=5189 kw=SPOT SHADOWS_OFF ok=1
-Cmd: compileSnippet
-  api=5 type=0 insize=4384 outsize=5911 kw=SPOT SHADOWS_DEPTH SHADOWS_NONATIVE ok=1
-Cmd: compileSnippet
-  api=5 type=0 insize=4384 outsize=5205 kw=DIRECTIONAL_COOKIE SHADOWS_SCREEN ok=1
-Cmd: compileSnippet
-  api=5 type=0 insize=4384 outsize=6988 kw=SPOT SHADOWS_DEPTH SHADOWS_SOFT SHADOWS_NONATIVE ok=1
-Cmd: compileSnippet
-  api=9 type=0 insize=4384 outsize=15650 kw=POINT SHADOWS_CUBE SHADOWS_SOFT ok=1
-Cmd: compileSnippet
-  api=9 type=0 insize=4384 outsize=13687 kw=DIRECTIONAL SHADOWS_SCREEN SHADOWS_NATIVE ok=1
-Cmd: compileSnippet
-  api=9 type=1 insize=4384 outsize=7 kw=POINT SHADOWS_OFF ok=1
-Cmd: compileSnippet
-  api=9 type=1 insize=4384 outsize=7 kw=SPOT SHADOWS_OFF ok=1
-Cmd: compileSnippet
-  api=9 type=1 insize=4384 outsize=7 kw=DIRECTIONAL_COOKIE SHADOWS_OFF ok=1
-Cmd: compileSnippet
-  api=5 type=1 insize=4384 outsize=6 kw=DIRECTIONAL SHADOWS_SCREEN ok=1
-Cmd: compileSnippet
-  api=5 type=1 insize=4384 outsize=6 kw=POINT_COOKIE SHADOWS_CUBE ok=1
-Cmd: compileSnippet
-  api=9 type=1 insize=4384 outsize=7 kw=SPOT SHADOWS_DEPTH SHADOWS_SOFT SHADOWS_NATIVE ok=1
-Cmd: compileSnippet
-  api=9 type=1 insize=4384 outsize=7 kw=POINT_COOKIE SHADOWS_CUBE SHADOWS_SOFT ok=1
-Cmd: compileSnippet
-  api=9 type=1 insize=4384 outsize=7 kw=DIRECTIONAL_COOKIE SHADOWS_SCREEN SHADOWS_NATIVE ok=1
-Cmd: compileSnippet
-  api=9 type=0 insize=6693 outsize=13342 kw=LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF UNITY_HDR_ON ok=1
-Cmd: compileSnippet
-  api=9 type=1 insize=6693 outsize=7 kw=LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF HDR_LIGHT_PREPASS_OFF ok=1
+Unhandled exception: Readfile from pipe failed. GLE=The pipe has been ended.
+
+
+Quitting shader compiler process

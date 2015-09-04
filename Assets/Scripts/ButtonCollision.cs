@@ -45,6 +45,7 @@ public class ButtonCollision : MonoBehaviour {
                 Global.delay.Stop();
                 buttonsCanMove = true;
                 Destroy(this.gameObject);
+                Application.LoadLevel("GameOver");
             }
         }
 
