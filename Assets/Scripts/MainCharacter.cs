@@ -5,6 +5,9 @@ public class MainCharacter : MonoBehaviour {
     
     public static bool canFly = true;
     public static bool canMove = true;
+    float previousClickTime = 0;
+    public float clickRate = 0.10f;
+
 
 	// Use this for initialization
 	void Start () {
@@ -40,8 +43,9 @@ public class MainCharacter : MonoBehaviour {
         else
         {
             rigid.velocity = new Vector2(0, rigid.velocity.y);
-            if (Input.touchCount > 0 || Input.GetMouseButtonDown(0))
+            if ((Input.touchCount > 0 || Input.GetMouseButtonDown(0)) && Time.time - previousClickTime > (clickRate / Global.speed))
             {
+                previousClickTime = Time.time;
                 if (canFly || rigid.transform.localPosition.y <= -2.25f)
                 {
                     rigid.AddForce(new Vector2(0, 150));
