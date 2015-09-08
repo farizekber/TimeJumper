@@ -2,24 +2,25 @@
 using UnityEngine.UI;
 using System.Diagnostics;
 using Assets.Scripts;
+using System.Collections.Generic;
 
 public class Global : MonoBehaviour {
-
-    public GameObject spawningItemMinecart;
-    public GameObject spawningItemDiamond;
-    public GameObject spawningItemBat;
+    
+    public List<ObstacleBase> spawnables = new List<ObstacleBase>();
     public float spawnRate = 5;
 
     public static Stopwatch delay = new Stopwatch();
     public static float speed = 1f;
     public static int score = 0;
     public static Text ScoreText;
-    private GameObject Foreground;
+    public static GameObject ForegroundObject;
+    public static GameObject GlobalObject;
 
 	// Use this for initialization
 	void Start () {
+        GlobalObject = gameObject;
         ScoreText = GetComponentInChildren<Text>();
-        Foreground = GameObject.Find("Foreground");
+        ForegroundObject = GameObject.Find("Foreground");
         InvokeSpawns();
     }
 
@@ -28,64 +29,12 @@ public class Global : MonoBehaviour {
         if (GameOverAnimation.GetInstance().m_fAnimationInProgress)
             return;
 
-        SpawnBat();
-        SpawnButton();
-        SpawnCrystal();
+        foreach (ObstacleBase obstacle in spawnables)
+        {
+            obstacle.Spawn();
+        }
+
         Invoke("InvokeSpawns", (spawnRate / speed) * Random.value + 3);
-    }
-
-    void SpawnCrystal()
-    {
-        while (GameOverAnimation.GetInstance().m_fAnimationInProgress)
-        {
-            Invoke("SpawnCrystal", 0.1f);
-            return;
-        }
-
-        GameObject gobject = (GameObject)Instantiate(spawningItemDiamond,
-            new Vector3(
-            16.5f,
-            Random.value * 10f - 1.0f,
-            0.5f),
-            new Quaternion(0, 0, 0, 0));
-        gobject.transform.localPosition += transform.localPosition + Foreground.transform.localPosition;
-        gobject.transform.parent = Foreground.transform;
-    }
-
-    void SpawnButton()
-    {
-        while (GameOverAnimation.GetInstance().m_fAnimationInProgress)
-        {
-            Invoke("SpawnButton", 0.1f);
-            return;
-        }
-
-        GameObject gobject = (GameObject)Instantiate(spawningItemMinecart,
-            new Vector3(
-            16.5f,
-            0f,
-            0.5f),
-            new Quaternion(0, 0, 0, 0));
-        gobject.transform.localPosition += transform.localPosition + Foreground.transform.localPosition;
-        gobject.transform.parent = Foreground.transform;
-    }
-
-    void SpawnBat()
-    {
-        while (GameOverAnimation.GetInstance().m_fAnimationInProgress)
-        {
-            Invoke("SpawnButton", 0.1f);
-            return;
-        }
-
-        GameObject gobject = (GameObject)Instantiate(spawningItemBat,
-            new Vector3(
-            16.5f,
-            Random.value * 10f - 1.0f,
-            0.5f),
-            new Quaternion(0, 0, 0, 0));
-        gobject.transform.localPosition += transform.localPosition + Foreground.transform.localPosition;
-        gobject.transform.parent = Foreground.transform;
     }
 	
 	// Update is called once per frame
