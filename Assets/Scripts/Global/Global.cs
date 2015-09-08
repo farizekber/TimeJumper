@@ -16,12 +16,16 @@ public class Global : MonoBehaviour {
     public static int score = 0;
     public static Text ScoreText;
     public static Text TimeText;
+    public static Text DistanceText;
+    float lastTime = 0;
+    float distance = 0;
     private GameObject Foreground;
 
 	// Use this for initialization
 	void Start () {
         ScoreText = GetComponentsInChildren<Text>().Where(s => s.name == "ScoreText").First();
         TimeText = GetComponentsInChildren<Text>().Where(s => s.name == "TimeText").First();
+        DistanceText = GetComponentsInChildren<Text>().Where(s => s.name == "DistanceText").First();
         Foreground = GameObject.Find("Foreground");
         InvokeSpawns();
     }
@@ -99,6 +103,9 @@ public class Global : MonoBehaviour {
             speed++;
         GameOverAnimation.GetInstance().Update();
         TimeText.text = "Time : " + Time.time;
+        distance += ((Time.time - lastTime) * speed) * 10;
+        lastTime = Time.time;
+        DistanceText.text = "Distance : " + distance + "m";
     }
 
     public static void UpdateScore()
