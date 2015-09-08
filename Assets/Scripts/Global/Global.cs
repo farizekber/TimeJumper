@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Diagnostics;
 using Assets.Scripts;
+using System.Linq;
 
 public class Global : MonoBehaviour {
 
@@ -14,11 +15,13 @@ public class Global : MonoBehaviour {
     public static float speed = 1f;
     public static int score = 0;
     public static Text ScoreText;
+    public static Text TimeText;
     private GameObject Foreground;
 
 	// Use this for initialization
 	void Start () {
-        ScoreText = GetComponentInChildren<Text>();
+        ScoreText = GetComponentsInChildren<Text>().Where(s => s.name == "ScoreText").First();
+        TimeText = GetComponentsInChildren<Text>().Where(s => s.name == "TimeText").First();
         Foreground = GameObject.Find("Foreground");
         InvokeSpawns();
     }
@@ -94,8 +97,8 @@ public class Global : MonoBehaviour {
             speed--;
         else if (Input.GetKeyDown(KeyCode.RightArrow))
             speed++;
-
         GameOverAnimation.GetInstance().Update();
+        TimeText.text = "Time : " + Time.time;
     }
 
     public static void UpdateScore()

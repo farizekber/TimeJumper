@@ -7,6 +7,7 @@ public class MainCharacter : MonoBehaviour {
     public static bool canFly = true;
     float previousClickTime = 0;
     public float clickRate = 0.10f;
+    int jumpsSinceGround = 0;
 
 
 	// Use this for initialization
@@ -34,6 +35,7 @@ public class MainCharacter : MonoBehaviour {
         if (rigid.transform.localPosition.y <= 0)
         {
             rigid.velocity = new Vector2(rigid.velocity.x, 0);
+            jumpsSinceGround = 0;
         }
 
         if (GameOverAnimation.GetInstance().m_fAnimationInProgress)
@@ -43,12 +45,13 @@ public class MainCharacter : MonoBehaviour {
         else
         {
             rigid.velocity = new Vector2(0, rigid.velocity.y);
-            if ((Input.touchCount > 0 || Input.GetMouseButtonDown(0)) && Time.time - previousClickTime > (clickRate / Global.speed))
+            if ((Input.touchCount > 0 || Input.GetMouseButtonDown(0)) && Time.time - previousClickTime > (clickRate / Global.speed) && jumpsSinceGround < 2)
             {
                 previousClickTime = Time.time;
                 if (canFly || rigid.transform.localPosition.y <= 0)
-                {
+                {   
                     rigid.AddForce(new Vector2(0, 150));
+                    jumpsSinceGround += 1;
                 }
             }
         }
