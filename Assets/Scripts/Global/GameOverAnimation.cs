@@ -32,7 +32,7 @@ namespace Assets.Scripts
             {
                 m_fpInitiatedTime = 0;
                 m_fAnimationInProgress = false;
-                Global.delay.Stop();
+                Global.Instance.delay.Stop();
                 Application.LoadLevel("GameOver");
             }
         }
@@ -41,7 +41,7 @@ namespace Assets.Scripts
         {
             m_fpInitiatedTime = Time.time;
             m_fAnimationInProgress = true;
-            Global.delay.Start();
+            Global.Instance.delay.Start();
         }
 
         private void initializeTwirl()

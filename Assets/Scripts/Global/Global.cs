@@ -2,113 +2,70 @@
 using UnityEngine.UI;
 using System.Diagnostics;
 using Assets.Scripts;
+using System.Collections.Generic;
 using System.Linq;
 
-public class Global : MonoBehaviour {
+public class Global : MonoBehaviour
+{
+    public static Global Instance;
+    public GameObject ForegroundObject;
+    public GameObject GlobalObject;
+    public Stopwatch delay = new Stopwatch();
 
-    public GameObject spawningItemMinecart;
-    public GameObject spawningItemDiamond;
-    public GameObject spawningItemBat;
-    public float spawnRate = 5;
+    public List<ObstacleBase> spawnables = new List<ObstacleBase>();
+    public float speed = 1f;
+    public float spawnRate = 5f;
+    public int score = 0;
 
-    public static Stopwatch delay = new Stopwatch();
-    public static float speed = 1f;
-    public static int score = 0;
-    public static Text ScoreText;
-    public static Text TimeText;
-    public static Text DistanceText;
-    float lastTime = 0;
-    float distance = 0;
-    private GameObject Foreground;
+    private Text ScoreText;
+    private Text TimeText;
+    private Text DistanceText;
 
-	// Use this for initialization
-	void Start () {
+    private float distance = 0;
+    private float lastTime = 0;
+
+    // Use this for initialization
+    private void Start()
+    {
+        Instance = this;
+        GlobalObject = gameObject;
         ScoreText = GetComponentsInChildren<Text>().Where(s => s.name == "ScoreText").First();
         TimeText = GetComponentsInChildren<Text>().Where(s => s.name == "TimeText").First();
         DistanceText = GetComponentsInChildren<Text>().Where(s => s.name == "DistanceText").First();
-        Foreground = GameObject.Find("Foreground");
+        ForegroundObject = GameObject.Find("Foreground");
         InvokeSpawns();
     }
 
-    void InvokeSpawns()
+    private void InvokeSpawns()
     {
         if (GameOverAnimation.GetInstance().m_fAnimationInProgress)
             return;
 
-        SpawnBat();
-        SpawnButton();
-        SpawnCrystal();
+        foreach (ObstacleBase obstacle in spawnables)
+        {
+            obstacle.Spawn();
+        }
+
         Invoke("InvokeSpawns", (spawnRate / speed) * Random.value + 3);
     }
 
-    void SpawnCrystal()
+    // Update is called once per frame
+    private void Update()
     {
-        while (GameOverAnimation.GetInstance().m_fAnimationInProgress)
-        {
-            Invoke("SpawnCrystal", 0.1f);
-            return;
-        }
-
-        GameObject gobject = (GameObject)Instantiate(spawningItemDiamond,
-            new Vector3(
-            16.5f,
-            Random.value * 10f - 1.0f,
-            0.5f),
-            new Quaternion(0, 0, 0, 0));
-        gobject.transform.localPosition += transform.localPosition + Foreground.transform.localPosition;
-        gobject.transform.parent = Foreground.transform;
-    }
-
-    void SpawnButton()
-    {
-        while (GameOverAnimation.GetInstance().m_fAnimationInProgress)
-        {
-            Invoke("SpawnButton", 0.1f);
-            return;
-        }
-
-        GameObject gobject = (GameObject)Instantiate(spawningItemMinecart,
-            new Vector3(
-            16.5f,
-            0f,
-            0.5f),
-            new Quaternion(0, 0, 0, 0));
-        gobject.transform.localPosition += transform.localPosition + Foreground.transform.localPosition;
-        gobject.transform.parent = Foreground.transform;
-    }
-
-    void SpawnBat()
-    {
-        while (GameOverAnimation.GetInstance().m_fAnimationInProgress)
-        {
-            Invoke("SpawnButton", 0.1f);
-            return;
-        }
-
-        GameObject gobject = (GameObject)Instantiate(spawningItemBat,
-            new Vector3(
-            16.5f,
-            Random.value * 10f - 1.0f,
-            0.5f),
-            new Quaternion(0, 0, 0, 0));
-        gobject.transform.localPosition += transform.localPosition + Foreground.transform.localPosition;
-        gobject.transform.parent = Foreground.transform;
-    }
-	
-	// Update is called once per frame
-	void Update () {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
             speed--;
         else if (Input.GetKeyDown(KeyCode.RightArrow))
             speed++;
+
         GameOverAnimation.GetInstance().Update();
+
         TimeText.text = "Time : " + Time.time;
         distance += ((Time.time - lastTime) * speed) * 10;
         lastTime = Time.time;
         DistanceText.text = "Distance : " + distance + "m";
     }
 
-    public static void UpdateScore()
+    public void UpdateScore()
     {
         ScoreText.text = "Score : " + score;
     }
