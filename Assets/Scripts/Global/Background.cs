@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class BackgroundScript : MonoBehaviour {
+public class Background : MonoBehaviour {
 
     float tickCount = 0;
 

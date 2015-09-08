@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameOverScript : MonoBehaviour {
+public class GameOverScene : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

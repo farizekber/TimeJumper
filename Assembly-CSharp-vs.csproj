@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{E664FD66-7241-7A36-2258-61F3C4E7918E}</ProjectGuid>
+	<ProjectGuid>{B845BA17-7AB0-264E-8F80-ED4F14E5A767}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -46,10 +46,17 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\BackgroundScript.cs" />
-     <Compile Include="Assets\Scripts\ButtonCollision.cs" />
-     <Compile Include="Assets\Scripts\Global.cs" />
+     <Compile Include="Assets\Scripts\Global\Background.cs" />
+     <Compile Include="Assets\Scripts\Global\GameOverAnimation.cs" />
+     <Compile Include="Assets\Scripts\Global\GameOverScene.cs" />
+     <Compile Include="Assets\Scripts\Global\Global.cs" />
      <Compile Include="Assets\Scripts\MainCharacter.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\Bat.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\Diamond.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\Minecart.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\ObstacleBase.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\Obstacles.cs" />
+     <Compile Include="Assets\Scripts\Perspectives.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
@@ -142,7 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
-      <Project>{54430793-F562-C51C-0830-2BE9515012E5}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
+      <Project>{BBE7C655-3EE0-EB65-8F5B-500E38BDC1DA}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
