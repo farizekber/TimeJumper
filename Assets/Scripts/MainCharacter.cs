@@ -11,9 +11,11 @@ public class MainCharacter : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
-	
-	}
+	void Start ()
+    {
+        //Rigidbody2D rigid = GetComponent<Rigidbody2D>();
+        //rigid.velocity = new Vector2(rigid.velocity.x, 0);
+    }
 
     void OnCollisionEnter2D(Collision2D col)
     { }
@@ -22,10 +24,13 @@ public class MainCharacter : MonoBehaviour {
     void Update ()
     {
         Rigidbody2D rigid = GetComponent<Rigidbody2D>();
+        //rigid.velocity = new Vector2(0, rigid.velocity.y);
+        //rigid.WakeUp();
+        //Debug.Log();
 
         GetComponent<Animator>().speed = (Global.Instance.speed < 0 ? 0 : Global.Instance.speed/4f);
-        
-        if (rigid.transform.localPosition.y == 0 && jumpsSinceGround > 0)
+
+        if (rigid.transform.localPosition.y == 0 && jumpsSinceGround >= 0)
         {
             rigid.velocity = new Vector2(rigid.velocity.x, 0);
             jumpsSinceGround = 0;
