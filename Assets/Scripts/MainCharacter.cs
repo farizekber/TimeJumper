@@ -8,6 +8,7 @@ public class MainCharacter : MonoBehaviour {
     float previousClickTime = 0;
     public float clickRate = 0.10f;
     int jumpsSinceGround = 0;
+    public float speedModifier = 1f;
 
 
 	// Use this for initialization
@@ -28,7 +29,7 @@ public class MainCharacter : MonoBehaviour {
         //rigid.WakeUp();
         //Debug.Log();
 
-        GetComponent<Animator>().speed = (Global.Instance.speed < 0 ? 0 : Global.Instance.speed/4f);
+        GetComponent<Animator>().speed = (Global.Instance.speed < 0 ? 0 : Global.Instance.speed / speedModifier);
 
         if (rigid.transform.localPosition.y > 0f - float.Epsilon && rigid.transform.localPosition.y < 0f + float.Epsilon && jumpsSinceGround >= 0)
         {
