@@ -29,9 +29,9 @@ public class MainCharacter : MonoBehaviour {
         //rigid.WakeUp();
         //Debug.Log();
 
-        GetComponent<Animator>().speed = (Global.Instance.speed < 0 ? 0 : Global.Instance.speed/ speedModifier);
-        
-        if (rigid.transform.localPosition.y == 0 && jumpsSinceGround > 0)
+        GetComponent<Animator>().speed = (Global.Instance.speed < 0 ? 0 : Global.Instance.speed / speedModifier);
+
+        if (rigid.transform.localPosition.y > 0f - float.Epsilon && rigid.transform.localPosition.y < 0f + float.Epsilon && jumpsSinceGround >= 0)
         {
             rigid.velocity = new Vector2(rigid.velocity.x, 0);
             jumpsSinceGround = 0;
