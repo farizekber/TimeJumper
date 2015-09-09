@@ -12,7 +12,7 @@ namespace Assets.Scripts
     {
         public void Start()
         {
-            Invoke("SwitchPerspective", 10);
+            // Invoke("SwitchPerspective", 10);
         }
 
         public void SwitchPerspective()
