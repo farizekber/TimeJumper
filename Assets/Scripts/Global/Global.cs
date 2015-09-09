@@ -11,8 +11,8 @@ public class Global : MonoBehaviour
     public GameObject ForegroundObject;
     public GameObject GlobalObject;
     public Stopwatch delay = new Stopwatch();
-
     public List<ObstacleBase> spawnables = new List<ObstacleBase>();
+
     public float speed = 1f;
     public float spawnRate = 5f;
     public int score = 0;
@@ -36,7 +36,7 @@ public class Global : MonoBehaviour
         InvokeSpawns();
     }
 
-    private void InvokeSpawns()
+    public void InvokeSpawns()
     {
         if (GameOverAnimation.GetInstance().m_fAnimationInProgress)
             return;
@@ -46,7 +46,7 @@ public class Global : MonoBehaviour
             obstacle.Spawn();
         }
 
-        Invoke("InvokeSpawns", (spawnRate / speed) * Random.value + 3);
+        Invoke("InvokeSpawns", (spawnRate * Random.value + 3) / speed);
     }
 
     // Update is called once per frame

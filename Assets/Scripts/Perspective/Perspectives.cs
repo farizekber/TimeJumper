@@ -3,6 +3,7 @@
     public enum Perspectives {
         Horizontal,
         Vertical,
-        Mounted
+        Mounted,
+        GameOver
     };
 }

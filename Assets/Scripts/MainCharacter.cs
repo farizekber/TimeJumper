@@ -16,14 +16,7 @@ public class MainCharacter : MonoBehaviour {
 	}
 
     void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.name == "Diamond(Clone)")
-        {
-            Destroy(col.gameObject);
-            Global.Instance.score += 1;
-            Global.Instance.UpdateScore();
-        }
-    }
+    { }
 
     // Update is called once per frame
     void Update ()

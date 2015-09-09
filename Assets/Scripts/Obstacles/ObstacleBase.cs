@@ -76,9 +76,15 @@ namespace Assets.Scripts
 
         void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.name == "Main Character")
+            if (other.gameObject.name == "Main Character" && name != "Diamond(Clone)")
             {
                 GameOverAnimation.GetInstance().Trigger();
+            }
+            else if (name == "Diamond(Clone)")
+            {
+                Destroy(gameObject);
+                Global.Instance.score += 1;
+                Global.Instance.UpdateScore();
             }
         }
 

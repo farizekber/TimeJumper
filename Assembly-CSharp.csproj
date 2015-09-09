@@ -56,7 +56,9 @@
      <Compile Include="Assets\Scripts\Obstacles\Minecart.cs" />
      <Compile Include="Assets\Scripts\Obstacles\ObstacleBase.cs" />
      <Compile Include="Assets\Scripts\Obstacles\Obstacles.cs" />
-     <Compile Include="Assets\Scripts\Perspectives.cs" />
+     <Compile Include="Assets\Scripts\Perspective\PerspectiveInitializer.cs" />
+     <Compile Include="Assets\Scripts\Perspective\Perspectives.cs" />
+     <Compile Include="Assets\Scripts\Perspective\Theme.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
