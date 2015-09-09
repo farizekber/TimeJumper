@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\Obstacles\ObstacleBase.cs" />
      <Compile Include="Assets\Scripts\Obstacles\Obstacles.cs" />
      <Compile Include="Assets\Scripts\Perspective\PerspectiveInitializer.cs" />
+     <Compile Include="Assets\Scripts\Perspective\PerspectiveTransition.cs" />
      <Compile Include="Assets\Scripts\Perspective\Perspectives.cs" />
      <Compile Include="Assets\Scripts\Perspective\Theme.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
