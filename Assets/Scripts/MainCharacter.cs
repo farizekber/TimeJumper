@@ -8,7 +8,6 @@ public class MainCharacter : MonoBehaviour {
     public static bool canFly = true;
     float previousClickTime = 0;
     public float clickRate = 0.40f;
-    int jumpsSinceGround = 0;
     public float speedModifier = 1f;
 
 
@@ -37,10 +36,9 @@ public class MainCharacter : MonoBehaviour {
 
         GetComponent<Animator>().speed = (Global.Instance.speed < 0 ? 0 : Global.Instance.speed / speedModifier);
 
-        if (rigid.transform.localPosition.y > 0f - float.Epsilon && rigid.transform.localPosition.y < 0f + float.Epsilon && jumpsSinceGround >= 0)
+        if (rigid.transform.localPosition.y > 0f - float.Epsilon && rigid.transform.localPosition.y < 0f + float.Epsilon)
         {
             rigid.velocity = new Vector2(rigid.velocity.x, 0);
-            jumpsSinceGround = 0;
             //Debug.LogFormat("Reset x: {0} y: {1}" , rigid.transform.localPosition.x,rigid.transform.localPosition.y);
         }
 
@@ -51,13 +49,12 @@ public class MainCharacter : MonoBehaviour {
         else
         {
             rigid.velocity = new Vector2(0, rigid.velocity.y);
-            if ((Input.GetMouseButtonDown(0) || Input.touches.Any(x => x.phase == TouchPhase.Began)) && (Time.time - previousClickTime > (clickRate / Global.Instance.speed))&& jumpsSinceGround < 2)
+            if ((Input.GetMouseButtonDown(0) || Input.touches.Any(x => x.phase == TouchPhase.Began)) && (Time.time - previousClickTime > (clickRate / Global.Instance.speed)))
             {
                 //Debug.LogFormat("Jump x: {0} y: {1}", rigid.transform.localPosition.x, rigid.transform.localPosition.y);
                 previousClickTime = Time.time;
                 rigid.velocity = new Vector2(0, 0);
-                rigid.AddForce(new Vector2(0, 200));
-                jumpsSinceGround += 1;
+                rigid.AddForce(new Vector2(0, 150));
             }
         }
     }

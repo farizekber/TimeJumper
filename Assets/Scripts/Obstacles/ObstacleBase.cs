@@ -61,7 +61,7 @@ namespace Assets.Scripts
         void Start() { }
 
         // Update is called once per frame
-        void FixedUpdate()
+        public void FixedUpdate()
         {
             if (!GameOverAnimation.GetInstance().m_fAnimationInProgress)
                 GetComponent<Rigidbody2D>().velocity = new Vector2(-m_fpSpeedModifier * Global.Instance.speed, 0);

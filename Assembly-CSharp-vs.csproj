@@ -56,10 +56,14 @@
      <Compile Include="Assets\Scripts\Global\MainMenuScene.cs" />
      <Compile Include="Assets\Scripts\MainCharacter.cs" />
      <Compile Include="Assets\Scripts\Obstacles\Bat.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\Crate.cs" />
      <Compile Include="Assets\Scripts\Obstacles\Diamond.cs" />
      <Compile Include="Assets\Scripts\Obstacles\Minecart.cs" />
      <Compile Include="Assets\Scripts\Obstacles\ObstacleBase.cs" />
      <Compile Include="Assets\Scripts\Obstacles\Obstacles.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\Pickaxe.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\Stone.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\TNT.cs" />
      <Compile Include="Assets\Scripts\Perspective\PerspectiveInitializer.cs" />
      <Compile Include="Assets\Scripts\Perspective\PerspectiveTransition.cs" />
      <Compile Include="Assets\Scripts\Perspective\Perspectives.cs" />
