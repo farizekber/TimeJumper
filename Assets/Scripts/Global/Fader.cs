@@ -17,6 +17,7 @@ namespace Assets.Scripts
             s_Instance = this;
             m_spriteRenderer = GameObject.Find("Fader").GetComponent<SpriteRenderer>();
             m_spriteRenderer.color = new Color(0, 0, 0, m_fEnabled ? 1f : 0f);
+            Disable();
         }
 
         public void Update()
