@@ -60,10 +60,10 @@ public class Global : MonoBehaviour
 
         GameOverAnimation.GetInstance().Update();
 
-        TimeText.text = "Time : " + Time.time;
+        TimeText.text = "Time : " + (int)Time.time;
         distance += ((Time.time - lastTime) * speed) * 10;
         lastTime = Time.time;
-        DistanceText.text = "Distance : " + distance + "m";
+        DistanceText.text = "Distance : " + (int)distance + "m";
     }
 
     public void UpdateScore()
