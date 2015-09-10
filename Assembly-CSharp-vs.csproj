@@ -46,7 +46,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Boulder.cs" />
      <Compile Include="Assets\Scripts\Global\Background.cs" />
+     <Compile Include="Assets\Scripts\Global\Fader.cs" />
      <Compile Include="Assets\Scripts\Global\GameOverAnimation.cs" />
      <Compile Include="Assets\Scripts\Global\GameOverScene.cs" />
      <Compile Include="Assets\Scripts\Global\Global.cs" />

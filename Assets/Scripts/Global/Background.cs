@@ -3,6 +3,7 @@
 public class Background : MonoBehaviour {
 
     float tickCount = 0;
+    public static bool horizontal = true;
 
     // Use this for initialization
     void Start()
@@ -13,5 +14,6 @@ public class Background : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         GetComponent<MeshRenderer>().material.SetFloat("_TickCount", (tickCount += (Time.fixedDeltaTime * 0.075f * Global.Instance.speed)) - Global.Instance.delay.ElapsedMilliseconds / 1000.0f);
-	}
+        GetComponent<MeshRenderer>().material.SetFloat("_Horizontal", horizontal ? 10 : -10);
+    }
 }

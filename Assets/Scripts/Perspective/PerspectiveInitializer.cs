@@ -10,20 +10,39 @@ namespace Assets.Scripts
 {
     class PerspectiveInitializer : MonoBehaviour
     {
+        public static PerspectiveInitializer s_Instance;
+
+        private Theme currentTheme;
+        private Perspectives currentPerspective;
+
+        private Theme newTheme;
+        private Perspectives newPerspective;
+
         public void Start()
         {
-            // Invoke("SwitchPerspective", 10);
+            s_Instance = this;
+            Invoke("SwitchPerspective", 10);
         }
 
-        public void SwitchPerspective()
+        public void InvokeMethod(string methodName, float delay)
         {
-            Theme newTheme = Theme.LoadTestLevel();
+            Invoke(methodName, delay);
+        }
 
+        public void CleanPerspective()
+        {
+            //Cancel all invokes except for the ones that are used in changing perspective.
             foreach (MonoBehaviour behaviour in GameObject.FindObjectsOfType(typeof(MonoBehaviour)))
             {
+                if (behaviour.name == "Fader" || behaviour.name == "PerspectiveInitializer" || behaviour.name == "Theme")
+                {
+                    continue;
+                }
+
                 behaviour.CancelInvoke();
             }
-            
+
+            //Remove all spawnables from screen.
             ((GameObject[])GameObject.FindObjectsOfType(typeof(GameObject))).Where((GameObject gameObject) =>
             {
                 foreach (ObstacleBase spawnable in Global.Instance.spawnables)
@@ -35,11 +54,13 @@ namespace Assets.Scripts
                 }
                 return false;
             }).ToList().ForEach((GameObject gameObject) => GameObject.Destroy(gameObject));
+        }
 
-            //Quick theme test
+        public void LoadPerspective()
+        {
             Global.Instance.spawnables.Clear();
             Global.Instance.spawnables.AddRange(newTheme.m_spawnables);
-            
+
             GameObject.Find("Main Character").GetComponent<SpriteRenderer>().sprite = newTheme.m_mainCharacter;
             GameObject.Find("Main Character").GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(newTheme.m_mainCharacterAnimationString);
 
@@ -47,7 +68,16 @@ namespace Assets.Scripts
             GameObject.Find("Dragon").GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(newTheme.m_chaserAnimationString);
 
             GameObject.Find("Background").GetComponent<MeshRenderer>().material.mainTexture = newTheme.m_background;
+            //test
+            Background.horizontal = false;
+
             Global.Instance.InvokeSpawns();
+        }
+
+        public void SwitchPerspective()
+        {
+            newTheme = Theme.LoadTestLevel();
+            newTheme.m_perspectiveTransitions[0].m_trigger();
         }
     }
 }

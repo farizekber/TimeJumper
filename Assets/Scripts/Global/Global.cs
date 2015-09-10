@@ -34,6 +34,7 @@ public class Global : MonoBehaviour
         DistanceText = GetComponentsInChildren<Text>().Where(s => s.name == "DistanceText").First();
         ForegroundObject = GameObject.Find("Foreground");
         InvokeSpawns();
+        Fader.s_Instance.Disable();
     }
 
     public void InvokeSpawns()

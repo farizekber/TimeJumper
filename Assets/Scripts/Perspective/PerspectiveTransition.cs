@@ -7,7 +7,16 @@ namespace Assets.Scripts.Perspective
 {
     class PerspectiveTransition
     {
-        public Perspectives from, to;
-        //public 
+        public delegate void Trigger();
+
+        public Trigger m_trigger;
+        public Perspectives m_from, m_to;
+
+        public PerspectiveTransition(Perspectives from, Perspectives to, Trigger trigger)
+        {
+            m_from = from;
+            m_to = to;
+            m_trigger = trigger;
+        }
     }
 }

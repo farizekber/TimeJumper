@@ -8,16 +8,18 @@ namespace Assets.Scripts.Perspective
 {
     class Theme
     {
-        public List<ObstacleBase> m_spawnables = new List<ObstacleBase>();
+        public List<ObstacleBase> m_spawnables;
+        public List<PerspectiveTransition> m_perspectiveTransitions;
         public Texture m_background;
         public Sprite m_mainCharacter;
         public string m_mainCharacterAnimationString;
         public Sprite m_chaser;
         public string m_chaserAnimationString;
 
-        public Theme(List<ObstacleBase> spawnables, Texture background, Sprite mainCharacter, string mainCharacterAnimationString, Sprite chaser, string chaserAnimationString)
+        public Theme(List<ObstacleBase> spawnables, List<PerspectiveTransition> perspectiveTransitions, Texture background, Sprite mainCharacter, string mainCharacterAnimationString, Sprite chaser, string chaserAnimationString)
         {
             m_spawnables = spawnables;
+            m_perspectiveTransitions = perspectiveTransitions;
             m_background = background;
             m_mainCharacter = mainCharacter;
             m_mainCharacterAnimationString = mainCharacterAnimationString;
@@ -30,6 +32,19 @@ namespace Assets.Scripts.Perspective
             return new Theme(new List<ObstacleBase>() { (Resources.Load("Prefabs/" + "Bat") as GameObject).GetComponent<Bat>(),
                                                         (Resources.Load("Prefabs/" + "Minecart") as GameObject).GetComponent<Minecart>(),
                                                         (Resources.Load("Prefabs/" + "Diamond") as GameObject).GetComponent<Diamond>() }, 
+                             new List<PerspectiveTransition>() { new PerspectiveTransition(Perspectives.Horizontal, Perspectives.Vertical, delegate {
+                                 PerspectiveInitializer.s_Instance.CleanPerspective();
+
+                                 Debug.Log(Resources.Load("Prefabs/" + "Boulder"));
+
+                                 GameObject gobject = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "Boulder"), new Vector3(0, 5, 0.5f), new Quaternion(0,0,0,0));
+                                 gobject.transform.localPosition += Global.Instance.GlobalObject.transform.localPosition + Global.Instance.ForegroundObject.transform.localPosition;
+                                 gobject.transform.parent = Global.Instance.ForegroundObject.transform;
+
+                                 Fader.s_Instance.InvokeMethod("Enable", 1.25f);
+                                 PerspectiveInitializer.s_Instance.InvokeMethod("LoadPerspective", 1.75f);
+                                 Fader.s_Instance.InvokeMethod("Disable", 2.25f);
+                             }) },
                              Resources.Load("Images/back") as Texture, 
                              Resources.Load("Images/dragon") as Sprite, 
                              "Animations/Dragon",

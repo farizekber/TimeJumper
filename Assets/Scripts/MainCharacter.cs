@@ -25,9 +25,13 @@ public class MainCharacter : MonoBehaviour {
     void Update ()
     {
         Rigidbody2D rigid = GetComponent<Rigidbody2D>();
-        //rigid.velocity = new Vector2(0, rigid.velocity.y);
-        //rigid.WakeUp();
-        //Debug.Log();
+
+        rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, 0, 10f), rigid.transform.localPosition.z);
+    }
+
+    void FixedUpdate()
+    {
+        Rigidbody2D rigid = GetComponent<Rigidbody2D>();
 
         GetComponent<Animator>().speed = (Global.Instance.speed < 0 ? 0 : Global.Instance.speed / speedModifier);
 
@@ -54,10 +58,6 @@ public class MainCharacter : MonoBehaviour {
                 jumpsSinceGround += 1;
             }
         }
-
-        rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, 0, 10f), rigid.transform.localPosition.z);
-
     }
-
     
 }

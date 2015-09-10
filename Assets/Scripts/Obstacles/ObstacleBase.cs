@@ -61,7 +61,7 @@ namespace Assets.Scripts
         void Start() { }
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
             if (!GameOverAnimation.GetInstance().m_fAnimationInProgress)
                 GetComponent<Rigidbody2D>().velocity = new Vector2(-m_fpSpeedModifier * Global.Instance.speed, 0);
@@ -76,11 +76,11 @@ namespace Assets.Scripts
 
         void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.name == "Main Character" && name != "Diamond(Clone)")
+            if (other.gameObject.name == "Main Character" && name != "Diamond(Clone)" && other.name != "Diamond(Clone)")
             {
                 GameOverAnimation.GetInstance().Trigger();
             }
-            else if (name == "Diamond(Clone)")
+            else if (other.gameObject.name == "Main Character" && name == "Diamond(Clone)")
             {
                 Destroy(gameObject);
                 Global.Instance.score += 1;

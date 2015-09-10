@@ -5,6 +5,7 @@
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
 		_TickCount("Tick Count", float) = 0.0
+		_Horizontal("Horizontal", float) = 10
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
@@ -19,6 +20,7 @@
 
 		sampler2D _MainTex;
 		float _TickCount;
+		float _Horizontal;
 
 		struct Input {
 			float2 uv_MainTex;
@@ -31,7 +33,11 @@
 		void surf (Input IN, inout SurfaceOutputStandard o) {
 			// Albedo comes from a texture tinted by color
             fixed2 scrollUV = IN.uv_MainTex;
-			scrollUV += fixed2(_TickCount, 0);
+
+			if(_Horizontal > 0)
+				scrollUV += fixed2(_TickCount, 0);
+			else
+				scrollUV += fixed2(0, -1 * _TickCount);
 
 			fixed4 c = tex2D (_MainTex, scrollUV) * _Color;
 			o.Albedo = c.rgb;
