@@ -42,10 +42,14 @@ public class Global : MonoBehaviour
         if (GameOverAnimation.GetInstance().m_fAnimationInProgress)
             return;
 
+        float randomNumber = Random.value * 100;
+        float amountSpawn = 100 / spawnables.Count;
+        spawnables[(int)(randomNumber / amountSpawn)].Spawn();
+        /*
         foreach (ObstacleBase obstacle in spawnables)
         {
             obstacle.Spawn();
-        }
+        }*/
 
         Invoke("InvokeSpawns", (spawnRate * Random.value + 3) / speed);
     }

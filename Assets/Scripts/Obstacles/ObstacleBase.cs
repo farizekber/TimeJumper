@@ -45,7 +45,7 @@ namespace Assets.Scripts
                 Invoke("Spawn", 0.1f);
                 return;
             }
-
+            
             GameObject gobject = (GameObject)Instantiate(Resources.Load("Prefabs/" + m_szPrefab),
                 new Vector3(
                 ((m_spawnData.m_fRandomX ? Random.value : 0) * m_spawnData.m_fpXModifier) + m_spawnData.m_fpXOffset,
