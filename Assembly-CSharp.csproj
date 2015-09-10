@@ -52,6 +52,8 @@
      <Compile Include="Assets\Scripts\Global\GameOverAnimation.cs" />
      <Compile Include="Assets\Scripts\Global\GameOverScene.cs" />
      <Compile Include="Assets\Scripts\Global\Global.cs" />
+     <Compile Include="Assets\Scripts\Global\LoadingScene.cs" />
+     <Compile Include="Assets\Scripts\Global\MainMenuScene.cs" />
      <Compile Include="Assets\Scripts\MainCharacter.cs" />
      <Compile Include="Assets\Scripts\Obstacles\Bat.cs" />
      <Compile Include="Assets\Scripts\Obstacles\Diamond.cs" />

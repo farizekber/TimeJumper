@@ -26,7 +26,7 @@ public class GameOverScene : MonoBehaviour {
 
             if (GetComponentInChildren<BoxCollider2D>().bounds.Intersects(new Bounds(inputLocation, new Vector3(20, 20, 100))))
             {
-                Application.LoadLevel("Scene1");
+                Application.LoadLevel("Loading");
             }
         }
     }

@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Assets.Scripts;
+using System.Linq;
 
 public class MainCharacter : MonoBehaviour {
     
     public static bool canFly = true;
     float previousClickTime = 0;
-    public float clickRate = 0.10f;
+    public float clickRate = 0.40f;
     int jumpsSinceGround = 0;
     public float speedModifier = 1f;
 
@@ -16,6 +17,7 @@ public class MainCharacter : MonoBehaviour {
     {
         //Rigidbody2D rigid = GetComponent<Rigidbody2D>();
         //rigid.velocity = new Vector2(rigid.velocity.x, 0);
+        Input.simulateMouseWithTouches = true;
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -49,7 +51,7 @@ public class MainCharacter : MonoBehaviour {
         else
         {
             rigid.velocity = new Vector2(0, rigid.velocity.y);
-            if ((Input.touchCount > 0 || Input.GetMouseButtonDown(0)) && Time.time - previousClickTime > (clickRate / Global.Instance.speed) && jumpsSinceGround < 2)
+            if ((Input.GetMouseButtonDown(0) || Input.touches.Any(x => x.phase == TouchPhase.Began)) && (Time.time - previousClickTime > (clickRate / Global.Instance.speed))&& jumpsSinceGround < 2)
             {
                 //Debug.LogFormat("Jump x: {0} y: {1}", rigid.transform.localPosition.x, rigid.transform.localPosition.y);
                 previousClickTime = Time.time;

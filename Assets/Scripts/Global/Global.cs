@@ -32,6 +32,7 @@ public class Global : MonoBehaviour
         ScoreText = GetComponentsInChildren<Text>().Where(s => s.name == "ScoreText").First();
         TimeText = GetComponentsInChildren<Text>().Where(s => s.name == "TimeText").First();
         DistanceText = GetComponentsInChildren<Text>().Where(s => s.name == "DistanceText").First();
+        //DistanceText.transform.localPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, new Vector2(13, 7));
         ForegroundObject = GameObject.Find("Foreground");
         InvokeSpawns();
     }
