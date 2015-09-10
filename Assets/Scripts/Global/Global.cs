@@ -14,6 +14,7 @@ public class Global : MonoBehaviour
     public List<ObstacleBase> spawnables = new List<ObstacleBase>();
 
     public float speed = 1f;
+    float lastSpeedIncrease = 0;
     public float spawnRate = 5f;
     public int score = 0;
 
@@ -79,9 +80,16 @@ public class Global : MonoBehaviour
 
         GameOverAnimation.GetInstance().Update();
 
-        TimeText.text = "Time : " + (int)(Time.time - startTime);
-        distance += ((Time.time - lastTime) * speed) * 10;
-        lastTime = Time.time;
+        float currentTime = Time.time;
+        if ((int)currentTime % 5 == 0 && (currentTime - lastSpeedIncrease) > 1.5f)
+        {
+            speed += 0.075f;
+            lastSpeedIncrease = currentTime;
+        }
+            
+        TimeText.text = "Time : " + (int)(currentTime - startTime);
+        distance += ((currentTime - lastTime) * speed) * 10;
+        lastTime = currentTime;
         DistanceText.text = "Distance : " + (int)distance + "m";
     }
 
