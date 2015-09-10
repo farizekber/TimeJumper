@@ -1,11 +1,12 @@
 fileFormatVersion: 2
 guid: a463156900f76334a88cf1e359b76739
-timeCreated: 1441803032
+timeCreated: 1441880338
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: character_0
     21300002: character_1
+    21300004: character_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -54,22 +55,22 @@ TextureImporter:
     - name: character_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1
-        width: 148
-        height: 207
+        x: 6
+        y: 5
+        width: 160
+        height: 223
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_1
+    - name: character_2
       rect:
         serializedVersion: 2
-        x: 192
-        y: 1
-        width: 114
-        height: 207
+        x: 196
+        y: 8
+        width: 130
+        height: 221
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

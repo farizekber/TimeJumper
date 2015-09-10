@@ -12,7 +12,7 @@ namespace Assets.Scripts
     {
         public static PerspectiveInitializer s_Instance;
 
-        private Theme currentTheme;
+        private Theme currentTheme;// = Theme.Default();
         private Perspectives currentPerspective;
 
         private Theme newTheme;
@@ -21,7 +21,7 @@ namespace Assets.Scripts
         public void Start()
         {
             s_Instance = this;
-            Invoke("SwitchPerspective", 10);
+            //Invoke("SwitchPerspective", 10);
         }
 
         public void InvokeMethod(string methodName, float delay)
