@@ -3,11 +3,19 @@
 public class Background : MonoBehaviour {
 
     float tickCount = 0;
-    public static bool horizontal = true;
+    public bool horizontal = true;
+    public static Background Instance;
+
+    public static void Finalize()
+    {
+        Instance.enabled = false;
+        Instance = null;
+    }
 
     // Use this for initialization
     void Start()
     {
+        Instance = this;
         Camera.main.transform.localScale = new Vector3(Camera.main.transform.localScale.x * Camera.main.aspect, Camera.main.transform.localScale.y, Camera.main.transform.localScale.z);
     }
 

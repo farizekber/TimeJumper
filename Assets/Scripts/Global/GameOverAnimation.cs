@@ -16,6 +16,11 @@ namespace Assets.Scripts
             return s_instance == null ? s_instance = new GameOverAnimation() : s_instance;
         }
 
+        public static void Finalize()
+        {
+            s_instance = null;
+        }
+
         public GameOverAnimation()
         {
             initializeTwirl();
@@ -28,11 +33,20 @@ namespace Assets.Scripts
 
             (m_twirl as UnityStandardAssets.ImageEffects.Twirl).angle++;
 
-            if (m_fpInitiatedTime + m_fpTwirlTimeInSeconds < Time.time && (((m_twirl as UnityStandardAssets.ImageEffects.Twirl).angle % 360) == 0))
+            if (/*m_fpInitiatedTime + m_fpTwirlTimeInSeconds < Time.time &&*/ (((m_twirl as UnityStandardAssets.ImageEffects.Twirl).angle % 360) == 0))
             {
+                PerspectiveInitializer.s_Instance.CleanPerspective();
+                PerspectiveInitializer.Finalize();
+                
+                Background.Finalize();
+                Fader.Finalize();
+                Global.Finalize();
+                
                 m_fpInitiatedTime = 0;
                 m_fAnimationInProgress = false;
-                Global.Instance.delay.Stop();
+                //Global.Instance.delay.Stop();
+                GameOverAnimation.Finalize();
+
                 Application.LoadLevel("GameOver");
             }
         }

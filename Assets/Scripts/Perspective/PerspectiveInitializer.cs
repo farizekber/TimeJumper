@@ -18,6 +18,11 @@ namespace Assets.Scripts
         private Theme newTheme;
         private Perspectives newPerspective;
 
+        public static void Finalize()
+        {
+            s_Instance = null;
+        }
+
         public void Start()
         {
             s_Instance = this;
@@ -69,7 +74,7 @@ namespace Assets.Scripts
 
             GameObject.Find("Background").GetComponent<MeshRenderer>().material.mainTexture = newTheme.m_background;
             //test
-            Background.horizontal = false;
+            Background.Instance.horizontal = false;
 
             Global.Instance.InvokeSpawns();
         }

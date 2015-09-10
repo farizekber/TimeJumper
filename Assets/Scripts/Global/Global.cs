@@ -24,10 +24,25 @@ public class Global : MonoBehaviour
     private float distance = 0;
     private float lastTime = 0;
 
+    private float startTime;
+
+    public static void Finalize()
+    {
+        Instance.enabled = false;
+        Instance.score = 0;
+        Instance.distance = 0;
+        Instance.ScoreText.text = "Score: 0";
+        Instance.TimeText.text = "Time : 00:00:00";
+        Instance.DistanceText.text = "Distance: 0m";
+        Instance = null;
+    }
+
     // Use this for initialization
     private void Start()
     {
         Instance = this;
+        startTime = Time.time;
+        lastTime = startTime;
         GlobalObject = gameObject;
         ScoreText = GetComponentsInChildren<Text>().Where(s => s.name == "ScoreText").First();
         TimeText = GetComponentsInChildren<Text>().Where(s => s.name == "TimeText").First();
@@ -64,7 +79,7 @@ public class Global : MonoBehaviour
 
         GameOverAnimation.GetInstance().Update();
 
-        TimeText.text = "Time : " + (int)Time.time;
+        TimeText.text = "Time : " + (int)(Time.time - startTime);
         distance += ((Time.time - lastTime) * speed) * 10;
         lastTime = Time.time;
         DistanceText.text = "Distance : " + (int)distance + "m";

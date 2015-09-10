@@ -5,7 +5,6 @@ using System.Linq;
 
 public class MainCharacter : MonoBehaviour {
     
-    public static bool canFly = true;
     float previousClickTime = 0;
     public float clickRate = 0.40f;
     public float speedModifier = 1f;
