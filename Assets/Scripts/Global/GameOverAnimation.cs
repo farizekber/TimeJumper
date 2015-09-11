@@ -60,7 +60,7 @@ namespace Assets.Scripts
         {
             m_fpInitiatedTime = Time.time;
             Global.endingTime = Time.time;
-            Global.Instance.PlayDeathSound();
+            //Global.Instance.PlayDeathSound();
             Global.Instance.addingDistance = false;
             m_fAnimationInProgress = true;
             Global.Instance.delay.Start();
