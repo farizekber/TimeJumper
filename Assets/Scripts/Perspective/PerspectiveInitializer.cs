@@ -74,7 +74,7 @@ namespace Assets.Scripts
 
             GameObject.Find("Background").GetComponent<MeshRenderer>().material.mainTexture = newTheme.m_background;
             //test
-            Background.Instance.horizontal = false;
+            //Background.Instance.horizontal = false;
 
             Global.Instance.InvokeSpawns();
         }

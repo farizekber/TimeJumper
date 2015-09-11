@@ -35,10 +35,15 @@ namespace Assets.Scripts
 
             if (/*m_fpInitiatedTime + m_fpTwirlTimeInSeconds < Time.time &&*/ (((m_twirl as UnityStandardAssets.ImageEffects.Twirl).angle % 360) == 0))
             {
+                foreach (Background item in GameObject.FindObjectsOfTypeAll(typeof(Background)))
+                {
+                    item.Finalize();
+                }
+                
                 PerspectiveInitializer.s_Instance.CleanPerspective();
                 PerspectiveInitializer.Finalize();
                 
-                Background.Finalize();
+                //Background.Finalize();
                 Fader.Finalize();
                 Global.Finalize();
                 
