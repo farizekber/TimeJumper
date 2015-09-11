@@ -75,8 +75,13 @@ namespace Assets.Scripts
             GameObject.Find("Background").GetComponent<MeshRenderer>().material.mainTexture = newTheme.m_background;
             //test
             //Background.Instance.horizontal = false;
+            foreach (Background item in Resources.FindObjectsOfTypeAll(typeof(Background)))
+            {
+                item.horizontal = false;
+            }
 
-            Global.Instance.InvokeSpawns();
+            Global.Instance.InvokeCollectableSpawns();
+            Global.Instance.InvokeObstacleSpawns();
         }
 
         public void SwitchPerspective()

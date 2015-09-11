@@ -35,7 +35,7 @@ namespace Assets.Scripts
 
             if (/*m_fpInitiatedTime + m_fpTwirlTimeInSeconds < Time.time &&*/ (((m_twirl as UnityStandardAssets.ImageEffects.Twirl).angle % 360) == 0))
             {
-                foreach (Background item in GameObject.FindObjectsOfTypeAll(typeof(Background)))
+                foreach (Background item in Resources.FindObjectsOfTypeAll(typeof(Background)))
                 {
                     item.Finalize();
                 }
@@ -59,6 +59,8 @@ namespace Assets.Scripts
         public void Trigger()
         {
             m_fpInitiatedTime = Time.time;
+            Global.endingTime = Time.time;
+            Global.Instance.addingDistance = false;
             m_fAnimationInProgress = true;
             Global.Instance.delay.Start();
         }

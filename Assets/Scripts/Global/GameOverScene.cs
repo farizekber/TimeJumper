@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using System.Linq;
 
 public class GameOverScene : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-	
-	}
+	void Start ()
+    {
+        GetComponentsInChildren<Text>().Where(s => s.name == "Score2").First().text = Global.score + "";
+        GetComponentsInChildren<Text>().Where(s => s.name == "Time2").First().text = ((int)(Global.endingTime - Global.startTime)) + "";
+        GetComponentsInChildren<Text>().Where(s => s.name == "Distance2").First().text = (int)Global.distance + "m";
+    }
 	
 	// Update is called once per frame
 	void Update () {
