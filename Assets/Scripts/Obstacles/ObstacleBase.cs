@@ -83,6 +83,7 @@ namespace Assets.Scripts
             else if (other.gameObject.name == "Main Character" && name == "Diamond(Clone)")
             {
                 Destroy(gameObject);
+                Global.Instance.PlayPickupSound();
                 Global.score += 1;
                 Global.Instance.UpdateScore();
             }

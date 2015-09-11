@@ -31,7 +31,7 @@ namespace Assets.Scripts
             if (!m_fAnimationInProgress)
                 return;
 
-            (m_twirl as UnityStandardAssets.ImageEffects.Twirl).angle++;
+            (m_twirl as UnityStandardAssets.ImageEffects.Twirl).angle+=3;
 
             if (/*m_fpInitiatedTime + m_fpTwirlTimeInSeconds < Time.time &&*/ (((m_twirl as UnityStandardAssets.ImageEffects.Twirl).angle % 360) == 0))
             {
@@ -60,6 +60,7 @@ namespace Assets.Scripts
         {
             m_fpInitiatedTime = Time.time;
             Global.endingTime = Time.time;
+            Global.Instance.PlayDeathSound();
             Global.Instance.addingDistance = false;
             m_fAnimationInProgress = true;
             Global.Instance.delay.Start();

@@ -32,6 +32,16 @@ public class Global : MonoBehaviour
 
     public bool addingDistance = true;
 
+    public void PlayPickupSound()
+    {
+        GetComponent<AudioSource>().Play();
+    }
+
+    public void PlayDeathSound()
+    {
+        ForegroundObject.GetComponent<AudioSource>().Play();
+    }
+
     public static void Finalize()
     {
         Instance.enabled = false;
@@ -121,11 +131,27 @@ public class Global : MonoBehaviour
             speed += 0.075f;
             lastSpeedIncrease = currentTime;
         }
-            
-        if(endingTime < 1)
-            TimeText.text = "Time : " + (int)(currentTime - startTime);
+
+        if (endingTime < 1)
+        {
+            System.TimeSpan t = System.TimeSpan.FromSeconds(currentTime - startTime);
+
+            string answer = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                            t.Hours,
+                            t.Minutes,
+                            t.Seconds);
+            TimeText.text = "Time : " + answer;
+        }
         else
-            TimeText.text = "Time : " + (int)(endingTime);
+        {
+            System.TimeSpan t = System.TimeSpan.FromSeconds(endingTime);
+
+            string answer = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                            t.Hours,
+                            t.Minutes,
+                            t.Seconds);
+            TimeText.text = "Time : " + answer;
+        }
 
         if (addingDistance)
             distance += ((currentTime - lastTime) * speed) * 10;

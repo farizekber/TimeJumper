@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Linq;
+using System;
 
 public class GameOverScene : MonoBehaviour {
 
@@ -9,7 +10,14 @@ public class GameOverScene : MonoBehaviour {
 	void Start ()
     {
         GetComponentsInChildren<Text>().Where(s => s.name == "Score2").First().text = Global.score + "";
-        GetComponentsInChildren<Text>().Where(s => s.name == "Time2").First().text = ((int)(Global.endingTime - Global.startTime)) + "";
+
+        TimeSpan t = TimeSpan.FromSeconds(Global.endingTime - Global.startTime);
+        string answer = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                        t.Hours,
+                        t.Minutes,
+                        t.Seconds);
+
+        GetComponentsInChildren<Text>().Where(s => s.name == "Time2").First().text = answer;
         GetComponentsInChildren<Text>().Where(s => s.name == "Distance2").First().text = (int)Global.distance + "m";
     }
 	
