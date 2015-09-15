@@ -9,14 +9,12 @@ public class MainMenuScene : MonoBehaviour
     void Start()
     {
         acceptsInput = true;
+        Application.targetFrameRate = -1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
-            Application.Quit();
-
         if (!acceptsInput)
             return;
 

@@ -11,10 +11,10 @@
 
 		SubShader{
 		Tags{ "Queue" = "AlphaTest" "IgnoreProjector" = "True" "RenderType" = "TransparentCutout" }
-		LOD 200
+		LOD 100
 
 		CGPROGRAM
-#pragma surface surf Standard alphatest:_Cutoff fullforwardshadows
+#pragma surface surf Standard alphatest:_Cutoff
 
 		sampler2D _MainTex;
 		fixed4 _Color;
@@ -45,5 +45,5 @@
 	ENDCG
 	}
 
-		Fallback "Legacy Shaders/Transparent/Cutout/VertexLit"
+	Fallback "Legacy Shaders/Transparent/Cutout/VertexLit"
 }

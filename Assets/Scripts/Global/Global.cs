@@ -11,13 +11,13 @@ public class Global : MonoBehaviour
     public GameObject ForegroundObject;
     public GameObject GlobalObject;
     public Stopwatch delay = new Stopwatch();
-    public List<ObstacleBase> spawnables = new List<ObstacleBase>();
-    public List<ObstacleBase> collectables = new List<ObstacleBase>();
+    //public List<ObstacleBase> spawnables = new List<ObstacleBase>();
+    //public List<ObstacleBase> collectables = new List<ObstacleBase>();
 
     public float speed = 1f;
     float lastSpeedIncrease = 0;
-    public float obstacleSpawnRate = 5f;
-    public float collectableSpawnRate = 3f;
+    //public float obstacleSpawnRate = 5f;
+    //public float collectableSpawnRate = 3f;
     public static int score = 0;
 
     private Text ScoreText;
@@ -68,51 +68,7 @@ public class Global : MonoBehaviour
         Instance.DistanceText.text = "Distance: 0m";
         //DistanceText.transform.localPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, new Vector2(13, 7));
         ForegroundObject = GameObject.Find("Foreground");
-        InvokeObstacleSpawns();
-        InvokeCollectableSpawns();
-    }
-
-    public void InvokeCollectableSpawns()
-    {
-        if (GameOverAnimation.GetInstance().m_fAnimationInProgress)
-            return;
-
-        //float randomNumber = Random.value * 100;
-        //float amountSpawn = 100 / spawnables.Count;
-        //spawnables[(int)(randomNumber / amountSpawn)].Spawn();
-
-        collectables.ForEach((ObstacleBase o) => o.Spawn());
-
-        if (Random.value > 0.75)
-            collectables.ForEach((ObstacleBase o) => o.Spawn());
-
-        if (Random.value > 0.75)
-            collectables.ForEach((ObstacleBase o) => o.Spawn());
-        /*
-        foreach (ObstacleBase obstacle in spawnables)
-        {
-            obstacle.Spawn();
-        }*/
-
-        Invoke("InvokeCollectableSpawns", (collectableSpawnRate * Random.value + 3) / speed);
-    }
-
-    public void InvokeObstacleSpawns()
-    {
-        if (GameOverAnimation.GetInstance().m_fAnimationInProgress)
-            return;
-
-        float randomNumber = Random.value * 100;
-        float amountSpawn = 100 / spawnables.Count;
-        spawnables[(int)(randomNumber / amountSpawn)].Spawn();
-        //collectables.ForEach((ObstacleBase o) => o.Spawn());
-        /*
-        foreach (ObstacleBase obstacle in spawnables)
-        {
-            obstacle.Spawn();
-        }*/
-
-        Invoke("InvokeObstacleSpawns", (obstacleSpawnRate * Random.value + 3) / speed);
+        SpawnManager.Instance.Init();
     }
 
     // Update is called once per frame
@@ -144,7 +100,7 @@ public class Global : MonoBehaviour
         }
         else
         {
-            System.TimeSpan t = System.TimeSpan.FromSeconds(endingTime);
+            System.TimeSpan t = System.TimeSpan.FromSeconds(endingTime - startTime);
 
             string answer = string.Format("{0:D2}:{1:D2}:{2:D2}",
                             t.Hours,
@@ -154,7 +110,7 @@ public class Global : MonoBehaviour
         }
 
         if (addingDistance)
-            distance += ((currentTime - lastTime) * speed) * 10;
+            distance += ((currentTime - lastTime) * speed) * 3;
 
         lastTime = currentTime;
         DistanceText.text = "Distance : " + (int)distance + "m";

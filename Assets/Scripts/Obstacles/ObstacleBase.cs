@@ -29,6 +29,7 @@ namespace Assets.Scripts
         private float m_fpSpeedModifier;
         public string m_szPrefab;
         public SpawnData m_spawnData;
+        public bool active = false;
 
         public ObstacleBase(Obstacles obstacleKind, float fpSpeedModifier, string szPrefab, SpawnData spawnData)
         {
@@ -38,23 +39,35 @@ namespace Assets.Scripts
             m_spawnData = spawnData;
         }
 
-        public void Spawn()
+        public GameObject Spawn()
         {
-            while (GameOverAnimation.GetInstance().m_fAnimationInProgress)
-            {
-                Invoke("Spawn", 0.1f);
-                return;
-            }
-            
             GameObject gobject = (GameObject)Instantiate(Resources.Load("Prefabs/" + m_szPrefab),
                 new Vector3(
-                ((m_spawnData.m_fRandomX ? Random.value : 0) * m_spawnData.m_fpXModifier) + m_spawnData.m_fpXOffset,
+                -8.0f,
                 ((m_spawnData.m_fRandomY ? Random.value : 0) * m_spawnData.m_fpYModifier) + m_spawnData.m_fpYOffset,
                 ((m_spawnData.m_fRandomZ ? Random.value : 0) * m_spawnData.m_fpZModifier) + m_spawnData.m_fpZOffset),
                 new Quaternion(0, 0, 0, 0));
 
-            gobject.transform.localPosition += Global.Instance.GlobalObject.transform.localPosition + Global.Instance.ForegroundObject.transform.localPosition;
+            //gobject.transform.localPosition += Global.Instance.GlobalObject.transform.localPosition + Global.Instance.ForegroundObject.transform.localPosition;
+            gobject.GetComponent<Collider2D>().enabled = false;
             gobject.transform.parent = Global.Instance.ForegroundObject.transform;
+
+            return gobject;
+        }
+
+        public void Activate()
+        {
+            GetComponent<Collider2D>().enabled = true;
+            transform.parent = null;
+            transform.localPosition = new Vector3(
+                ((m_spawnData.m_fRandomX ? Random.value : 0) * m_spawnData.m_fpXModifier) + m_spawnData.m_fpXOffset,
+                ((m_spawnData.m_fRandomY ? Random.value : 0) * m_spawnData.m_fpYModifier) + m_spawnData.m_fpYOffset,
+                ((m_spawnData.m_fRandomZ ? Random.value : 0) * m_spawnData.m_fpZModifier) + m_spawnData.m_fpZOffset);
+
+            transform.localPosition += Global.Instance.GlobalObject.transform.localPosition + Global.Instance.ForegroundObject.transform.localPosition;
+            transform.parent = Global.Instance.ForegroundObject.transform;
+
+            active = true;
         }
 
         // Use this for initialization
@@ -63,26 +76,65 @@ namespace Assets.Scripts
         // Update is called once per frame
         public void FixedUpdate()
         {
+            if (!active)
+            {
+                return;
+            }
+
             if (!GameOverAnimation.GetInstance().m_fAnimationInProgress)
                 GetComponent<Rigidbody2D>().velocity = new Vector2(-m_fpSpeedModifier * Global.Instance.speed, 0);
             else
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
 
-            if (transform.localPosition.x < -10)
+            if (transform.localPosition.x < -8)
             {
-                Destroy(this.gameObject);
+                Disable();
+                //Destroy(this.gameObject);
             }
+        }
+        
+        public void Disable()
+        {
+            GetComponent<Collider2D>().enabled = false;
+            active = false;
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(-8, 0, 0);
         }
 
         void OnTriggerEnter2D(Collider2D other)
         {
+            if (!active)
+            {
+                return;
+            }
+
+            if (other.gameObject.GetComponent<ObstacleBase>() != null)
+            {
+                if (name == "Diamond(Clone)")
+                {
+                    if (other.GetComponent<ObstacleBase>().m_fpSpeedModifier == this.m_fpSpeedModifier)
+                    {
+                        Disable();
+                    }
+                }
+
+                if (other.name == "Diamond(Clone)")
+                {
+                    if (other.GetComponent<ObstacleBase>().m_fpSpeedModifier == this.m_fpSpeedModifier)
+                    {
+                        other.GetComponent<ObstacleBase>().Disable();
+                    }
+                }
+            }
+
             if (other.gameObject.name == "Main Character" && name != "Diamond(Clone)" && other.name != "Diamond(Clone)")
             {
                 GameOverAnimation.GetInstance().Trigger();
             }
             else if (other.gameObject.name == "Main Character" && name == "Diamond(Clone)")
             {
-                Destroy(gameObject);
+                //Destroy(gameObject);
+                Disable();
                 Global.Instance.PlayPickupSound();
                 Global.score += 1;
                 Global.Instance.UpdateScore();

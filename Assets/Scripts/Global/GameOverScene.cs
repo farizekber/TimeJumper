@@ -19,6 +19,7 @@ public class GameOverScene : MonoBehaviour {
 
         GetComponentsInChildren<Text>().Where(s => s.name == "Time2").First().text = answer;
         GetComponentsInChildren<Text>().Where(s => s.name == "Distance2").First().text = (int)Global.distance + "m";
+        GetComponentsInChildren<Text>().Where(s => s.name == "HighestDistance2").First().text = PlayerPrefs.GetInt("Highest Distance") + "m";
     }
 	
 	// Update is called once per frame

@@ -9,7 +9,6 @@ public class MainCharacter : MonoBehaviour {
     public float clickRate = 0.40f;
     public float speedModifier = 1f;
 
-
 	// Use this for initialization
 	void Start ()
     {
@@ -26,14 +25,14 @@ public class MainCharacter : MonoBehaviour {
     {
         Rigidbody2D rigid = GetComponent<Rigidbody2D>();
 
-        rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, 0, 10f), rigid.transform.localPosition.z);
+        rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, -0.19f, 10f), rigid.transform.localPosition.z);
     }
 
     void FixedUpdate()
     {
         Rigidbody2D rigid = GetComponent<Rigidbody2D>();
 
-        GetComponent<Animator>().speed = (Global.Instance.speed < 0 ? 0 : Global.Instance.speed / speedModifier);
+        GetComponent<Animator>().speed = (Global.Instance.speed < -0.19f ? -0.19f : Global.Instance.speed / speedModifier);
 
         if (rigid.transform.localPosition.y > 0f - float.Epsilon && rigid.transform.localPosition.y < 0f + float.Epsilon)
         {

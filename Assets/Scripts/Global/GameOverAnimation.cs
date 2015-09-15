@@ -35,6 +35,9 @@ namespace Assets.Scripts
 
             if (/*m_fpInitiatedTime + m_fpTwirlTimeInSeconds < Time.time &&*/ (((m_twirl as UnityStandardAssets.ImageEffects.Twirl).angle % 360) == 0))
             {
+                SpawnManager.Instance.CancelInvoke();
+                SpawnManager.Instance.enabled = false;
+
                 foreach (Background item in Resources.FindObjectsOfTypeAll(typeof(Background)))
                 {
                     item.Finalize();
@@ -58,11 +61,19 @@ namespace Assets.Scripts
 
         public void Trigger()
         {
+            if (m_fAnimationInProgress)
+                return;
+
+            m_fAnimationInProgress = true;
+
             m_fpInitiatedTime = Time.time;
             Global.endingTime = Time.time;
             //Global.Instance.PlayDeathSound();
             Global.Instance.addingDistance = false;
-            m_fAnimationInProgress = true;
+
+            if (Global.distance > PlayerPrefs.GetInt("Highest Distance"))
+                PlayerPrefs.SetInt("Highest Distance", (int)Global.distance);
+
             Global.Instance.delay.Start();
         }
 

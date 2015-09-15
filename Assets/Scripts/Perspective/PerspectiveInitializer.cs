@@ -47,24 +47,40 @@ namespace Assets.Scripts
                 behaviour.CancelInvoke();
             }
 
-            //Remove all spawnables from screen.
-            ((GameObject[])GameObject.FindObjectsOfType(typeof(GameObject))).Where((GameObject gameObject) =>
-            {
-                foreach (ObstacleBase spawnable in Global.Instance.spawnables)
-                {
-                    if (gameObject.name == spawnable.name + "(Clone)")
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }).ToList().ForEach((GameObject gameObject) => GameObject.Destroy(gameObject));
+            //SpawnManager.Instance.CancelInvoke();
+            //SpawnManager.Instance.DisableAll();
+
+            ////Remove all spawnables from screen.
+            //((GameObject[])GameObject.FindObjectsOfType(typeof(GameObject))).Where((GameObject gameObject) =>
+            //{
+            //    foreach (ObstacleBase spawnable in SpawnManager.Instance.spawnables)
+            //    {
+            //        if (gameObject.name == spawnable.name + "(Clone)")
+            //        {
+            //            return true;
+            //        }
+            //    }
+            //    return false;
+            //}).ToList().ForEach((GameObject gameObject) => GameObject.Destroy(gameObject));
+
+            ////Remove all spawnables from screen.
+            //((GameObject[])GameObject.FindObjectsOfType(typeof(GameObject))).Where((GameObject gameObject) =>
+            //{
+            //    foreach (ObstacleBase spawnable in SpawnManager.Instance.collectables)
+            //    {
+            //        if (gameObject.name == spawnable.name + "(Clone)")
+            //        {
+            //            return true;
+            //        }
+            //    }
+            //    return false;
+            //}).ToList().ForEach((GameObject gameObject) => GameObject.Destroy(gameObject));
         }
 
         public void LoadPerspective()
         {
-            Global.Instance.spawnables.Clear();
-            Global.Instance.spawnables.AddRange(newTheme.m_spawnables);
+            SpawnManager.Instance.spawnables.Clear();
+            SpawnManager.Instance.spawnables.AddRange(newTheme.m_spawnables);
 
             GameObject.Find("Main Character").GetComponent<SpriteRenderer>().sprite = newTheme.m_mainCharacter;
             GameObject.Find("Main Character").GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(newTheme.m_mainCharacterAnimationString);
@@ -72,7 +88,7 @@ namespace Assets.Scripts
             GameObject.Find("Dragon").GetComponent<SpriteRenderer>().sprite = newTheme.m_chaser;
             GameObject.Find("Dragon").GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(newTheme.m_chaserAnimationString);
 
-            GameObject.Find("Background").GetComponent<MeshRenderer>().material.mainTexture = newTheme.m_background;
+            //GameObject.Find("Background").GetComponent<MeshRenderer>().material.mainTexture = newTheme.m_background;
             //test
             //Background.Instance.horizontal = false;
             foreach (Background item in Resources.FindObjectsOfTypeAll(typeof(Background)))
@@ -80,8 +96,8 @@ namespace Assets.Scripts
                 item.horizontal = false;
             }
 
-            Global.Instance.InvokeCollectableSpawns();
-            Global.Instance.InvokeObstacleSpawns();
+            SpawnManager.Instance.InvokeCollectableSpawns();
+            SpawnManager.Instance.InvokeObstacleSpawns();
         }
 
         public void SwitchPerspective()

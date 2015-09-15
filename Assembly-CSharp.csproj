@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Boulder.cs" />
+     <Compile Include="Assets\Scripts\Global\ApplicationGlobal.cs" />
      <Compile Include="Assets\Scripts\Global\Background.cs" />
      <Compile Include="Assets\Scripts\Global\Fader.cs" />
      <Compile Include="Assets\Scripts\Global\GameOverAnimation.cs" />
@@ -62,6 +63,7 @@
      <Compile Include="Assets\Scripts\Obstacles\ObstacleBase.cs" />
      <Compile Include="Assets\Scripts\Obstacles\Obstacles.cs" />
      <Compile Include="Assets\Scripts\Obstacles\Pickaxe.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\SpawnManager.cs" />
      <Compile Include="Assets\Scripts\Obstacles\Stone.cs" />
      <Compile Include="Assets\Scripts\Obstacles\TNT.cs" />
      <Compile Include="Assets\Scripts\Perspective\PerspectiveInitializer.cs" />
