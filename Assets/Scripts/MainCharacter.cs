@@ -8,6 +8,8 @@ public class MainCharacter : MonoBehaviour {
     float previousClickTime = 0;
     public float clickRate = 0.40f;
     public float speedModifier = 1f;
+    public bool inVehicle = false;
+    public int vehicleHealth = 0;
 
 	// Use this for initialization
 	void Start ()
@@ -52,7 +54,7 @@ public class MainCharacter : MonoBehaviour {
                 //Debug.LogFormat("Jump x: {0} y: {1}", rigid.transform.localPosition.x, rigid.transform.localPosition.y);
                 previousClickTime = Time.time;
                 rigid.velocity = new Vector2(0, 0);
-                rigid.AddForce(new Vector2(0, 150));
+                rigid.AddForce(new Vector2(0, 175));
             }
         }
     }

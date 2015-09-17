@@ -92,7 +92,7 @@ namespace Assets.Scripts
                 //Destroy(this.gameObject);
             }
         }
-        
+
         public void Disable()
         {
             GetComponent<Collider2D>().enabled = false;
@@ -107,16 +107,8 @@ namespace Assets.Scripts
             {
                 return;
             }
-
             if (other.gameObject.GetComponent<ObstacleBase>() != null)
             {
-                if (name == "Diamond(Clone)")
-                {
-                    if (other.GetComponent<ObstacleBase>().m_fpSpeedModifier == this.m_fpSpeedModifier)
-                    {
-                        Disable();
-                    }
-                }
 
                 if (other.name == "Diamond(Clone)")
                 {
@@ -127,22 +119,55 @@ namespace Assets.Scripts
                 }
             }
 
-            if (other.gameObject.name == "Main Character" && name != "Diamond(Clone)" && other.name != "Diamond(Clone)")
-            {
-                GameOverAnimation.GetInstance().Trigger();
-            }
-            else if (other.gameObject.name == "Main Character" && name == "Diamond(Clone)")
-            {
-                //Destroy(gameObject);
-                Disable();
-                Global.Instance.PlayPickupSound();
-                Global.score += 1;
-                Global.Instance.UpdateScore();
-            }
-        }
 
-        void OnTriggerStay2D(Collider2D other) { }
+            if (other.gameObject.name == "Main Character")
+            {
+                if (name == "Diamond(Clone)")
+                {
+                    //Destroy(gameObject);
+                    Disable();
+                    Global.Instance.PlayPickupSound();
+                    Global.score += 1;
+                    Global.Instance.UpdateScore();
+                }
+                else if (name == "MineCarVehicle(Clone)")
+                {
+                    if (!other.gameObject.GetComponent<MainCharacter>().inVehicle)
+                    {
+                        Global.Instance.speed += 2f;
+                    }
+                    other.gameObject.GetComponent<MainCharacter>().inVehicle = true;
+                    other.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/InMineCart");
+                    other.gameObject.GetComponent<Animator>().enabled = false;
+                    other.gameObject.GetComponent<MainCharacter>().vehicleHealth = 100;
 
-        void OnTriggerExit2D(Collider2D other) { }
+
+                    //other.GetComponent<Rigidbody2D>().velocity = 
+                }
+                else
+                {
+                    if (!other.gameObject.GetComponent<MainCharacter>().inVehicle)
+                    {
+                        GameOverAnimation.GetInstance().Trigger();
+                    }
+                    else
+                    {
+                        other.gameObject.GetComponent<MainCharacter>().vehicleHealth -= 20;
+                        if (other.gameObject.GetComponent<MainCharacter>().vehicleHealth <= 0)
+                        {
+                            Disable();
+                            other.gameObject.GetComponent<MainCharacter>().inVehicle = false;
+                            other.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/character-v2");
+                            other.gameObject.GetComponent<Animator>().enabled = true;
+                            Global.Instance.speed -= 2f;
+                        }
+                    }
+                }
+            }
+        }    
+
+    void OnTriggerStay2D(Collider2D other) { }
+
+    void OnTriggerExit2D(Collider2D other) { }
     }
 }
