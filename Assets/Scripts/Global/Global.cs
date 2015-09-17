@@ -8,6 +8,9 @@ using System.Linq;
 public class Global : MonoBehaviour
 {
     public static Global Instance;
+
+    public int orientation = 0;
+
     public GameObject ForegroundObject;
     public GameObject GlobalObject;
     public Stopwatch delay = new Stopwatch();
@@ -51,6 +54,9 @@ public class Global : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        //test
+        Screen.orientation = 0;
+
         Instance = this;
 
         score = 0;
@@ -69,6 +75,11 @@ public class Global : MonoBehaviour
         //DistanceText.transform.localPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, new Vector2(13, 7));
         ForegroundObject = GameObject.Find("Foreground");
         SpawnManager.Instance.Init();
+
+        Screen.autorotateToPortrait = false;
+        Screen.autorotateToLandscapeRight = false;
+        Screen.autorotateToLandscapeLeft = false;
+        Screen.autorotateToPortraitUpsideDown = false;
     }
 
     // Update is called once per frame

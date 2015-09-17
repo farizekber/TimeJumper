@@ -21,6 +21,31 @@ public class SpawnManager : MonoBehaviour {
         Instance = this;
     }
 
+    public void RemoveAll()
+    {
+        CancelInvoke();
+        foreach (var item in spawnableInstances)
+        {
+            foreach (var item2 in item.Value)
+            {
+                GameObject.Destroy(item2);
+            }
+        }
+
+        foreach (var item in collectableInstances)
+        {
+            foreach (var item2 in item.Value)
+            {
+                GameObject.Destroy(item2);
+            }
+        }
+
+        spawnableInstances.Clear();
+        collectableInstances.Clear();
+        spawnables.Clear();
+        collectables.Clear();
+    }
+
     public void Init()
     {
         foreach (var item in spawnables)

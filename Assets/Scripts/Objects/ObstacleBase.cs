@@ -28,25 +28,41 @@ namespace Assets.Scripts
         private Obstacles m_obstacleKind;
         private float m_fpSpeedModifier;
         public string m_szPrefab;
-        public SpawnData m_spawnData;
+        public SpawnData m_horizontalSpawnData;
+        public SpawnData m_verticalSpawnData;
         public bool active = false;
 
-        public ObstacleBase(Obstacles obstacleKind, float fpSpeedModifier, string szPrefab, SpawnData spawnData)
+        public ObstacleBase(Obstacles obstacleKind, float fpSpeedModifier, string szPrefab, SpawnData horizontalSpawnData, SpawnData verticalSpawnData)
         {
             m_obstacleKind = obstacleKind;
             m_fpSpeedModifier = fpSpeedModifier;
             m_szPrefab = szPrefab;
-            m_spawnData = spawnData;
+            m_horizontalSpawnData = horizontalSpawnData;
+            m_verticalSpawnData = verticalSpawnData;
         }
 
         public GameObject Spawn()
         {
-            GameObject gobject = (GameObject)Instantiate(Resources.Load("Prefabs/" + m_szPrefab),
-                new Vector3(
-                -8.0f,
-                ((m_spawnData.m_fRandomY ? Random.value : 0) * m_spawnData.m_fpYModifier) + m_spawnData.m_fpYOffset,
-                ((m_spawnData.m_fRandomZ ? Random.value : 0) * m_spawnData.m_fpZModifier) + m_spawnData.m_fpZOffset),
-                new Quaternion(0, 0, 0, 0));
+            GameObject gobject;
+
+            if (Global.Instance.orientation == 0)
+            {
+                gobject = (GameObject)Instantiate(Resources.Load("Prefabs/" + m_szPrefab),
+                    new Vector3(
+                    -8.0f,
+                    ((m_horizontalSpawnData.m_fRandomY ? Random.value : 0) * m_horizontalSpawnData.m_fpYModifier) + m_horizontalSpawnData.m_fpYOffset,
+                    ((m_horizontalSpawnData.m_fRandomZ ? Random.value : 0) * m_horizontalSpawnData.m_fpZModifier) + m_horizontalSpawnData.m_fpZOffset),
+                    Quaternion.Euler(0, 0, 0));
+            }
+            else
+            {
+                gobject = (GameObject)Instantiate(Resources.Load("Prefabs/" + m_szPrefab),
+                    new Vector3(
+                    -8.0f,
+                    ((m_verticalSpawnData.m_fRandomY ? Random.value : 0) * m_verticalSpawnData.m_fpYModifier) + m_verticalSpawnData.m_fpYOffset,
+                    ((m_verticalSpawnData.m_fRandomZ ? Random.value : 0) * m_verticalSpawnData.m_fpZModifier) + m_verticalSpawnData.m_fpZOffset),
+                    Quaternion.Euler(0, 0, -90));
+            }
 
             //gobject.transform.localPosition += Global.Instance.GlobalObject.transform.localPosition + Global.Instance.ForegroundObject.transform.localPosition;
             gobject.GetComponent<Collider2D>().enabled = false;
@@ -59,10 +75,21 @@ namespace Assets.Scripts
         {
             GetComponent<Collider2D>().enabled = true;
             transform.parent = null;
-            transform.localPosition = new Vector3(
-                ((m_spawnData.m_fRandomX ? Random.value : 0) * m_spawnData.m_fpXModifier) + m_spawnData.m_fpXOffset,
-                ((m_spawnData.m_fRandomY ? Random.value : 0) * m_spawnData.m_fpYModifier) + m_spawnData.m_fpYOffset,
-                ((m_spawnData.m_fRandomZ ? Random.value : 0) * m_spawnData.m_fpZModifier) + m_spawnData.m_fpZOffset);
+
+            if (Global.Instance.orientation == 0)
+            {
+                transform.localPosition = new Vector3(
+                    ((m_horizontalSpawnData.m_fRandomX ? Random.value : 0) * m_horizontalSpawnData.m_fpXModifier) + m_horizontalSpawnData.m_fpXOffset,
+                    ((m_horizontalSpawnData.m_fRandomY ? Random.value : 0) * m_horizontalSpawnData.m_fpYModifier) + m_horizontalSpawnData.m_fpYOffset,
+                    ((m_horizontalSpawnData.m_fRandomZ ? Random.value : 0) * m_horizontalSpawnData.m_fpZModifier) + m_horizontalSpawnData.m_fpZOffset);
+            }
+            else
+            {
+                transform.localPosition = new Vector3(
+                    ((m_verticalSpawnData.m_fRandomX ? Random.value : 0) * m_verticalSpawnData.m_fpXModifier) + m_verticalSpawnData.m_fpXOffset,
+                    ((m_verticalSpawnData.m_fRandomY ? Random.value : 0) * m_verticalSpawnData.m_fpYModifier) + m_verticalSpawnData.m_fpYOffset,
+                    ((m_verticalSpawnData.m_fRandomZ ? Random.value : 0) * m_verticalSpawnData.m_fpZModifier) + m_verticalSpawnData.m_fpZOffset);
+            }
 
             transform.localPosition += Global.Instance.GlobalObject.transform.localPosition + Global.Instance.ForegroundObject.transform.localPosition;
             transform.parent = Global.Instance.ForegroundObject.transform;
@@ -82,11 +109,16 @@ namespace Assets.Scripts
             }
 
             if (!GameOverAnimation.GetInstance().m_fAnimationInProgress)
-                GetComponent<Rigidbody2D>().velocity = new Vector2(-m_fpSpeedModifier * Global.Instance.speed, 0);
+            {
+                if (Global.Instance.orientation == 0)
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(-m_fpSpeedModifier * Global.Instance.speed, 0);
+                else
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(m_fpSpeedModifier * Global.Instance.speed, 0);
+            }
             else
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
 
-            if (transform.localPosition.x < -8)
+            if ((Global.Instance.orientation == 0 && transform.localPosition.x < -8) || (Global.Instance.orientation == 1 && transform.localPosition.x > 15))
             {
                 Disable();
                 //Destroy(this.gameObject);
