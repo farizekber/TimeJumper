@@ -104,8 +104,15 @@ namespace Assets.Scripts
             dragon.SetActive(false);
 
             SpawnManager.Instance.spawnables.AddRange(newTheme.m_spawnables);
-            SpawnManager.Instance.collectables.AddRange(newTheme.m_collectables);
+            SpawnManager.Instance.collectables.Add(newTheme.m_collectables[0]);
             SpawnManager.Instance.Init();
+
+            if (GameObject.Find("Main Character").GetComponent<MainCharacter>().inVehicle)
+            {
+                Global.Instance.speed -= 2f;
+                GameObject.Find("Main Character").GetComponent<MainCharacter>().inVehicle = false;
+                GameObject.Find("Main Character").GetComponent<Animator>().enabled = true;
+            }
         }
 
         public void LoadHorizontalPerspective()

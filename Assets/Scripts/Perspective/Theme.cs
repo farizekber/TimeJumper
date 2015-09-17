@@ -28,30 +28,30 @@ namespace Assets.Scripts.Perspective
             m_chaserAnimationString = chaserAnimationString;
         }
 
-//        public static Theme Default()
-//        {
-//            return new Theme(new List<ObstacleBase>() { (Resources.Load("Prefabs/" + "Bat") as GameObject).GetComponent<Bat>(),
-//                                                        (Resources.Load("Prefabs/" + "Minecart") as GameObject).GetComponent<Minecart>(),
-//                                                        (Resources.Load("Prefabs/" + "Diamond") as GameObject).GetComponent<Diamond>() },
-//                             new List<PerspectiveTransition>() { new PerspectiveTransition(Perspectives.Horizontal, Perspectives.Vertical, delegate {
-//                                 PerspectiveInitializer.s_Instance.CleanPerspective();
+        //        public static Theme Default()
+        //        {
+        //            return new Theme(new List<ObstacleBase>() { (Resources.Load("Prefabs/" + "Bat") as GameObject).GetComponent<Bat>(),
+        //                                                        (Resources.Load("Prefabs/" + "Minecart") as GameObject).GetComponent<Minecart>(),
+        //                                                        (Resources.Load("Prefabs/" + "Diamond") as GameObject).GetComponent<Diamond>() },
+        //                             new List<PerspectiveTransition>() { new PerspectiveTransition(Perspectives.Horizontal, Perspectives.Vertical, delegate {
+        //                                 PerspectiveInitializer.s_Instance.CleanPerspective();
 
-////                                 Debug.Log(Resources.Load("Prefabs/" + "Boulder"));
+        ////                                 Debug.Log(Resources.Load("Prefabs/" + "Boulder"));
 
-//                                 GameObject gobject = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "Boulder"), new Vector3(0, 5, 0.5f), new Quaternion(0,0,0,0));
-//                                 gobject.transform.localPosition += Global.Instance.GlobalObject.transform.localPosition + Global.Instance.ForegroundObject.transform.localPosition;
-//                                 gobject.transform.parent = Global.Instance.ForegroundObject.transform;
+        //                                 GameObject gobject = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "Boulder"), new Vector3(0, 5, 0.5f), new Quaternion(0,0,0,0));
+        //                                 gobject.transform.localPosition += Global.Instance.GlobalObject.transform.localPosition + Global.Instance.ForegroundObject.transform.localPosition;
+        //                                 gobject.transform.parent = Global.Instance.ForegroundObject.transform;
 
-//                                 Fader.s_Instance.InvokeMethod("Enable", 1.25f);
-//                                 PerspectiveInitializer.s_Instance.InvokeMethod("LoadPerspective", 1.75f);
-//                                 Fader.s_Instance.InvokeMethod("Disable", 2.25f);
-//                             }) },
-//                             Resources.Load("Images/back") as Texture,
-//                             Resources.Load("Images/dragon") as Sprite,
-//                             "Animations/Dragon",
-//                             Resources.Load("Images/scottpilgrim_multiple") as Sprite,
-//                             "Animations/Main Character");
-//        }
+        //                                 Fader.s_Instance.InvokeMethod("Enable", 1.25f);
+        //                                 PerspectiveInitializer.s_Instance.InvokeMethod("LoadPerspective", 1.75f);
+        //                                 Fader.s_Instance.InvokeMethod("Disable", 2.25f);
+        //                             }) },
+        //                             Resources.Load("Images/back") as Texture,
+        //                             Resources.Load("Images/dragon") as Sprite,
+        //                             "Animations/Dragon",
+        //                             Resources.Load("Images/scottpilgrim_multiple") as Sprite,
+        //                             "Animations/Main Character");
+        //        }
 
         public static Theme LoadTestLevel()
         {
@@ -59,12 +59,13 @@ namespace Assets.Scripts.Perspective
                                                         (Resources.Load("Prefabs/" + "Minecart") as GameObject).GetComponent<Minecart>(),
                                                         (Resources.Load("Prefabs/" + "Stone") as GameObject).GetComponent<Stone>(),
                                                         (Resources.Load("Prefabs/" + "Pickaxe") as GameObject).GetComponent<Pickaxe>(),
-                                                        (Resources.Load("Prefabs/" + "TNT") as GameObject).GetComponent<TNT>() }, 
-                             new List<ObstacleBase>() { (Resources.Load("Prefabs/" + "Diamond") as GameObject).GetComponent<Diamond>() },
+                                                        (Resources.Load("Prefabs/" + "TNT") as GameObject).GetComponent<TNT>() },
+
+                             new List<ObstacleBase>() { (Resources.Load("Prefabs/" + "Diamond") as GameObject).GetComponent<Diamond>(),
+                                                        (Resources.Load("Prefabs/" + "MineCarVehicle") as GameObject).GetComponent<MineCarVehicle>() },
+
                              new List<PerspectiveTransition>() { new PerspectiveTransition(Perspectives.Horizontal, Perspectives.Vertical, delegate {
                                  PerspectiveInitializer.s_Instance.CleanPerspective();
-
-//                                 Debug.Log(Resources.Load("Prefabs/" + "Boulder"));
 
                                  GameObject gobject = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "Boulder"), new Vector3(0, 5, 0.5f), new Quaternion(0,0,0,0));
                                  gobject.transform.localPosition += Global.Instance.GlobalObject.transform.localPosition + Global.Instance.ForegroundObject.transform.localPosition;

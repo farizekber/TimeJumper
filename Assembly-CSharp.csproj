@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\Objects\SpawnManager.cs" />
      <Compile Include="Assets\Scripts\Objects\Stone.cs" />
      <Compile Include="Assets\Scripts\Objects\TNT.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\MineCarVehicle.cs" />
      <Compile Include="Assets\Scripts\Perspective\PerspectiveInitializer.cs" />
      <Compile Include="Assets\Scripts\Perspective\PerspectiveTransition.cs" />
      <Compile Include="Assets\Scripts\Perspective\Perspectives.cs" />

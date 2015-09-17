@@ -28,6 +28,10 @@ public class MainCharacter : MonoBehaviour {
     float previousClickTime = 0;
     public float clickRate = 0.40f;
     public float speedModifier = 1f;
+
+    public bool inVehicle = false;
+    public int vehicleHealth = 0;
+
     public int defaultJumps;
     private int jumps;
     private float downTime;
@@ -53,14 +57,20 @@ public class MainCharacter : MonoBehaviour {
     {
         Rigidbody2D rigid = GetComponent<Rigidbody2D>();
 
-        rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, -0.19f, 10f), rigid.transform.localPosition.z);
+        if (Global.Instance != null)
+        {
+            if (Global.Instance.orientation == 0)
+                rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, 0.765f, 10f), rigid.transform.localPosition.z);
+            else
+                rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, -0.19f, 10f), rigid.transform.localPosition.z);
+        }
     }
 
     void FixedUpdate()
     {
         Rigidbody2D rigid = GetComponent<Rigidbody2D>();
 
-        GetComponent<Animator>().speed = (Global.Instance.speed < -0.19f ? -0.19f : Global.Instance.speed / speedModifier);
+        GetComponent<Animator>().speed = (Global.Instance.speed < 0.0f ? 0.0f : Global.Instance.speed / speedModifier);
 
         foreach (Touch touch in Input.touches)
         {
@@ -115,9 +125,7 @@ public class MainCharacter : MonoBehaviour {
 
         if (Global.Instance.orientation == 0)
         {
-            //GameObject.Find("Platform").GetComponent<Platform>().colliderEnabled = !(Input.GetKey(KeyCode.DownArrow) || (currentSwipe.yDirectionDelta <= -0.25f + float.Epsilon && currentSwipe.Enabled));
-
-            if (rigid.transform.localPosition.y >= -0.19f - float.Epsilon && rigid.transform.localPosition.y <= -0.19f + float.Epsilon)
+            if (rigid.transform.localPosition.y >= 0.765f - float.Epsilon && rigid.transform.localPosition.y <= 0.765f + float.Epsilon)
             {
                 rigid.velocity = new Vector2(rigid.velocity.x, 0);
                 jumps = defaultJumps;

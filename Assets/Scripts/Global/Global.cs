@@ -54,9 +54,6 @@ public class Global : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        //test
-        Screen.orientation = 0;
-
         Instance = this;
 
         score = 0;
