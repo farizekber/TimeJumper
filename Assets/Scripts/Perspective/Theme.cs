@@ -67,7 +67,7 @@ namespace Assets.Scripts.Perspective
                              new List<PerspectiveTransition>() { new PerspectiveTransition(Perspectives.Horizontal, Perspectives.Vertical, delegate {
                                  PerspectiveInitializer.s_Instance.CleanPerspective();
 
-                                 GameObject gobject = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "Boulder"), new Vector3(0, 5, 0.5f), new Quaternion(0,0,0,0));
+                                 GameObject gobject = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "pillar-crash"), new Vector3(0, 5, 0.5f), new Quaternion(0,0,0,0));
                                  gobject.transform.localPosition += Global.Instance.GlobalObject.transform.localPosition + Global.Instance.ForegroundObject.transform.localPosition;
                                  gobject.transform.parent = Global.Instance.ForegroundObject.transform;
 

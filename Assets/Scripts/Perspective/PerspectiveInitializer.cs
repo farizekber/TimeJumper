@@ -85,8 +85,10 @@ namespace Assets.Scripts
         {
             Global.Instance.orientation = 1;
 
+
             GameObject.Find("Main Character").transform.localRotation = Quaternion.Euler(GameObject.Find("Main Character").transform.localRotation.x, GameObject.Find("Main Character").transform.localRotation.y, -90);
             //GameObject.Destroy(GameObject.Find("Platform"));
+            GameObject.Find("Main Character").GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
             GameObject.Find("Main Character").GetComponent<Rigidbody2D>().gravityScale = 0;
 
             for (int i = 0; i < GameObject.Find("Background").transform.childCount; ++i)
@@ -96,7 +98,7 @@ namespace Assets.Scripts
             }
 
             GameObject.Find("Main Character").GetComponent<BoxCollider2D>().size = new Vector2(0.8542318f, 1.699413f) * 2;
-            GameObject.Find("Main Character").GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(4.5f, GameObject.Find("Main Character").GetComponent<Rigidbody2D>().transform.localPosition.y, GameObject.Find("Main Character").GetComponent<Rigidbody2D>().transform.localPosition.z);
+            GameObject.Find("Main Character").GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(4.5f, 3.1f, GameObject.Find("Main Character").GetComponent<Rigidbody2D>().transform.localPosition.z);
             GameObject.Find("Main Character").GetComponent<SpriteRenderer>().sprite = newTheme.m_mainCharacter;
             GameObject.Find("Main Character").GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(newTheme.m_mainCharacterAnimationString);
 
@@ -155,7 +157,7 @@ namespace Assets.Scripts
             {
                 PerspectiveInitializer.s_Instance.CleanPerspective();
 
-                GameObject gobject = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "Boulder"), new Vector3(0, 5, 0.5f), new Quaternion(0, 0, 0, 0));
+                GameObject gobject = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "pillar-crash"), new Vector3(0, 5, 0.5f), new Quaternion(0, 0, 0, 0));
                 gobject.transform.localPosition += Global.Instance.GlobalObject.transform.localPosition + Global.Instance.ForegroundObject.transform.localPosition;
                 gobject.transform.parent = Global.Instance.ForegroundObject.transform;
 
