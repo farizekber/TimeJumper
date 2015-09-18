@@ -98,12 +98,15 @@ namespace Assets.Scripts
             }
 
             GameObject.Find("Main Character").GetComponent<BoxCollider2D>().size = new Vector2(0.8542318f, 1.699413f) * 2;
-            GameObject.Find("Main Character").GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(4.5f, 3.1f, GameObject.Find("Main Character").GetComponent<Rigidbody2D>().transform.localPosition.z);
+            GameObject.Find("Main Character").GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(2.66f, 3.1f, GameObject.Find("Main Character").GetComponent<Rigidbody2D>().transform.localPosition.z);
             GameObject.Find("Main Character").GetComponent<SpriteRenderer>().sprite = newTheme.m_mainCharacter;
             GameObject.Find("Main Character").GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(newTheme.m_mainCharacterAnimationString);
 
             dragon = GameObject.Find("Dragon");
-            dragon.SetActive(false);
+            dragon.transform.localPosition = new Vector3(4.85f,3.12f,0.5f);
+            dragon.transform.localRotation = Quaternion.Euler(0, 0, 270);
+            dragon.transform.localScale = new Vector3(1,1,1);
+            dragon.GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Dragon2");
 
             SpawnManager.Instance.spawnables.AddRange(newTheme.m_spawnables);
             SpawnManager.Instance.collectables.Add(newTheme.m_collectables[0]);
@@ -136,8 +139,10 @@ namespace Assets.Scripts
             GameObject.Find("Main Character").GetComponent<SpriteRenderer>().sprite = Resources.Load("Images/character-v2") as Sprite;
             GameObject.Find("Main Character").GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/character_0");
 
-            if(dragon == null) GameObject.Find("Dragon").SetActive(true);
-            else dragon.SetActive(true);
+            dragon.transform.localPosition = new Vector3(-5.68f,2.76f,0.5f);
+            dragon.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            dragon.transform.localScale = new Vector3(1.73f, 1.57f, 1);
+            dragon.GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Dragon");
 
             //GameObject.Find("Platform").active = true;
 
@@ -157,9 +162,9 @@ namespace Assets.Scripts
             {
                 PerspectiveInitializer.s_Instance.CleanPerspective();
 
-                GameObject gobject = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "pillar-crash"), new Vector3(0, 5, 0.5f), new Quaternion(0, 0, 0, 0));
+                /* GameObject gobject = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "pillar-crash"), new Vector3(0, 5, 0.5f), new Quaternion(0, 0, 0, 0));
                 gobject.transform.localPosition += Global.Instance.GlobalObject.transform.localPosition + Global.Instance.ForegroundObject.transform.localPosition;
-                gobject.transform.parent = Global.Instance.ForegroundObject.transform;
+                gobject.transform.parent = Global.Instance.ForegroundObject.transform; */
 
                 Fader.s_Instance.InvokeMethod("Enable", 1.25f);
                 PerspectiveInitializer.s_Instance.InvokeMethod("LoadHorizontalPerspective", 1.75f);

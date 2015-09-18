@@ -67,13 +67,13 @@ namespace Assets.Scripts.Perspective
                              new List<PerspectiveTransition>() { new PerspectiveTransition(Perspectives.Horizontal, Perspectives.Vertical, delegate {
                                  PerspectiveInitializer.s_Instance.CleanPerspective();
 
-                                 GameObject gobject = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "pillar-crash"), new Vector3(0, 5, 0.5f), new Quaternion(0,0,0,0));
+                                 GameObject gobject = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "pillar-crash"), new Vector3(0, 8.574f, 0.5f), new Quaternion(0,0,0,0));
                                  gobject.transform.localPosition += Global.Instance.GlobalObject.transform.localPosition + Global.Instance.ForegroundObject.transform.localPosition;
                                  gobject.transform.parent = Global.Instance.ForegroundObject.transform;
 
-                                 Fader.s_Instance.InvokeMethod("Enable", 1.25f);
-                                 PerspectiveInitializer.s_Instance.InvokeMethod("LoadVerticalPerspective", 1.75f);
-                                 Fader.s_Instance.InvokeMethod("Disable", 2.25f);
+                                 Fader.s_Instance.InvokeMethod("Enable", 2.25f);
+                                 PerspectiveInitializer.s_Instance.InvokeMethod("LoadVerticalPerspective", 2.75f);
+                                 Fader.s_Instance.InvokeMethod("Disable", 3.25f);
                              }) },
                              Resources.Load("Images/back") as Texture, 
                              Resources.Load("Images/character-falling-v1") as Sprite, 
