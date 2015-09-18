@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts;
+using Assets.Scripts.Objects;
 
 public class SpawnManager : MonoBehaviour {
 
@@ -10,6 +11,8 @@ public class SpawnManager : MonoBehaviour {
     public List<ObstacleBase> collectables = new List<ObstacleBase>();
     public Dictionary<ObstacleBase, List<GameObject>> spawnableInstances = new Dictionary<ObstacleBase, List<GameObject>>();
     public Dictionary<ObstacleBase, List<GameObject>> collectableInstances = new Dictionary<ObstacleBase, List<GameObject>>();
+
+    public PlatformManager platformManager = new PlatformManager();
 
     public float obstacleSpawnRate = 5f;
     public float collectableSpawnRate = 3f;
@@ -21,9 +24,29 @@ public class SpawnManager : MonoBehaviour {
         Instance = this;
     }
 
+    public void SpawnPlatform()
+    {
+        if (Global.Instance.orientation == 0)
+        {
+            if ((!platformManager.previousHigh) && (Random.value > 0.66f))
+            {
+                platformManager.previousHigh = true;
+                platformManager.Activate(((int)(Random.value * 3)) + 1, false);
+            }
+            else
+            {
+                platformManager.previousHigh = false;
+                platformManager.Activate(((int)(Random.value * 3)) + 1, true);
+            }
+        }
+
+        Invoke("SpawnPlatform", 2.5f);
+    }
+
     public void RemoveAll()
     {
         CancelInvoke();
+
         foreach (var item in spawnableInstances)
         {
             foreach (var item2 in item.Value)
@@ -48,6 +71,8 @@ public class SpawnManager : MonoBehaviour {
 
     public void Init()
     {
+        platformManager.Spawn();
+
         foreach (var item in spawnables)
         {
             for (int i = 0; i < defaultSpawnableCount; i++)
@@ -74,13 +99,14 @@ public class SpawnManager : MonoBehaviour {
             }
         }
 
+        Invoke("SpawnPlatform", 1.5f);
         Invoke("InvokeObstacleSpawns", 2f);
         Invoke("InvokeCollectableSpawns", 2f);
     }
 
     // Update is called once per frame
     void Update () {
-
+        platformManager.Update();
     }
 
     public void InvokeCollectableSpawns()

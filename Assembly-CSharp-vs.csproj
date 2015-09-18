@@ -63,7 +63,6 @@
      <Compile Include="Assets\Scripts\Objects\ObstacleBase.cs" />
      <Compile Include="Assets\Scripts\Objects\Obstacles.cs" />
      <Compile Include="Assets\Scripts\Objects\Pickaxe.cs" />
-     <Compile Include="Assets\Scripts\Objects\Platform.cs" />
      <Compile Include="Assets\Scripts\Objects\SpawnManager.cs" />
      <Compile Include="Assets\Scripts\Objects\Stone.cs" />
      <Compile Include="Assets\Scripts\Objects\TNT.cs" />
@@ -72,6 +71,9 @@
      <Compile Include="Assets\Scripts\Perspective\PerspectiveTransition.cs" />
      <Compile Include="Assets\Scripts\Perspective\Perspectives.cs" />
      <Compile Include="Assets\Scripts\Perspective\Theme.cs" />
+     <Compile Include="Assets\Scripts\Platforms\Platform.cs" />
+     <Compile Include="Assets\Scripts\Platforms\PlatformManager.cs" />
+     <Compile Include="Assets\Scripts\Swipe.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />

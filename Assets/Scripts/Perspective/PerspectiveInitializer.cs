@@ -94,7 +94,7 @@ namespace Assets.Scripts
                 if (GameObject.Find("Background").transform.GetChild(i).gameObject.name != "Directional light")
                     GameObject.Find("Background").transform.GetChild(i).gameObject.SetActive(GameObject.Find("Background").transform.GetChild(i).gameObject.name.Length > 8);
             }
-
+            
             GameObject.Find("Main Character").GetComponent<BoxCollider2D>().size = new Vector2(0.8542318f, 1.699413f) * 2;
             GameObject.Find("Main Character").GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(4.5f, GameObject.Find("Main Character").GetComponent<Rigidbody2D>().transform.localPosition.y, GameObject.Find("Main Character").GetComponent<Rigidbody2D>().transform.localPosition.z);
             GameObject.Find("Main Character").GetComponent<SpriteRenderer>().sprite = newTheme.m_mainCharacter;
@@ -113,6 +113,8 @@ namespace Assets.Scripts
                 GameObject.Find("Main Character").GetComponent<MainCharacter>().inVehicle = false;
                 GameObject.Find("Main Character").GetComponent<Animator>().enabled = true;
             }
+
+            SpawnManager.Instance.platformManager.Finalize();
         }
 
         public void LoadHorizontalPerspective()
@@ -121,7 +123,7 @@ namespace Assets.Scripts
 
             GameObject.Find("Main Character").transform.localRotation = Quaternion.Euler(GameObject.Find("Main Character").transform.localRotation.x, GameObject.Find("Main Character").transform.localRotation.y, 0);
             //GameObject.Destroy(GameObject.Find("Platform"));
-            GameObject.Find("Main Character").GetComponent<Rigidbody2D>().gravityScale = 0.35f;
+            GameObject.Find("Main Character").GetComponent<Rigidbody2D>().gravityScale = 1;
 
             for (int i = 0; i < GameObject.Find("Background").transform.childCount; ++i)
             {
@@ -139,6 +141,7 @@ namespace Assets.Scripts
 
             //GameObject.Find("Platform").active = true;
 
+            SpawnManager.Instance.platformManager.Spawn();
             SpawnManager.Instance.spawnables.AddRange(newTheme.m_spawnables);
             SpawnManager.Instance.collectables.AddRange(newTheme.m_collectables);
             SpawnManager.Instance.Init();

@@ -6,25 +6,6 @@ using UnityEngine.UI;
 
 public class MainCharacter : MonoBehaviour {
 
-    private class Swipe
-    {
-        public float xDirectionStart = 0, yDirectionStart = 0;
-        public float xDirectionEnd = 0, yDirectionEnd = 0;
-        public float xDirectionDelta = 0, yDirectionDelta = 0;
-        public bool Tap = false;
-        public bool Enabled = false;
-
-        public Swipe() { }
-        public void Reset()
-        {
-            xDirectionStart = 0; yDirectionStart = 0;
-            xDirectionEnd = 0; yDirectionEnd = 0;
-            xDirectionDelta = 0; yDirectionDelta = 0;
-            Tap = false;
-            Enabled = false;
-        }
-    }
-
     float previousClickTime = 0;
     public float clickRate = 0.40f;
     public float speedModifier = 1f;
@@ -49,9 +30,6 @@ public class MainCharacter : MonoBehaviour {
         jumps = defaultJumps;
     }
 
-    void OnCollisionEnter2D(Collision2D col)
-    { }
-
     // Update is called once per frame
     void Update ()
     {
@@ -60,9 +38,9 @@ public class MainCharacter : MonoBehaviour {
         if (Global.Instance != null)
         {
             if (Global.Instance.orientation == 0)
-                rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, 0.765f, 10f), rigid.transform.localPosition.z);
+                rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, 0.765f, 6.45f), rigid.transform.localPosition.z);
             else
-                rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, -0.19f, 10f), rigid.transform.localPosition.z);
+                rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, -0.19f, 6.45f), rigid.transform.localPosition.z);
         }
     }
 
@@ -123,6 +101,8 @@ public class MainCharacter : MonoBehaviour {
             currentSwipe.Reset();
         }
 
+        SpawnManager.Instance.platformManager.UpdateActive(currentSwipe, transform, Input.GetKey(KeyCode.DownArrow));
+
         if (Global.Instance.orientation == 0)
         {
             if (rigid.transform.localPosition.y >= 0.765f - float.Epsilon && rigid.transform.localPosition.y <= 0.765f + float.Epsilon)
@@ -144,7 +124,7 @@ public class MainCharacter : MonoBehaviour {
                     {
                         previousClickTime = Time.time;
                         rigid.velocity = new Vector2(0, 0);
-                        rigid.AddForce(new Vector2(0, 250));
+                        rigid.AddForce(new Vector2(0, 250.0f * 1.5f));
 
                         if (jumps >= 0)
                             jumps--;
