@@ -58,8 +58,11 @@ public class MainCharacter : MonoBehaviour {
 
                 Vector3 test = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 0));
 
+
                 currentSwipe.xDirectionStart = test.x;
                 currentSwipe.yDirectionStart = test.y;
+                currentSwipe.xDirectionEnd = test.x;
+                currentSwipe.yDirectionEnd = test.y;
             }
             else if (touch.phase == TouchPhase.Moved)
             {
@@ -143,10 +146,16 @@ public class MainCharacter : MonoBehaviour {
             {
                 if (currentSwipe.Enabled)
                 {
-                    if (rigid.velocity.y > 0 && currentSwipe.yDirectionEnd < 3.635f || rigid.velocity.y < 0 && currentSwipe.yDirectionEnd > 3.635f)
-                        rigid.velocity = new Vector2(0, 0);
-
-                    rigid.AddForce(new Vector2(0, currentSwipe.yDirectionEnd - 3.635f));
+                    //if (rigid.velocity.y > 0 && currentSwipe.yDirectionEnd < 3.1f || rigid.velocity.y < 0 && currentSwipe.yDirectionEnd > 3.1f) rigid.velocity = new Vector2(0, 0);
+                    rigid.velocity = new Vector2(0, 0);
+                    if (currentSwipe.yDirectionEnd < 3.1f)
+                    {
+                        rigid.AddForce(new Vector2(0, -100f));
+                    }
+                    else
+                    {
+                        rigid.AddForce(new Vector2(0, 100f));
+                    }
                 }
                 else
                 {
