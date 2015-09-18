@@ -74,6 +74,7 @@
      <Compile Include="Assets\Scripts\Platforms\Platform.cs" />
      <Compile Include="Assets\Scripts\Platforms\PlatformManager.cs" />
      <Compile Include="Assets\Scripts\Swipe.cs" />
+     <Compile Include="Assets\Scripts\pillarcrash.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
