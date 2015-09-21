@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Pickaxe : ObstacleBase
 {
+    private Animator animator;
+
     public Pickaxe() : base(Obstacles.Flying, 1.5f, "Pickaxe", new SpawnData(
         false, 1.0f, 10.5f,
         true, 3.07f, 4.0f,
@@ -14,10 +16,16 @@ public class Pickaxe : ObstacleBase
         false, 1.0f, 0.5f))
     { }
 
+    public new void Start()
+    {
+        base.Start();
+        animator = GetComponent<Animator>();
+    }
+
     public new void FixedUpdate()
     {
         base.FixedUpdate();
         
-        GetComponent<Animator>().speed = (Global.Instance.speed < 0 ? 0 : Global.Instance.speed);
+        animator.speed = (Global.Instance.speed < 0 ? 0 : Global.Instance.speed);
     }
 }

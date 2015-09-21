@@ -23,9 +23,9 @@ public class Global : MonoBehaviour
     //public float collectableSpawnRate = 3f;
     public static int score = 0;
 
-    private Text ScoreText;
-    private Text TimeText;
-    private Text DistanceText;
+    public Text ScoreText;
+    public Text TimeText;
+    public Text DistanceText;
 
     public static float distance = 0;
     private float lastTime = 0;
@@ -35,17 +35,23 @@ public class Global : MonoBehaviour
 
     public bool addingDistance = true;
 
+    private AudioSource audioSource;
+    private AudioSource foregroundAudioSource;
+
+    public GameObject HealthBar;
+    public GameObject HealthBarBackground;
+
     public void PlayPickupSound()
     {
-        GetComponent<AudioSource>().Play();
+        audioSource.Play();
     }
 
     public void PlayDeathSound()
     {
-        ForegroundObject.GetComponent<AudioSource>().Play();
+        foregroundAudioSource.Play();
     }
 
-    public static void Finalize()
+    public static void FinalizeObject()
     {
         Instance.enabled = false;
         Instance = null;
@@ -55,6 +61,11 @@ public class Global : MonoBehaviour
     private void Start()
     {
         Instance = this;
+
+        HealthBar = GameObject.Find("HealthBar");
+        HealthBar.GetComponent<Image>().enabled = false;
+        HealthBarBackground = GameObject.Find("HealthBarBackground");
+        HealthBarBackground.GetComponent<Image>().enabled = false;
 
         score = 0;
         distance = 0;
@@ -69,8 +80,11 @@ public class Global : MonoBehaviour
         Instance.ScoreText.text = "Score: 0";
         Instance.TimeText.text = "Time : 00:00:00";
         Instance.DistanceText.text = "Distance: 0m";
-        //DistanceText.transform.localPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, new Vector2(13, 7));
+
         ForegroundObject = GameObject.Find("Foreground");
+        foregroundAudioSource = ForegroundObject.GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
+
         SpawnManager.Instance.Init();
 
         Screen.autorotateToPortrait = false;

@@ -71,8 +71,6 @@ public class SpawnManager : MonoBehaviour {
 
     public void Init()
     {
-        platformManager.Spawn();
-
         foreach (var item in spawnables)
         {
             for (int i = 0; i < defaultSpawnableCount; i++)
@@ -99,7 +97,17 @@ public class SpawnManager : MonoBehaviour {
             }
         }
 
-        Invoke("SpawnPlatform", 1.5f);
+        if (Global.Instance.orientation == 0)
+        {
+            platformManager.Start();
+            platformManager.Spawn();
+            Invoke("SpawnPlatform", 1.5f);
+        }
+        else
+        {
+            platformManager.FinalizeObject();
+        }
+
         Invoke("InvokeObstacleSpawns", 2f);
         Invoke("InvokeCollectableSpawns", 2f);
     }

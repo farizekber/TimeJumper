@@ -5,30 +5,38 @@ using System;
 
 public class Platform : MonoBehaviour {
 
+    //private Rigidbody2D mainCharacterRigidBody;
+    private MainCharacter mainCharacter;
+    private SpriteRenderer spriteRenderer;
+    private Collider2D m_collider;
     public bool colliderEnabled = true;
     public bool Taken;
 
     // Use this for initialization
     void Start () {
-	
-	}
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        m_collider = GetComponent<BoxCollider2D>();
+        mainCharacter = GameObject.Find("Main Character").GetComponent<MainCharacter>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        if (GameObject.Find("Main Character").GetComponent<Rigidbody2D>().transform.localPosition.y < transform.localPosition.y)
-        {
-            colliderEnabled = false;
-        }
+        //if (mainCharacterRigidBody.transform.localPosition.y < transform.localPosition.y)
+        //{
+        //    colliderEnabled = false;
+        //}
 
-        GetComponent<BoxCollider2D>().enabled = colliderEnabled;
+        m_collider.enabled = colliderEnabled;
 
         if (!colliderEnabled)
         {
-            GetComponent<SpriteRenderer>().color = new Color(GetComponent<SpriteRenderer>().color.r, GetComponent<SpriteRenderer>().color.g, GetComponent<SpriteRenderer>().color.b, 0.5f);
+            if(spriteRenderer.color.a + float.Epsilon > 0.5)
+                spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0.5f);
         }
         else
         {
-            GetComponent<SpriteRenderer>().color = new Color(GetComponent<SpriteRenderer>().color.r, GetComponent<SpriteRenderer>().color.g, GetComponent<SpriteRenderer>().color.b, 1.0f);
+            if (spriteRenderer.color.a - float.Epsilon < 1.0)
+                spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 1.0f);
         }
     }
 
@@ -36,13 +44,12 @@ public class Platform : MonoBehaviour {
     {
         if (col.gameObject.name == "Main Character")
         {
-            col.gameObject.GetComponent<MainCharacter>().ResetJumps();
+            mainCharacter.ResetJumps();
         }
     }
 
     public void Disable()
     {
-        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-        GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(-8, 0, 1.5f);
+        transform.localPosition = new Vector3(-8, 0, 1.5f);
     }
 }

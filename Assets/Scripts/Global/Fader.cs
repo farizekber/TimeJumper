@@ -12,7 +12,7 @@ namespace Assets.Scripts
         private SpriteRenderer m_spriteRenderer;
         public bool m_fEnabled;
 
-        public static void Finalize()
+        public static void FinalizeObject()
         {
             s_Instance.enabled = false;
             s_Instance = null;

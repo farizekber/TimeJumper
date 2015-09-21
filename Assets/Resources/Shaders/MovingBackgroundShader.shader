@@ -2,7 +2,7 @@
 	Properties{
 		_Color("Main Color", Color) = (1,1,1,1)
 		_MainTex("Base (RGB) Trans (A)", 2D) = "white" {}
-		_Cutoff("Alpha cutoff", Range(0,1)) = 0.5
+	_Cutoff("Alpha cutoff", Range(0,1)) = 0.5
 		_Glossiness("Smoothness", Range(0,1)) = 0.5
 		_Metallic("Metallic", Range(0,1)) = 0.0
 		_TickCount("Tick Count", float) = 0.0
@@ -17,9 +17,9 @@
 #pragma surface surf Standard alphatest:_Cutoff
 
 		sampler2D _MainTex;
-		fixed4 _Color;
-		float _TickCount;
-		float _Horizontal;
+	fixed4 _Color;
+	float _TickCount;
+	float _Horizontal;
 
 	struct Input {
 		float2 uv_MainTex;
@@ -45,5 +45,5 @@
 	ENDCG
 	}
 
-	Fallback "Legacy Shaders/Transparent/Cutout/VertexLit"
+		Fallback "Legacy Shaders/Transparent/Cutout/VertexLit"
 }

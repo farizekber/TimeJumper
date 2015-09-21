@@ -17,6 +17,8 @@ public class MainCharacter : MonoBehaviour {
     private int jumps;
     private float downTime;
     private Swipe currentSwipe = new Swipe();
+    Rigidbody2D rigid;
+    Animator animator;
 
     public void ResetJumps()
     {
@@ -28,27 +30,18 @@ public class MainCharacter : MonoBehaviour {
     {
         Input.simulateMouseWithTouches = false;
         jumps = defaultJumps;
+        rigid = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
-        Rigidbody2D rigid = GetComponent<Rigidbody2D>();
+        if (Global.Instance == null)
+            return;
 
-        if (Global.Instance != null)
-        {
-            if (Global.Instance.orientation == 0)
-                rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, 0.765f, 6.45f), rigid.transform.localPosition.z);
-            else
-                rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, -0.19f, 6.45f), rigid.transform.localPosition.z);
-        }
-    }
-
-    void FixedUpdate()
-    {
-        Rigidbody2D rigid = GetComponent<Rigidbody2D>();
-
-        GetComponent<Animator>().speed = (Global.Instance.speed < 0.0f ? 0.0f : Global.Instance.speed / speedModifier);
+        if(animator != null)
+            animator.speed = (Global.Instance.speed < 0.0f ? 0.0f : Global.Instance.speed / speedModifier);
 
         foreach (Touch touch in Input.touches)
         {
@@ -127,7 +120,7 @@ public class MainCharacter : MonoBehaviour {
                     {
                         previousClickTime = Time.time;
                         rigid.velocity = new Vector2(0, 0);
-                        rigid.AddForce(new Vector2(0, 250.0f * 1.5f));
+                        rigid.AddForce(new Vector2(0, 150.0f * 1.5f));
 
                         if (jumps >= 0)
                             jumps--;
@@ -141,28 +134,38 @@ public class MainCharacter : MonoBehaviour {
             {
                 rigid.velocity = new Vector2(0, 0);
             }
-
-            if (currentSwipe.Enabled || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+            else
             {
-                if (currentSwipe.Enabled)
+                if (currentSwipe.Enabled || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
                 {
-                    //if (rigid.velocity.y > 0 && currentSwipe.yDirectionEnd < 3.1f || rigid.velocity.y < 0 && currentSwipe.yDirectionEnd > 3.1f) rigid.velocity = new Vector2(0, 0);
-                    rigid.velocity = new Vector2(0, 0);
-                    if (currentSwipe.yDirectionEnd < 3.1f)
+                    if (currentSwipe.Enabled)
                     {
-                        rigid.AddForce(new Vector2(0, -100f));
+                        //if (rigid.velocity.y > 0 && currentSwipe.yDirectionEnd < 3.1f || rigid.velocity.y < 0 && currentSwipe.yDirectionEnd > 3.1f) rigid.velocity = new Vector2(0, 0);
+                        rigid.velocity = new Vector2(0, 0);
+                        if (currentSwipe.yDirectionEnd < 3.1f)
+                        {
+                            rigid.AddForce(new Vector2(0, -100f));
+                        }
+                        else
+                        {
+                            rigid.AddForce(new Vector2(0, 100f));
+                        }
                     }
                     else
                     {
-                        rigid.AddForce(new Vector2(0, 100f));
+                        rigid.velocity = new Vector2(0, 0);
+                        rigid.AddForce(new Vector2(0, (Input.GetMouseButtonDown(0) ? 1 : -1) * 100.0f));
                     }
                 }
-                else
-                {
-                    rigid.velocity = new Vector2(0, 0);
-                    rigid.AddForce(new Vector2(0, (Input.GetMouseButtonDown(0) ? 1 : -1) * 100.0f));
-                }
             }
+        }
+
+        if (Global.Instance != null)
+        {
+            if (Global.Instance.orientation == 0)
+                rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, 0.765f, 6.45f), rigid.transform.localPosition.z);
+            else
+                rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, -0.19f, 6.45f), rigid.transform.localPosition.z);
         }
     }
 }

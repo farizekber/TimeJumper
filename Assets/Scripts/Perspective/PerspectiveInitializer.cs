@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Perspective;
+﻿using Assets.Scripts.Parallaxing;
+using Assets.Scripts.Perspective;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace Assets.Scripts
     {
         public static PerspectiveInitializer s_Instance;
 
+        private GameObject mainCharacter;// = GameObject.Find("Main Character");
+
         private Theme currentTheme;// = Theme.Default();
         private Perspectives currentPerspective;
 
@@ -21,7 +24,7 @@ namespace Assets.Scripts
 
         private GameObject dragon;
 
-        public static void Finalize()
+        public static void FinalizeObject()
         {
             s_Instance = null;
         }
@@ -29,6 +32,7 @@ namespace Assets.Scripts
         public void Start()
         {
             s_Instance = this;
+            mainCharacter = GameObject.Find("Main Character");
             Invoke("SwitchPerspective", 40.0f + (UnityEngine.Random.value * 20.0f));
         }
 
@@ -53,57 +57,39 @@ namespace Assets.Scripts
             //SpawnManager.Instance.CancelInvoke();
             SpawnManager.Instance.RemoveAll();
             //SpawnManager.Instance.Init();
-
-            ////Remove all spawnables from screen.
-            //((GameObject[])GameObject.FindObjectsOfType(typeof(GameObject))).Where((GameObject gameObject) =>
-            //{
-            //    foreach (ObstacleBase spawnable in SpawnManager.Instance.spawnables)
-            //    {
-            //        if (gameObject.name == spawnable.name + "(Clone)")
-            //        {
-            //            return true;
-            //        }
-            //    }
-            //    return false;
-            //}).ToList().ForEach((GameObject gameObject) => GameObject.Destroy(gameObject));
-
-            ////Remove all spawnables from screen.
-            //((GameObject[])GameObject.FindObjectsOfType(typeof(GameObject))).Where((GameObject gameObject) =>
-            //{
-            //    foreach (ObstacleBase spawnable in SpawnManager.Instance.collectables)
-            //    {
-            //        if (gameObject.name == spawnable.name + "(Clone)")
-            //        {
-            //            return true;
-            //        }
-            //    }
-            //    return false;
-            //}).ToList().ForEach((GameObject gameObject) => GameObject.Destroy(gameObject));
         }
 
         public void LoadVerticalPerspective()
         {
             Global.Instance.orientation = 1;
 
+            GameObject mainCharacter = GameObject.Find("Main Character");
+            Global.Instance.HealthBarBackground.GetComponent<Image>().enabled = false;
+            Global.Instance.HealthBar.GetComponent<Image>().enabled = false;
 
-            GameObject.Find("Main Character").transform.localRotation = Quaternion.Euler(GameObject.Find("Main Character").transform.localRotation.x, GameObject.Find("Main Character").transform.localRotation.y, -90);
+            Global.Instance.TimeText.transform.localRotation = Quaternion.Euler(0, 0, -90);
+            Global.Instance.TimeText.transform.localPosition = new Vector3(-300, 110, Global.Instance.TimeText.transform.localPosition.z);
+
+            Global.Instance.ScoreText.transform.localRotation = Quaternion.Euler(0, 0, -90);
+            Global.Instance.ScoreText.transform.localPosition = new Vector3(-300, -190, Global.Instance.ScoreText.transform.localPosition.z);
+
+            Global.Instance.DistanceText.transform.localRotation = Quaternion.Euler(0, 0, -90);
+            Global.Instance.DistanceText.transform.localPosition = new Vector3(-300, -40, Global.Instance.DistanceText.transform.localPosition.z);
+
+            mainCharacter.transform.localRotation = Quaternion.Euler(mainCharacter.transform.localRotation.x, mainCharacter.transform.localRotation.y, -90);
             //GameObject.Destroy(GameObject.Find("Platform"));
-            GameObject.Find("Main Character").GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
-            GameObject.Find("Main Character").GetComponent<Rigidbody2D>().gravityScale = 0;
+            mainCharacter.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+            mainCharacter.GetComponent<Rigidbody2D>().gravityScale = 0;
 
-            for (int i = 0; i < GameObject.Find("Background").transform.childCount; ++i)
-            {
-                if (GameObject.Find("Background").transform.GetChild(i).gameObject.name != "Directional light")
-                    GameObject.Find("Background").transform.GetChild(i).gameObject.SetActive(GameObject.Find("Background").transform.GetChild(i).gameObject.name.Length > 8);
-            }
-            
-            GameObject.Find("Main Character").GetComponent<BoxCollider2D>().size = new Vector2(0.8542318f, 1.699413f) * 2;
-            GameObject.Find("Main Character").GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(2.66f, 3.1f, GameObject.Find("Main Character").GetComponent<Rigidbody2D>().transform.localPosition.z);
-            GameObject.Find("Main Character").GetComponent<SpriteRenderer>().sprite = newTheme.m_mainCharacter;
-            GameObject.Find("Main Character").GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(newTheme.m_mainCharacterAnimationString);
+            GameObject.Find("Background Manager").GetComponent<BackgroundManager>().InitVertical();
+
+            mainCharacter.GetComponent<BoxCollider2D>().size = new Vector2(0.8542318f, 1.699413f) * 2;
+            mainCharacter.GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(2.66f, 3.1f, mainCharacter.GetComponent<Rigidbody2D>().transform.localPosition.z);
+            mainCharacter.GetComponent<SpriteRenderer>().sprite = newTheme.m_mainCharacter;
+            mainCharacter.GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(newTheme.m_mainCharacterAnimationString);
 
             dragon = GameObject.Find("Dragon");
-            dragon.transform.localPosition = new Vector3(4.85f,3.12f,0.5f);
+            dragon.transform.localPosition = new Vector3(5.50f,3.12f,0.5f);
             dragon.transform.localRotation = Quaternion.Euler(0, 0, 270);
             dragon.transform.localScale = new Vector3(1,1,1);
             dragon.GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Dragon2");
@@ -112,34 +98,39 @@ namespace Assets.Scripts
             SpawnManager.Instance.collectables.Add(newTheme.m_collectables[0]);
             SpawnManager.Instance.Init();
 
-            if (GameObject.Find("Main Character").GetComponent<MainCharacter>().inVehicle)
+            if (mainCharacter.GetComponent<MainCharacter>().inVehicle)
             {
                 Global.Instance.speed -= 2f;
-                GameObject.Find("Main Character").GetComponent<MainCharacter>().inVehicle = false;
-                GameObject.Find("Main Character").GetComponent<Animator>().enabled = true;
+                mainCharacter.GetComponent<MainCharacter>().inVehicle = false;
+                mainCharacter.GetComponent<Animator>().enabled = true;
             }
 
-            SpawnManager.Instance.platformManager.Finalize();
+            //SpawnManager.Instance.platformManager.FinalizeObject();
         }
 
         public void LoadHorizontalPerspective()
         {
             Global.Instance.orientation = 0;
 
-            GameObject.Find("Main Character").transform.localRotation = Quaternion.Euler(GameObject.Find("Main Character").transform.localRotation.x, GameObject.Find("Main Character").transform.localRotation.y, 0);
+            Global.Instance.TimeText.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            Global.Instance.TimeText.transform.localPosition = new Vector3(-239, 180, Global.Instance.TimeText.transform.localPosition.z);
+
+            Global.Instance.ScoreText.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            Global.Instance.ScoreText.transform.localPosition = new Vector3(318, 180, Global.Instance.ScoreText.transform.localPosition.z);
+
+            Global.Instance.DistanceText.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            Global.Instance.DistanceText.transform.localPosition = new Vector3(171, 180, Global.Instance.DistanceText.transform.localPosition.z);
+
+            mainCharacter.transform.localRotation = Quaternion.Euler(mainCharacter.transform.localRotation.x, mainCharacter.transform.localRotation.y, 0);
             //GameObject.Destroy(GameObject.Find("Platform"));
-            GameObject.Find("Main Character").GetComponent<Rigidbody2D>().gravityScale = 1;
+            mainCharacter.GetComponent<Rigidbody2D>().gravityScale = 1;
 
-            for (int i = 0; i < GameObject.Find("Background").transform.childCount; ++i)
-            {
-                if (GameObject.Find("Background").transform.GetChild(i).gameObject.name != "Directional light")
-                    GameObject.Find("Background").transform.GetChild(i).gameObject.SetActive(GameObject.Find("Background").transform.GetChild(i).gameObject.name.Length < 8);
-            }
+            GameObject.Find("Background Manager").GetComponent<BackgroundManager>().InitHorizontal();
 
-            GameObject.Find("Main Character").GetComponent<BoxCollider2D>().size = new Vector2(0.8542318f, 1.699413f);
-            GameObject.Find("Main Character").GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(-3.459f, 2.216f, GameObject.Find("Main Character").GetComponent<Rigidbody2D>().transform.localPosition.z);
-            GameObject.Find("Main Character").GetComponent<SpriteRenderer>().sprite = Resources.Load("Images/character-v2") as Sprite;
-            GameObject.Find("Main Character").GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/character_0");
+            mainCharacter.GetComponent<BoxCollider2D>().size = new Vector2(0.8542318f, 1.699413f);
+            mainCharacter.GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(-3.459f, 2.216f, mainCharacter.GetComponent<Rigidbody2D>().transform.localPosition.z);
+            mainCharacter.GetComponent<SpriteRenderer>().sprite = Resources.Load("Images/character-v2") as Sprite;
+            mainCharacter.GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/character_0");
 
             dragon.transform.localPosition = new Vector3(-5.68f,2.76f,0.5f);
             dragon.transform.localRotation = Quaternion.Euler(0, 0, 0);

@@ -16,7 +16,7 @@ namespace Assets.Scripts
             return s_instance == null ? s_instance = new GameOverAnimation() : s_instance;
         }
 
-        public static void Finalize()
+        public static void FinalizeObject()
         {
             s_instance = null;
         }
@@ -38,22 +38,22 @@ namespace Assets.Scripts
                 SpawnManager.Instance.CancelInvoke();
                 SpawnManager.Instance.enabled = false;
 
-                foreach (Background item in Resources.FindObjectsOfTypeAll(typeof(Background)))
-                {
-                    item.Finalize();
-                }
+                //foreach (Background item in Resources.FindObjectsOfTypeAll(typeof(Background)))
+                //{
+                //    item.FinalizeObject();
+                //}
                 
                 PerspectiveInitializer.s_Instance.CleanPerspective();
-                PerspectiveInitializer.Finalize();
+                PerspectiveInitializer.FinalizeObject();
                 
                 //Background.Finalize();
-                Fader.Finalize();
-                Global.Finalize();
+                Fader.FinalizeObject();
+                Global.FinalizeObject();
                 
                 m_fpInitiatedTime = 0;
                 m_fAnimationInProgress = false;
                 //Global.Instance.delay.Stop();
-                GameOverAnimation.Finalize();
+                GameOverAnimation.FinalizeObject();
 
                 Application.LoadLevel("GameOver");
             }

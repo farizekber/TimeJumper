@@ -46,9 +46,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Dragon.cs" />
      <Compile Include="Assets\Scripts\Boulder.cs" />
      <Compile Include="Assets\Scripts\Global\ApplicationGlobal.cs" />
-     <Compile Include="Assets\Scripts\Global\Background.cs" />
      <Compile Include="Assets\Scripts\Global\Fader.cs" />
      <Compile Include="Assets\Scripts\Global\GameOverAnimation.cs" />
      <Compile Include="Assets\Scripts\Global\GameOverScene.cs" />
@@ -56,7 +56,6 @@
      <Compile Include="Assets\Scripts\Global\LoadingScene.cs" />
      <Compile Include="Assets\Scripts\Global\MainMenuScene.cs" />
      <Compile Include="Assets\Scripts\MainCharacter.cs" />
-     <Compile Include="Assets\Scripts\Objects\Bat.cs" />
      <Compile Include="Assets\Scripts\Objects\Crate.cs" />
      <Compile Include="Assets\Scripts\Objects\Diamond.cs" />
      <Compile Include="Assets\Scripts\Objects\Minecart.cs" />
@@ -67,6 +66,8 @@
      <Compile Include="Assets\Scripts\Objects\Stone.cs" />
      <Compile Include="Assets\Scripts\Objects\TNT.cs" />
      <Compile Include="Assets\Scripts\Obstacles\MineCarVehicle.cs" />
+     <Compile Include="Assets\Scripts\Parallaxing\BackgroundManager.cs" />
+     <Compile Include="Assets\Scripts\Parallaxing\BackgroundPlane.cs" />
      <Compile Include="Assets\Scripts\Perspective\PerspectiveInitializer.cs" />
      <Compile Include="Assets\Scripts\Perspective\PerspectiveTransition.cs" />
      <Compile Include="Assets\Scripts\Perspective\Perspectives.cs" />
@@ -92,6 +93,7 @@
      <None Include="Assets\Standard Assets\Effects\Projectors\Guidelines.txt" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\MotionBlur.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBloom.shader" />
+     <None Include="Assets\Resources\Shaders\CombinedMovingBackgroundShader.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\MinMaxReduction.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\SSAA.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\RadialBlur.shader" />

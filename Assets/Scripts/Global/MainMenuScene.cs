@@ -4,12 +4,14 @@ using System.Collections;
 public class MainMenuScene : MonoBehaviour
 {
     private static bool acceptsInput = true;
+    private BoxCollider2D boxCollider;
 
     // Use this for initialization
     void Start()
     {
         acceptsInput = true;
         Application.targetFrameRate = -1;
+        boxCollider = GetComponentInChildren<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -32,9 +34,8 @@ public class MainMenuScene : MonoBehaviour
                 inputLocation = Input.GetTouch(0).deltaPosition;
             }
 
-            if (GetComponentInChildren<BoxCollider2D>().bounds.Intersects(new Bounds(inputLocation, new Vector3(20, 20, 100))))
+            if (boxCollider.bounds.Intersects(new Bounds(inputLocation, new Vector3(20, 20, 100))))
             {
-
                 Application.LoadLevel("Loading");
             }
         }

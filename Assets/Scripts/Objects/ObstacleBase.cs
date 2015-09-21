@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
@@ -31,6 +32,10 @@ namespace Assets.Scripts
         public SpawnData m_horizontalSpawnData;
         public SpawnData m_verticalSpawnData;
         public bool active = false;
+
+        private Collider2D m_collider;
+        private Rigidbody2D rigid;
+        private MainCharacter mainCharacter;
 
         public ObstacleBase(Obstacles obstacleKind, float fpSpeedModifier, string szPrefab, SpawnData horizontalSpawnData, SpawnData verticalSpawnData)
         {
@@ -73,7 +78,7 @@ namespace Assets.Scripts
 
         public void Activate()
         {
-            GetComponent<Collider2D>().enabled = true;
+            m_collider.enabled = true;
             transform.parent = null;
 
             if (Global.Instance.orientation == 0)
@@ -98,7 +103,11 @@ namespace Assets.Scripts
         }
 
         // Use this for initialization
-        void Start() { }
+        public void Start() {
+            m_collider = GetComponent<Collider2D>();
+            rigid = GetComponent<Rigidbody2D>();
+            mainCharacter = GameObject.Find("Main Character").GetComponent<MainCharacter>();
+        }
 
         // Update is called once per frame
         public void FixedUpdate()
@@ -111,12 +120,12 @@ namespace Assets.Scripts
             if (!GameOverAnimation.GetInstance().m_fAnimationInProgress)
             {
                 if (Global.Instance.orientation == 0)
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(-m_fpSpeedModifier * Global.Instance.speed, 0);
+                    rigid.velocity = new Vector2(-m_fpSpeedModifier * Global.Instance.speed, 0);
                 else
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(m_fpSpeedModifier * Global.Instance.speed, 0);
+                    rigid.velocity = new Vector2(m_fpSpeedModifier * Global.Instance.speed, 0);
             }
             else
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                rigid.velocity = new Vector2(0, 0);
 
             if ((Global.Instance.orientation == 0 && transform.localPosition.x < -8) || (Global.Instance.orientation == 1 && transform.localPosition.x > 15))
             {
@@ -127,10 +136,10 @@ namespace Assets.Scripts
 
         public void Disable()
         {
-            GetComponent<Collider2D>().enabled = false;
+            m_collider.enabled = false;
             active = false;
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(-8, 0, 0);
+            rigid.velocity = new Vector2(0, 0);
+            rigid.transform.localPosition = new Vector3(-8, 0, 0);
         }
 
         void OnTriggerEnter2D(Collider2D other)
@@ -139,14 +148,17 @@ namespace Assets.Scripts
             {
                 return;
             }
-            if (other.gameObject.GetComponent<ObstacleBase>() != null)
+
+            ObstacleBase otherObstacleBase = other.gameObject.GetComponent<ObstacleBase>();
+
+            if (otherObstacleBase != null)
             {
 
                 if (other.name == "Diamond(Clone)")
                 {
-                    if (other.GetComponent<ObstacleBase>().m_fpSpeedModifier == this.m_fpSpeedModifier)
+                    if (otherObstacleBase.m_fpSpeedModifier == this.m_fpSpeedModifier)
                     {
-                        other.GetComponent<ObstacleBase>().Disable();
+                        otherObstacleBase.Disable();
                     }
                 }
             }
@@ -164,31 +176,41 @@ namespace Assets.Scripts
                 }
                 else if (name == "MineCarVehicle(Clone)")
                 {
-                    if (!other.gameObject.GetComponent<MainCharacter>().inVehicle)
+                    if (!mainCharacter.inVehicle)
                     {
                         Global.Instance.speed += 2f;
                     }
 
-                    other.gameObject.GetComponent<MainCharacter>().inVehicle = true;
+                    Global.Instance.HealthBar.GetComponent<Image>().enabled = true;
+                    Global.Instance.HealthBar.GetComponent<Image>().fillAmount = 1;
+                    Global.Instance.HealthBarBackground.GetComponent<Image>().enabled = true;
+                    Global.Instance.HealthBarBackground.GetComponent<Image>().fillAmount = 1;
+                    mainCharacter.inVehicle = true;
                     other.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/InMineCart");
                     other.gameObject.GetComponent<Animator>().enabled = false;
-                    other.gameObject.GetComponent<MainCharacter>().vehicleHealth = 100;
+                    mainCharacter.vehicleHealth = 100;
+
+                    Disable();
                 }
                 else
                 {
-                    if (!other.gameObject.GetComponent<MainCharacter>().inVehicle)
+                    if (!mainCharacter.inVehicle)
                     {
                         GameOverAnimation.GetInstance().Trigger();
                     }
                     else
                     {
-                        other.gameObject.GetComponent<MainCharacter>().vehicleHealth -= 20;
+                        mainCharacter.vehicleHealth -= 20;
+                        Global.Instance.HealthBar.GetComponent<Image>().fillAmount -= 0.2f;
+                        Global.Instance.HealthBarBackground.GetComponent<Image>().fillAmount = 1;
                         Disable();
 
-                        if (other.gameObject.GetComponent<MainCharacter>().vehicleHealth <= 0)
+                        if (mainCharacter.vehicleHealth <= 0)
                         {
                             Disable();
-                            other.gameObject.GetComponent<MainCharacter>().inVehicle = false;
+                            mainCharacter.inVehicle = false;
+                            Global.Instance.HealthBarBackground.GetComponent<Image>().enabled = false;
+                            Global.Instance.HealthBar.GetComponent<Image>().enabled = false;
                             other.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/character-v2");
                             other.gameObject.GetComponent<Animator>().enabled = true;
                             Global.Instance.speed -= 2f;
@@ -196,10 +218,6 @@ namespace Assets.Scripts
                     }
                 }
             }
-        }    
-
-    void OnTriggerStay2D(Collider2D other) { }
-
-    void OnTriggerExit2D(Collider2D other) { }
+        }
     }
 }

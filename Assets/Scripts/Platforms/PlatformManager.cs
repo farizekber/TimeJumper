@@ -6,18 +6,15 @@ using UnityEngine;
 
 namespace Assets.Scripts.Objects
 {
+    //bug 1 combination disappears at the start, no clue why.
     public class PlatformManager
     {
-        //3 prefabs
-        //Have 4 of 1 and 3, 20 of 2
-        //All use platform script
-
         class PlatformCombination
         {
             public Platform begin;
             public List<Platform> middle = new List<Platform>();
             public Platform end;
-            public GameObject combinedGameObject = new GameObject("Combined Platform");
+            public CombinationObject combinedGameObject;
 
             public PlatformCombination(Platform begin, List<Platform> middle, Platform end)
             {
@@ -29,30 +26,130 @@ namespace Assets.Scripts.Objects
             public PlatformCombination() { }
         }
 
+        class CombinationObject
+        {
+            public GameObject combinationObject;
+            public bool Taken = false;
+
+            public Rigidbody2D rigid;
+
+            public CombinationObject(GameObject combinationObject)
+            {
+                this.combinationObject = combinationObject;
+                rigid = combinationObject.GetComponent<Rigidbody2D>();
+            }
+
+            public void Disable()
+            {
+                rigid.transform.SetParent(null);
+                rigid.transform.localPosition = new Vector3(-8, 0, 0.5f);
+                rigid.transform.localPosition += Global.Instance.GlobalObject.transform.localPosition + Global.Instance.ForegroundObject.transform.localPosition;
+                rigid.transform.SetParent(Global.Instance.ForegroundObject.transform);
+            }
+        }
+
         List<PlatformCombination> spawnedPlatforms = new List<PlatformCombination>();
+        List<CombinationObject> combiningObjects = new List<CombinationObject>();
         List<Platform> beginComponents = new List<Platform>();
         List<Platform> middleComponents = new List<Platform>();
         List<Platform> endComponents = new List<Platform>();
         public bool previousHigh = false;
+        private Rigidbody2D mainCharacterRigidBody;
 
-        public void Update()
+        public void Start()
         {
-            foreach (PlatformCombination platformCombination in spawnedPlatforms)
+            mainCharacterRigidBody = GameObject.Find("Main Character").GetComponent<Rigidbody2D>();
+        }
+
+        //Initial Spawn
+        public void Spawn()
+        {
+            for (int i = 0; i < 4; i++)
             {
-                platformCombination.combinedGameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-2 * (Global.Instance.speed / 3.0f), 0);
+                combiningObjects.Add(new CombinationObject((GameObject.Instantiate(Resources.Load("Prefabs/" + "Combination"), new Vector3(0, 0, 0.5f), new Quaternion(0, 0, 0, 0)) as GameObject)));
+                combiningObjects[i].rigid.transform.SetParent(null);
+                combiningObjects[i].rigid.transform.localPosition = Global.Instance.GlobalObject.transform.localPosition + Global.Instance.ForegroundObject.transform.localPosition;
+                combiningObjects[i].rigid.transform.SetParent(Global.Instance.ForegroundObject.transform);
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                beginComponents.Add((GameObject.Instantiate(Resources.Load("Prefabs/" + "PlatformBegin"), new Vector3(0, 0, 0.5f), new Quaternion(0, 0, 0, 0)) as GameObject).GetComponent<Platform>());
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                middleComponents.Add((GameObject.Instantiate(Resources.Load("Prefabs/" + "PlatformMiddle"), new Vector3(0, 0, 0.5f), new Quaternion(0, 0, 0, 0)) as GameObject).GetComponent<Platform>());
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                endComponents.Add((GameObject.Instantiate(Resources.Load("Prefabs/" + "PlatformEnd"), new Vector3(0, 0, 0.5f), new Quaternion(0, 0, 0, 0)) as GameObject).GetComponent<Platform>());
             }
         }
 
+        //Updates position and disables combinations
+        public void Update()
+        {
+            List<PlatformCombination> platformCombinationsToRemove = new List<PlatformCombination>();
+
+            foreach (PlatformCombination platformCombination in spawnedPlatforms)
+            {
+                Rigidbody2D rigid = platformCombination.combinedGameObject.rigid;
+                rigid.velocity = new Vector2(-2 * (Global.Instance.speed / 3.0f), 0);
+                
+                if (mainCharacterRigidBody.transform.localPosition.y < rigid.transform.localPosition.y)
+                {
+                    platformCombination.begin.colliderEnabled = false;
+                    platformCombination.end.colliderEnabled = false;
+
+                    foreach (Platform plat in platformCombination.middle)
+                    {
+                        plat.colliderEnabled = false;
+                    }
+                }
+
+                if (rigid.transform.localPosition.x < -8.5f)
+                {
+                    platformCombinationsToRemove.Add(platformCombination);
+                }
+            }
+            
+            foreach (PlatformCombination platformCombination in platformCombinationsToRemove)
+            {
+                DisablePlatformCombination(platformCombination);
+                spawnedPlatforms.Remove(platformCombination);
+            }
+        }
+
+        //Cleans up a combination
+        private void DisablePlatformCombination(PlatformCombination platformCombination)
+        {
+            foreach (Platform platform in platformCombination.middle)
+            {
+                platform.transform.SetParent(null);
+                platform.Disable();
+                platform.Taken = false;
+            }
+            platformCombination.begin.transform.SetParent(null);
+            platformCombination.begin.Disable();
+            platformCombination.begin.Taken = false;
+            platformCombination.end.transform.SetParent(null);
+            platformCombination.end.Disable();
+            platformCombination.end.Taken = false;
+            platformCombination.combinedGameObject.Disable();
+            platformCombination.combinedGameObject.Taken = false;
+        }
+
+        //The update taking input into account.
         public void UpdateActive(Swipe currentSwipe, Transform mainCharacterTransform, bool downKeyDown)
         {
             foreach (PlatformCombination platformCombination in spawnedPlatforms)
             {
-                platformCombination.begin.colliderEnabled = mainCharacterTransform.localPosition.y > (platformCombination.combinedGameObject.transform.localPosition.y + 0.55f);
-                platformCombination.end.colliderEnabled = mainCharacterTransform.localPosition.y > (platformCombination.combinedGameObject.transform.localPosition.y + 0.55f);
+                bool enable = mainCharacterTransform.localPosition.y > (platformCombination.combinedGameObject.rigid.transform.localPosition.y + 0.65f);
+                platformCombination.begin.colliderEnabled = enable;
+                platformCombination.end.colliderEnabled = enable;
 
                 foreach (Platform platform in platformCombination.middle)
                 {
-                    platform.colliderEnabled = mainCharacterTransform.localPosition.y > (platformCombination.combinedGameObject.transform.localPosition.y + 0.55f);
+                    platform.colliderEnabled = enable;
                 }
 
                 if (currentSwipe.yDirectionDelta < -0.1 || downKeyDown)
@@ -68,27 +165,24 @@ namespace Assets.Scripts.Objects
             }
         }
 
-        //Initial Spawn
-        public void Spawn()
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                beginComponents.Add((GameObject.Instantiate(Resources.Load("Prefabs/" + "PlatformBegin"), new Vector3(-8, 0, 0.5f), new Quaternion(0, 0, 0, 0)) as GameObject).GetComponent<Platform>());
-            }
-            for (int i = 0; i < 20; i++)
-            {
-                middleComponents.Add((GameObject.Instantiate(Resources.Load("Prefabs/" + "PlatformMiddle"), new Vector3(-8, 0, 0.5f), new Quaternion(0, 0, 0, 0)) as GameObject).GetComponent<Platform>());
-            }
-            for (int i = 0; i < 4; i++)
-            {
-                endComponents.Add((GameObject.Instantiate(Resources.Load("Prefabs/" + "PlatformEnd"), new Vector3(-8, 0, 0.5f), new Quaternion(0, 0, 0, 0)) as GameObject).GetComponent<Platform>());
-            }
-        }
-
         //Activate a piece with the given length (Will always be extended with a begin and end component
         public void Activate(int length, bool low) {
 
             PlatformCombination platformCombination = new PlatformCombination();
+
+            foreach (CombinationObject combination in combiningObjects)
+            {
+                if (!combination.Taken)
+                {
+                    platformCombination.combinedGameObject = combination;
+                    combination.Taken = true;
+                    break;
+                }
+            }
+
+            //Check if a platform can be made at this time.
+            if (platformCombination.combinedGameObject == null)
+                return;
 
             foreach (Platform platform in beginComponents)
             {
@@ -122,82 +216,42 @@ namespace Assets.Scripts.Objects
                     break;
                 }
             }
-            
-            platformCombination.combinedGameObject.AddComponent<Rigidbody2D>();
-            platformCombination.combinedGameObject.GetComponent<Rigidbody2D>().mass = 5;
-            platformCombination.combinedGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
-            platformCombination.combinedGameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 
-            platformCombination.combinedGameObject.GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(-8, 0, 0.5f);
-            //platformCombination.combinedGameObject.GetComponent<Rigidbody2D>().transform.localPosition += Global.Instance.GlobalObject.transform.localPosition + Global.Instance.ForegroundObject.transform.localPosition;
-            platformCombination.combinedGameObject.GetComponent<Rigidbody2D>().transform.SetParent(Global.Instance.ForegroundObject.transform);
-
-            if (platformCombination.begin == null || platformCombination.end == null)
-            {
-                if (platformCombination.begin != null)
-                    platformCombination.begin.Taken = false;
-                if (platformCombination.end != null)
-                    platformCombination.end.Taken = false;
-                foreach (Platform item in platformCombination.middle)
-                {
-                    if (item != null)
-                    {
-                        item.Taken = false;
-                    }
-                }
-                return;
-            }
-
+            platformCombination.begin.transform.SetParent(platformCombination.combinedGameObject.rigid.transform);
+            platformCombination.end.transform.SetParent(platformCombination.combinedGameObject.rigid.transform);
             foreach (Platform platform in platformCombination.middle)
             {
-                if (platform == null)
-                {
-                    if (platformCombination.begin != null)
-                        platformCombination.begin.Taken = false;
-                    if (platformCombination.end != null)
-                        platformCombination.end.Taken = false;
-                    foreach (Platform item in platformCombination.middle)
-                    {
-                        if (item != null)
-                        {
-                            item.Taken = false;
-                        }
-                    }
-                    return;
-                }
-            }
-
-            platformCombination.begin.transform.SetParent(platformCombination.combinedGameObject.transform);
-            platformCombination.end.transform.SetParent(platformCombination.combinedGameObject.transform);
-            foreach (Platform platform in platformCombination.middle)
-            {
-                platform.transform.SetParent(platformCombination.combinedGameObject.transform);
+                platform.transform.SetParent(platformCombination.combinedGameObject.rigid.transform);
             }
             
-            platformCombination.combinedGameObject.GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(13, low ? 2.5f : 3.5f, 0.5f);
-            float pieceSize = 0.6f;
+            platformCombination.combinedGameObject.rigid.transform.localPosition = new Vector3(16, low ? 2.5f : 3.5f, 0.5f);
+            float pieceSize = 0.64f;
             float xOffset = 0;
+
+            platformCombination.end.transform.localPosition = new Vector3(platformCombination.end.transform.localPosition.x, 0, platformCombination.end.transform.localPosition.z);
 
             foreach (Platform item in platformCombination.middle)
             {
                 xOffset += pieceSize;
-                item.transform.localPosition = new Vector3(platformCombination.begin.transform.localPosition.x - xOffset, platformCombination.begin.transform.localPosition.y, platformCombination.begin.transform.localPosition.z);
+                item.transform.localPosition = new Vector3(platformCombination.begin.transform.localPosition.x - xOffset, 0, platformCombination.begin.transform.localPosition.z);
             }
 
-            platformCombination.begin.transform.localPosition = new Vector3(platformCombination.begin.transform.localPosition.x - xOffset - pieceSize, platformCombination.begin.transform.localPosition.y, platformCombination.begin.transform.localPosition.z);
+            platformCombination.begin.transform.localPosition = new Vector3(platformCombination.begin.transform.localPosition.x - xOffset - pieceSize, 0, platformCombination.begin.transform.localPosition.z);
 
             spawnedPlatforms.Add(platformCombination);
         }
 
-        //Move all platforms back to their original place
-        public void DisableAll() {
+        //Move all used platforms back to their original place
+        public void DisableAll()
+        {
             foreach (PlatformCombination platformCombination in spawnedPlatforms)
             {
+                platformCombination.combinedGameObject.Disable();
+                platformCombination.combinedGameObject.Taken = false;
                 platformCombination.begin.Disable();
                 platformCombination.begin.Taken = false;
                 platformCombination.end.Disable();
                 platformCombination.end.Taken = false;
-
                 foreach (Platform platform in platformCombination.middle)
                 {
                     platform.Taken = false;
@@ -205,13 +259,17 @@ namespace Assets.Scripts.Objects
                 }
             }
         }
-        
-        //Cleans this up, expects all gameobjects to have been destroyed before this.
-        public void Finalize()
+
+        //Removes everything that has to do with platforms
+        public void FinalizeObject()
         {
             foreach (PlatformCombination platformCombination in spawnedPlatforms)
             {
-                GameObject.Destroy(platformCombination.combinedGameObject);
+                GameObject.Destroy(platformCombination.combinedGameObject.combinationObject);
+            }
+            foreach (CombinationObject combination in combiningObjects)
+            {
+                GameObject.Destroy(combination.combinationObject);
             }
             foreach (Platform platform in beginComponents)
             {
@@ -227,6 +285,7 @@ namespace Assets.Scripts.Objects
             }
 
             spawnedPlatforms.Clear();
+            combiningObjects.Clear();
             beginComponents.Clear();
             middleComponents.Clear();
             endComponents.Clear();
