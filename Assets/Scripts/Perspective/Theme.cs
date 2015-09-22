@@ -58,7 +58,6 @@ namespace Assets.Scripts.Perspective
             return new Theme(new List<ObstacleBase>() { (Resources.Load("Prefabs/" + "Crate") as GameObject).GetComponent<Crate>(),
                                                         (Resources.Load("Prefabs/" + "Minecart") as GameObject).GetComponent<Minecart>(),
                                                         (Resources.Load("Prefabs/" + "Stone") as GameObject).GetComponent<Stone>(),
-                                                        (Resources.Load("Prefabs/" + "Pickaxe") as GameObject).GetComponent<Pickaxe>(),
                                                         (Resources.Load("Prefabs/" + "TNT") as GameObject).GetComponent<TNT>() },
 
                              new List<ObstacleBase>() { (Resources.Load("Prefabs/" + "Diamond") as GameObject).GetComponent<Diamond>(),

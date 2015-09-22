@@ -168,7 +168,6 @@ namespace Assets.Scripts
             {
                 if (name == "Diamond(Clone)")
                 {
-                    //Destroy(gameObject);
                     Disable();
                     Global.Instance.PlayPickupSound();
                     Global.score += 1;
@@ -179,17 +178,20 @@ namespace Assets.Scripts
                     if (!mainCharacter.inVehicle)
                     {
                         Global.Instance.speed += 2f;
+                        Global.Instance.HealthBar.GetComponent<Image>().enabled = true;
+                        Global.Instance.HealthBar.GetComponent<Image>().fillAmount = 1;
+                        Global.Instance.HealthBarBackground.GetComponent<Image>().enabled = true;
+                        Global.Instance.HealthBarBackground.GetComponent<Image>().fillAmount = 1;
+                        mainCharacter.inVehicle = true;
+                        other.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/InMineCart");
+                        other.gameObject.GetComponent<Animator>().enabled = false;
+                        mainCharacter.vehicleHealth = 60;
                     }
-
-                    Global.Instance.HealthBar.GetComponent<Image>().enabled = true;
-                    Global.Instance.HealthBar.GetComponent<Image>().fillAmount = 1;
-                    Global.Instance.HealthBarBackground.GetComponent<Image>().enabled = true;
-                    Global.Instance.HealthBarBackground.GetComponent<Image>().fillAmount = 1;
-                    mainCharacter.inVehicle = true;
-                    other.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/InMineCart");
-                    other.gameObject.GetComponent<Animator>().enabled = false;
-                    mainCharacter.vehicleHealth = 60;
-
+                    else if (mainCharacter.vehicleHealth < 60)
+                    {
+                        mainCharacter.vehicleHealth += 20;
+                        Global.Instance.HealthBar.GetComponent<Image>().fillAmount += 0.33f;
+                    }
                     Disable();
                 }
                 else
