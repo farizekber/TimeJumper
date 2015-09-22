@@ -18,9 +18,8 @@ public class SpawnManager : MonoBehaviour {
     public float collectableSpawnRate = 3f;
     public int defaultSpawnableCount = 5;
     public int defaultCollectableCount = 20;
-
-    // Use this for initialization
-    void Start() {
+    
+    void Awake() {
         Instance = this;
     }
 

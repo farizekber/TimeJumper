@@ -57,11 +57,14 @@ public class Global : MonoBehaviour
         Instance = null;
     }
 
+    void Awake()
+    {
+        Instance = this;
+    }
+
     // Use this for initialization
     private void Start()
     {
-        Instance = this;
-
         HealthBar = GameObject.Find("HealthBar");
         HealthBar.GetComponent<Image>().enabled = false;
         HealthBarBackground = GameObject.Find("HealthBarBackground");

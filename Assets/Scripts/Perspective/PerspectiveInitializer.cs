@@ -29,9 +29,13 @@ namespace Assets.Scripts
             s_Instance = null;
         }
 
-        public void Start()
+        void Awake()
         {
             s_Instance = this;
+        }
+
+        public void Start()
+        {
             mainCharacter = GameObject.Find("Main Character");
             Invoke("SwitchPerspective", 40.0f + (UnityEngine.Random.value * 20.0f));
         }

@@ -143,7 +143,7 @@ namespace Assets.Scripts.Objects
         {
             foreach (PlatformCombination platformCombination in spawnedPlatforms)
             {
-                bool enable = mainCharacterTransform.localPosition.y > (platformCombination.combinedGameObject.rigid.transform.localPosition.y + 0.65f);
+                bool enable = mainCharacterTransform.localPosition.y > (platformCombination.combinedGameObject.rigid.transform.localPosition.y + 0.60f);
                 platformCombination.begin.colliderEnabled = enable;
                 platformCombination.end.colliderEnabled = enable;
 
