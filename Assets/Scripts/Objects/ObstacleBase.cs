@@ -188,7 +188,7 @@ namespace Assets.Scripts
                     mainCharacter.inVehicle = true;
                     other.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/InMineCart");
                     other.gameObject.GetComponent<Animator>().enabled = false;
-                    mainCharacter.vehicleHealth = 100;
+                    mainCharacter.vehicleHealth = 60;
 
                     Disable();
                 }
@@ -201,7 +201,7 @@ namespace Assets.Scripts
                     else
                     {
                         mainCharacter.vehicleHealth -= 20;
-                        Global.Instance.HealthBar.GetComponent<Image>().fillAmount -= 0.2f;
+                        Global.Instance.HealthBar.GetComponent<Image>().fillAmount -= 0.33f;
                         Global.Instance.HealthBarBackground.GetComponent<Image>().fillAmount = 1;
                         Disable();
 

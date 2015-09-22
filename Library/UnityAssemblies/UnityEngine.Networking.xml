@@ -1663,6 +1663,14 @@ The message ID determines the handler that will be called on the server for this
         <para>Returns the transform to spawn a player at, or null.</para>
       </returns>
     </member>
+    <member name="M:UnityEngine.Networking.NetworkManager.IsClientConnected">
+      <summary>
+        <para>This checks if the NetworkManager has a client and that it is connected to a server.</para>
+      </summary>
+      <returns>
+        <para>True if the NetworkManagers client is connected to a server.</para>
+      </returns>
+    </member>
     <member name="M:UnityEngine.Networking.NetworkManager.OnClientConnect(UnityEngine.Networking.NetworkConnection)">
       <summary>
         <para>Called on the client when connected to a server.</para>
@@ -2668,6 +2676,12 @@ The message ID determines the handler that will be called on the server for this
         <para>Unregisters a handler for a particular message type.</para>
       </summary>
       <param name="msgType">The message type to remove the handler for.</param>
+    </member>
+    <member name="M:UnityEngine.Networking.NetworkServer.UnSpawn(UnityEngine.GameObject)">
+      <summary>
+        <para>This takes an object that has been spawned and un-spawns it.</para>
+      </summary>
+      <param name="obj">The spawned object to be unspawned.</param>
     </member>
     <member name="T:UnityEngine.Networking.NetworkSettingsAttribute">
       <summary>
