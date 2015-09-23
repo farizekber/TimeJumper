@@ -74,9 +74,6 @@ namespace Assets.Scripts
             Global.Instance.TimeText.transform.localRotation = Quaternion.Euler(0, 0, -90);
             Global.Instance.TimeText.transform.localPosition = new Vector3(-300, 110, Global.Instance.TimeText.transform.localPosition.z);
 
-            Global.Instance.ScoreText.transform.localRotation = Quaternion.Euler(0, 0, -90);
-            Global.Instance.ScoreText.transform.localPosition = new Vector3(-300, -190, Global.Instance.ScoreText.transform.localPosition.z);
-
             Global.Instance.DistanceText.transform.localRotation = Quaternion.Euler(0, 0, -90);
             Global.Instance.DistanceText.transform.localPosition = new Vector3(-300, -40, Global.Instance.DistanceText.transform.localPosition.z);
 
@@ -118,9 +115,6 @@ namespace Assets.Scripts
 
             Global.Instance.TimeText.transform.localRotation = Quaternion.Euler(0, 0, 0);
             Global.Instance.TimeText.transform.localPosition = new Vector3(-239, 180, Global.Instance.TimeText.transform.localPosition.z);
-
-            Global.Instance.ScoreText.transform.localRotation = Quaternion.Euler(0, 0, 0);
-            Global.Instance.ScoreText.transform.localPosition = new Vector3(318, 180, Global.Instance.ScoreText.transform.localPosition.z);
 
             Global.Instance.DistanceText.transform.localRotation = Quaternion.Euler(0, 0, 0);
             Global.Instance.DistanceText.transform.localPosition = new Vector3(171, 180, Global.Instance.DistanceText.transform.localPosition.z);

@@ -9,8 +9,6 @@ public class GameOverScene : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        GetComponentsInChildren<Text>().Where(s => s.name == "Score2").First().text = Global.score + "";
-
         TimeSpan t = TimeSpan.FromSeconds(Global.endingTime - Global.startTime);
         string answer = string.Format("{0:D2}:{1:D2}:{2:D2}",
                         t.Hours,

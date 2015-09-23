@@ -166,14 +166,7 @@ namespace Assets.Scripts
 
             if (other.gameObject.name == "Main Character")
             {
-                if (name == "Diamond(Clone)")
-                {
-                    Disable();
-                    Global.Instance.PlayPickupSound();
-                    Global.score += 1;
-                    Global.Instance.UpdateScore();
-                }
-                else if (name == "MineCarVehicle(Clone)")
+                if (name == "MineCarVehicle(Clone)")
                 {
                     if (!mainCharacter.inVehicle)
                     {

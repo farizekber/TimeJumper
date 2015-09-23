@@ -13,36 +13,46 @@ namespace Assets.Scripts
         GameObject[] energy = new GameObject[3];
 
         public int activeEnergy = 1;
-        public float activeHealth = 0.0f;
+        public float activeVehicleHealth = 0.0f;
         public float vehicleHealthLossPerHit = 0.33f;
 
         void Start()
         {
             vehicleHealth = GameObject.Find("HealthBar");
-            energy[0] = GameObject.Find("Energy1");
-            energy[1] = GameObject.Find("Energy2");
-            energy[2] = GameObject.Find("Energy3");
+            energy[0] = GameObject.Find("EnergyBar1");
+            energy[1] = GameObject.Find("EnergyBar2");
+            energy[2] = GameObject.Find("EnergyBar3");
         }
 
-        void onGui()
+        void OnGUI()
         {
-            vehicleHealth.GetComponent<Image>().fillAmount = activeHealth;
-            //energy
-
+            vehicleHealth.GetComponent<Image>().fillAmount = activeVehicleHealth;
+            energy[0].GetComponent<Image>().fillAmount = activeEnergy > 0 ? 1 : 0;
+            energy[0].GetComponent<Image>().fillAmount = activeEnergy > 1 ? 1 : 0;
+            energy[0].GetComponent<Image>().fillAmount = activeEnergy > 2 ? 1 : 0;
         }
 
-        void resetActiveHealth()
+        public void IncreaseEnergy()
         {
-            activeHealth = 1.0f;
+            //TODO
+        }
+
+        public void IncreaseHealth()
+        {
+            Mathf.Clamp(activeVehicleHealth += vehicleHealthLossPerHit, 0, 1);
+        }
+
+        public void ResetActiveHealth()
+        {
+            activeVehicleHealth = 1.0f;
         }
 
         //Called when noticing collision
-        void lowerHealth()
+        public void LowerHealth()
         {
-            if (activeHealth > 0)//vehicleHealth.GetComponent<Image>().fillAmount > 0 - float.Epsilon)
+            if (activeVehicleHealth > 0)
             {
-                Mathf.Clamp(activeHealth -= vehicleHealthLossPerHit, 0, 1);
-                //vehicleHealth.GetComponent<Image>().fillAmount -= vehicleHealthLossPerHit;
+                Mathf.Clamp(activeVehicleHealth -= vehicleHealthLossPerHit, 0, 1);
             }
             else if (activeEnergy > 0)
             {
@@ -50,7 +60,7 @@ namespace Assets.Scripts
             }
             else
             {
-                //Trigger Death
+                GameOverAnimation.GetInstance().Trigger();
             }
         }
     }

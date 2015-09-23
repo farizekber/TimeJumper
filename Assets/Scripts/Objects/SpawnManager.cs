@@ -15,7 +15,7 @@ public class SpawnManager : MonoBehaviour {
     public PlatformManager platformManager = new PlatformManager();
 
     public float obstacleSpawnRate = 5f;
-    public float collectableSpawnRate = 3f;
+    public float collectableSpawnRate = 10f;
     public int defaultSpawnableCount = 5;
     public int defaultCollectableCount = 20;
     
@@ -127,7 +127,6 @@ public class SpawnManager : MonoBehaviour {
 
         foreach (ObstacleBase o1 in collectables)
         {
-            bool found = false;
             foreach (GameObject o2 in collectableInstances[o1])
             {
                 ObstacleBase o = o2.GetComponent<ObstacleBase>();
@@ -136,56 +135,11 @@ public class SpawnManager : MonoBehaviour {
                     continue;
 
                 o.Activate();
-                found = true;
                 break;
             }
-            if (found)
-                break;
         }
 
-        if (Random.value > 0.75)
-        {
-            foreach (ObstacleBase o1 in collectables)
-            {
-                bool found = false;
-                foreach (GameObject o2 in collectableInstances[o1])
-                {
-                    ObstacleBase o = o2.GetComponent<ObstacleBase>();
-
-                    if (o.active)
-                        continue;
-
-                    o.Activate();
-                    found = true;
-                    break;
-                }
-                if (found)
-                    break;
-            }
-        }
-
-        if (Random.value > 0.75)
-        {
-            foreach (ObstacleBase o1 in collectables)
-            {
-                bool found = false;
-                foreach (GameObject o2 in collectableInstances[o1])
-                {
-                    ObstacleBase o = o2.GetComponent<ObstacleBase>();
-
-                    if (o.active)
-                        continue;
-
-                    o.Activate();
-                    found = true;
-                    break;
-                }
-                if (found)
-                    break;
-            }
-        }
-
-        Invoke("InvokeCollectableSpawns", (collectableSpawnRate * Random.value + 3) / Global.Instance.speed);
+        Invoke("InvokeCollectableSpawns", ((collectableSpawnRate / 2.0f) * Random.value + collectableSpawnRate / 2.0f) / Global.Instance.speed + 5);
     }
 
     public void InvokeObstacleSpawns()
@@ -198,6 +152,9 @@ public class SpawnManager : MonoBehaviour {
 
         foreach (GameObject o2 in spawnableInstances[spawnables[(int)(randomNumber / amountSpawn)]])
         {
+            if (o2.name == "Pickaxe(Clone)" && Time.time < 30)
+                break;
+
             ObstacleBase o = o2.GetComponent<ObstacleBase>();
 
             if (o.active)

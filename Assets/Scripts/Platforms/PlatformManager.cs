@@ -224,7 +224,7 @@ namespace Assets.Scripts.Objects
                 platform.transform.SetParent(platformCombination.combinedGameObject.rigid.transform);
             }
             
-            platformCombination.combinedGameObject.rigid.transform.localPosition = new Vector3(16, low ? 2.5f : 3.5f, 0.5f);
+            platformCombination.combinedGameObject.rigid.transform.localPosition = new Vector3(16, low ? 2.0f : 3.5f, 0.5f);
             float pieceSize = 0.64f;
             float xOffset = 0;
 

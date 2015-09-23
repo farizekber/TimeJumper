@@ -19,11 +19,7 @@ public class Global : MonoBehaviour
 
     public float speed = 1f;
     float lastSpeedIncrease = 0;
-    //public float obstacleSpawnRate = 5f;
-    //public float collectableSpawnRate = 3f;
-    public static int score = 0;
 
-    public Text ScoreText;
     public Text TimeText;
     public Text DistanceText;
 
@@ -69,18 +65,15 @@ public class Global : MonoBehaviour
         HealthBar.GetComponent<Image>().enabled = false;
         HealthBarBackground = GameObject.Find("HealthBarBackground");
         HealthBarBackground.GetComponent<Image>().enabled = false;
-
-        score = 0;
+        
         distance = 0;
         startTime = Time.time;
         lastTime = startTime;
         endingTime = 0;
 
         GlobalObject = gameObject;
-        ScoreText = GetComponentsInChildren<Text>().Where(s => s.name == "ScoreText").First();
         TimeText = GetComponentsInChildren<Text>().Where(s => s.name == "TimeText").First();
         DistanceText = GetComponentsInChildren<Text>().Where(s => s.name == "DistanceText").First();
-        Instance.ScoreText.text = "Score: 0";
         Instance.TimeText.text = "Time : 00:00:00";
         Instance.DistanceText.text = "Distance: 0m";
 
@@ -139,10 +132,5 @@ public class Global : MonoBehaviour
 
         lastTime = currentTime;
         DistanceText.text = "Distance : " + (int)distance + "m";
-    }
-
-    public void UpdateScore()
-    {
-        ScoreText.text = "Score : " + score;
     }
 }
