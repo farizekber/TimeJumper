@@ -164,9 +164,9 @@ namespace Assets.Scripts
                 gobject.transform.localPosition += Global.Instance.GlobalObject.transform.localPosition + Global.Instance.ForegroundObject.transform.localPosition;
                 gobject.transform.parent = Global.Instance.ForegroundObject.transform; */
 
-                Fader.s_Instance.InvokeMethod("Enable", 1.25f);
-                PerspectiveInitializer.s_Instance.InvokeMethod("LoadHorizontalPerspective", 1.75f);
-                Fader.s_Instance.InvokeMethod("Disable", 2.25f);
+                Fader.s_Instance.InvokeMethod("Enable", 1.5f);
+                PerspectiveInitializer.s_Instance.InvokeMethod("LoadHorizontalPerspective", 2f);
+                Fader.s_Instance.InvokeMethod("Disable", 2.5f);
             }
 
             Invoke("SwitchPerspective", 40.0f + (UnityEngine.Random.value * 20.0f));
