@@ -30,12 +30,12 @@ public class SpawnManager : MonoBehaviour {
             if ((!platformManager.previousHigh) && (Random.value > 0.66f))
             {
                 platformManager.previousHigh = true;
-                platformManager.Activate(((int)(Random.value * 3)) + 1, false);
+                platformManager.Activate(((int)(Random.value * 6)) + 2, false);
             }
             else
             {
                 platformManager.previousHigh = false;
-                platformManager.Activate(((int)(Random.value * 3)) + 1, true);
+                platformManager.Activate(((int)(Random.value * 6)) + 2, true);
             }
         }
 

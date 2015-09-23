@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\Global\Global.cs" />
      <Compile Include="Assets\Scripts\Global\LoadingScene.cs" />
      <Compile Include="Assets\Scripts\Global\MainMenuScene.cs" />
+     <Compile Include="Assets\Scripts\Global\ResourceManager.cs" />
      <Compile Include="Assets\Scripts\MainCharacter.cs" />
      <Compile Include="Assets\Scripts\Objects\Crate.cs" />
      <Compile Include="Assets\Scripts\Objects\Diamond.cs" />
@@ -93,7 +94,6 @@
      <None Include="Assets\Standard Assets\Effects\Projectors\Guidelines.txt" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\MotionBlur.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBloom.shader" />
-     <None Include="Assets\Resources\Shaders\CombinedMovingBackgroundShader.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\MinMaxReduction.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\SSAA.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\RadialBlur.shader" />

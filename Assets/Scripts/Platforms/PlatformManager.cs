@@ -75,7 +75,7 @@ namespace Assets.Scripts.Objects
             {
                 beginComponents.Add((GameObject.Instantiate(Resources.Load("Prefabs/" + "PlatformBegin"), new Vector3(0, 0, 0.5f), new Quaternion(0, 0, 0, 0)) as GameObject).GetComponent<Platform>());
             }
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 20; i++)
             {
                 middleComponents.Add((GameObject.Instantiate(Resources.Load("Prefabs/" + "PlatformMiddle"), new Vector3(0, 0, 0.5f), new Quaternion(0, 0, 0, 0)) as GameObject).GetComponent<Platform>());
             }
