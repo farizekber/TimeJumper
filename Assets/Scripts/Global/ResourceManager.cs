@@ -87,7 +87,7 @@ namespace Assets.Scripts
         //Called when noticing collision
         public void LowerHealth()
         {
-            if (activeVehicleHealth > 0.01)
+            if (activeVehicleHealth > 0.01 && inVehicle)
             {
                 Mathf.Clamp(activeVehicleHealth -= vehicleHealthLossPerHit, 0, 1);
 

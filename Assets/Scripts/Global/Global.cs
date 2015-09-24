@@ -165,6 +165,12 @@ public class Global : MonoBehaviour
             distance += ((currentTime - lastTime) * speed) * 3;
 
         lastTime = currentTime;
+        float prevHighest = PlayerPrefs.GetInt("Highest Distance");
+        if ((int)distance > prevHighest)
+        {
+            DistanceText.color = new Color(255.0f / 255.0f, 208.0f / 255.0f, 66.0f / 255.0f);
+            DistanceText.fontSize = 16;
+        }
         DistanceText.text = "Distance : " + (int)distance + "m";
     }
 }
