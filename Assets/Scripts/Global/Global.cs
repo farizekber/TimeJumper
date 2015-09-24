@@ -22,6 +22,7 @@ public class Global : MonoBehaviour
 
     public Text TimeText;
     public Text DistanceText;
+    private bool paused = false;
 
     public static float distance = 0;
     private float lastTime = 0;
@@ -87,6 +88,39 @@ public class Global : MonoBehaviour
         Screen.autorotateToLandscapeRight = false;
         Screen.autorotateToLandscapeLeft = false;
         Screen.autorotateToPortraitUpsideDown = false;
+    }
+
+    public void PauseButton()
+    {
+        if (!paused)
+        {
+            paused = true;
+            Time.timeScale = 0f;
+            AudioListener.pause = true;
+            GameObject.Find("PauseButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/resume");
+        }
+        else
+        {
+            paused = false;
+            Time.timeScale = 1f;
+            AudioListener.pause = false;
+            GameObject.Find("PauseButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/pause");
+        }
+    }
+
+    public void AudioButton()
+    {
+
+        if (AudioListener.volume == 0)
+        {
+            AudioListener.volume = 1;
+            GameObject.Find("MuteButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/unmute-white");
+        }
+        else
+        {
+            AudioListener.volume = 0;
+            GameObject.Find("MuteButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/mute-white");
+        }
     }
 
     // Update is called once per frame
