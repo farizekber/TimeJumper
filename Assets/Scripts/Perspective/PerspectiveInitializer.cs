@@ -78,7 +78,6 @@ namespace Assets.Scripts
             Global.Instance.DistanceText.transform.localPosition = new Vector3(-300, -40, Global.Instance.DistanceText.transform.localPosition.z);
 
             mainCharacter.transform.localRotation = Quaternion.Euler(mainCharacter.transform.localRotation.x, mainCharacter.transform.localRotation.y, -90);
-            //GameObject.Destroy(GameObject.Find("Platform"));
             mainCharacter.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
             mainCharacter.GetComponent<Rigidbody2D>().gravityScale = 0;
 
@@ -106,6 +105,13 @@ namespace Assets.Scripts
                 mainCharacter.GetComponent<Animator>().enabled = true;
             }
 
+            GameObject muteButton = GameObject.Find("MuteButton");
+            GameObject pauseButton = GameObject.Find("PauseButton");
+            muteButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x, muteButton.transform.localPosition.y * -1, muteButton.transform.localPosition.z);
+            pauseButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x, (pauseButton.transform.localPosition.y * -1) + 30, pauseButton.transform.localPosition.z);
+            muteButton.transform.rotation = Quaternion.Euler(0, 0, 270);
+            pauseButton.transform.rotation = Quaternion.Euler(0, 0, 270);
+
             //SpawnManager.Instance.platformManager.FinalizeObject();
         }
 
@@ -117,7 +123,7 @@ namespace Assets.Scripts
             Global.Instance.TimeText.transform.localPosition = new Vector3(-239, 180, Global.Instance.TimeText.transform.localPosition.z);
 
             Global.Instance.DistanceText.transform.localRotation = Quaternion.Euler(0, 0, 0);
-            Global.Instance.DistanceText.transform.localPosition = new Vector3(171, 180, Global.Instance.DistanceText.transform.localPosition.z);
+            Global.Instance.DistanceText.transform.localPosition = new Vector3(-100, 180, Global.Instance.DistanceText.transform.localPosition.z);
 
             mainCharacter.transform.localRotation = Quaternion.Euler(mainCharacter.transform.localRotation.x, mainCharacter.transform.localRotation.y, 0);
             //GameObject.Destroy(GameObject.Find("Platform"));
@@ -141,6 +147,15 @@ namespace Assets.Scripts
             SpawnManager.Instance.spawnables.AddRange(newTheme.m_spawnables);
             SpawnManager.Instance.collectables.AddRange(newTheme.m_collectables);
             SpawnManager.Instance.Init();
+
+            GameObject muteButton = GameObject.Find("MuteButton");
+            GameObject pauseButton = GameObject.Find("PauseButton");
+            float oldY = muteButton.transform.localPosition.y;
+            muteButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x, oldY * -1, muteButton.transform.localPosition.z);
+            pauseButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x-35, oldY * -1, pauseButton.transform.localPosition.z);
+            muteButton.transform.rotation = Quaternion.Euler(0, 0, 0);
+            pauseButton.transform.rotation = Quaternion.Euler(0, 0, 0);
+
         }
 
         public void SwitchPerspective()
