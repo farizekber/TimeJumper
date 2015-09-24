@@ -58,10 +58,10 @@
      <Compile Include="Assets\Scripts\Global\ResourceManager.cs" />
      <Compile Include="Assets\Scripts\MainCharacter.cs" />
      <Compile Include="Assets\Scripts\Objects\Crate.cs" />
-     <Compile Include="Assets\Scripts\Objects\Diamond.cs" />
      <Compile Include="Assets\Scripts\Objects\Minecart.cs" />
      <Compile Include="Assets\Scripts\Objects\ObstacleBase.cs" />
      <Compile Include="Assets\Scripts\Objects\Obstacles.cs" />
+     <Compile Include="Assets\Scripts\Objects\Orb.cs" />
      <Compile Include="Assets\Scripts\Objects\Pickaxe.cs" />
      <Compile Include="Assets\Scripts\Objects\SpawnManager.cs" />
      <Compile Include="Assets\Scripts\Objects\Stone.cs" />

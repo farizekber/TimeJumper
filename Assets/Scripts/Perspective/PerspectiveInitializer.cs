@@ -99,12 +99,7 @@ namespace Assets.Scripts
             SpawnManager.Instance.collectables.Add(newTheme.m_collectables[0]);
             SpawnManager.Instance.Init();
 
-            if (GameObject.Find("Resource Manager").GetComponent<ResourceManager>().inVehicle)
-            {
-                Global.Instance.speed -= 2f;
-                GameObject.Find("Resource Manager").GetComponent<ResourceManager>().inVehicle = false;
-                mainCharacter.GetComponent<Animator>().enabled = true;
-            }
+            GameObject.Find("Resource Manager").GetComponent<ResourceManager>().RemoveVehicle();
 
             //SpawnManager.Instance.platformManager.FinalizeObject();
         }

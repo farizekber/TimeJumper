@@ -151,20 +151,12 @@ namespace Assets.Scripts
 
             ObstacleBase otherObstacleBase = other.gameObject.GetComponent<ObstacleBase>();
 
-            if (otherObstacleBase != null)
+            if (gameObject.name == "Orb(Clone)" && other.gameObject.name == "Main Character")
             {
-
-                if (other.name == "Diamond(Clone)")
-                {
-                    if (otherObstacleBase.m_fpSpeedModifier == this.m_fpSpeedModifier)
-                    {
-                        otherObstacleBase.Disable();
-                    }
-                }
+                Disable();
+                GameObject.Find("Resource Manager").GetComponent<ResourceManager>().IncreaseEnergy();
             }
-
-
-            if (other.gameObject.name == "Main Character")
+            else if (other.gameObject.name == "Main Character")
             {
                 Disable();
 

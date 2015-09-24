@@ -13,7 +13,7 @@ namespace Assets.Scripts
         GameObject[] energy = new GameObject[3];
 
         public bool inVehicle = false;
-        public int activeEnergy = 1;
+        public int activeEnergy;
         public float activeVehicleHealth = 0.0f;
         public float vehicleHealthLossPerHit = 0.33f;
 
@@ -70,6 +70,15 @@ namespace Assets.Scripts
             }
         }
 
+        public void RemoveVehicle()
+        {
+            if (inVehicle)
+            {
+                inVehicle = false;
+                Global.Instance.speed -= 2;
+            }
+        }
+
         void resetActiveHealth()
         {
             activeVehicleHealth = 1.0f;
@@ -84,8 +93,7 @@ namespace Assets.Scripts
 
                 if (activeVehicleHealth < 0.01)
                 {
-                    inVehicle = false;
-                    Global.Instance.speed -= 2;
+                    RemoveVehicle();
                 }
             }
             else if (activeEnergy > 0)

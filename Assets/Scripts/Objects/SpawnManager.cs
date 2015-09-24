@@ -121,12 +121,10 @@ public class SpawnManager : MonoBehaviour {
         if (GameOverAnimation.GetInstance().m_fAnimationInProgress)
             return;
 
-        //float randomNumber = Random.value * 100;
-        //float amountSpawn = 100 / spawnables.Count;
-        //spawnables[(int)(randomNumber / amountSpawn)].Spawn();
-
-        foreach (ObstacleBase o1 in collectables)
+        if (spawnables.Count > 0)
         {
+            ObstacleBase o1 = collectables[(int)Mathf.Round((Random.value * (collectables.Count - 1)))];
+
             foreach (GameObject o2 in collectableInstances[o1])
             {
                 ObstacleBase o = o2.GetComponent<ObstacleBase>();

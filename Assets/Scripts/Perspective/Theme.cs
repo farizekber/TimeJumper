@@ -60,7 +60,8 @@ namespace Assets.Scripts.Perspective
                                                         (Resources.Load("Prefabs/" + "Stone") as GameObject).GetComponent<Stone>(),
                                                         (Resources.Load("Prefabs/" + "TNT") as GameObject).GetComponent<TNT>() },
 
-                             new List<ObstacleBase>() { (Resources.Load("Prefabs/" + "MineCarVehicle") as GameObject).GetComponent<MineCarVehicle>() },
+                             new List<ObstacleBase>() { (Resources.Load("Prefabs/" + "MineCarVehicle") as GameObject).GetComponent<MineCarVehicle>(),
+                                                        (Resources.Load("Prefabs/" + "Orb") as GameObject).GetComponent<Orb>()},
 
                              new List<PerspectiveTransition>() { new PerspectiveTransition(Perspectives.Horizontal, Perspectives.Vertical, delegate {
                                  PerspectiveInitializer.s_Instance.CleanPerspective();
