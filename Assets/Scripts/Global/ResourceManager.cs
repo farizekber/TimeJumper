@@ -7,11 +7,12 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
-    class ResourceManager
+    class ResourceManager : MonoBehaviour
     {
         GameObject vehicleHealth;
         GameObject[] energy = new GameObject[3];
 
+        public bool inVehicle = false;
         public int activeEnergy = 1;
         public float activeVehicleHealth = 0.0f;
         public float vehicleHealthLossPerHit = 0.33f;
@@ -26,23 +27,50 @@ namespace Assets.Scripts
 
         void OnGUI()
         {
+            if (inVehicle)
+            {
+                Global.Instance.HealthBar.GetComponent<Image>().enabled = true;
+                Global.Instance.HealthBarBackground.GetComponent<Image>().enabled = true;
+                GameObject.Find("Main Character").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/InMineCart");
+                GameObject.Find("Main Character").GetComponent<Animator>().enabled = false;
+            }
+            else
+            {
+                if (Global.Instance != null)
+                {
+                    Global.Instance.HealthBar.GetComponent<Image>().enabled = false;
+                    Global.Instance.HealthBarBackground.GetComponent<Image>().enabled = false;
+                    GameObject.Find("Main Character").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/character-v2");
+                    GameObject.Find("Main Character").GetComponent<Animator>().enabled = true;
+                }
+            }
+
             vehicleHealth.GetComponent<Image>().fillAmount = activeVehicleHealth;
-            energy[0].GetComponent<Image>().fillAmount = activeEnergy > 0 ? 1 : 0;
-            energy[0].GetComponent<Image>().fillAmount = activeEnergy > 1 ? 1 : 0;
-            energy[0].GetComponent<Image>().fillAmount = activeEnergy > 2 ? 1 : 0;
+            energy[0].GetComponent<Image>().fillAmount = activeEnergy >= 1 ? 1 : 0;
+            energy[1].GetComponent<Image>().fillAmount = activeEnergy >= 2 ? 1 : 0;
+            energy[2].GetComponent<Image>().fillAmount = activeEnergy >= 3 ? 1 : 0;
         }
 
         public void IncreaseEnergy()
         {
-            //TODO
+            Mathf.Clamp(activeEnergy++, 0, 3);
         }
 
         public void IncreaseHealth()
         {
-            Mathf.Clamp(activeVehicleHealth += vehicleHealthLossPerHit, 0, 1);
+            if (!inVehicle)
+            {
+                resetActiveHealth();    
+                inVehicle = true;
+                Global.Instance.speed += 2;
+            }
+            else
+            {
+                Mathf.Clamp(activeVehicleHealth += vehicleHealthLossPerHit, 0, 1);
+            }
         }
 
-        public void ResetActiveHealth()
+        void resetActiveHealth()
         {
             activeVehicleHealth = 1.0f;
         }
@@ -50,9 +78,15 @@ namespace Assets.Scripts
         //Called when noticing collision
         public void LowerHealth()
         {
-            if (activeVehicleHealth > 0)
+            if (activeVehicleHealth > 0.01)
             {
                 Mathf.Clamp(activeVehicleHealth -= vehicleHealthLossPerHit, 0, 1);
+
+                if (activeVehicleHealth < 0.01)
+                {
+                    inVehicle = false;
+                    Global.Instance.speed -= 2;
+                }
             }
             else if (activeEnergy > 0)
             {

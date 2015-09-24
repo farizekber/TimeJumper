@@ -166,51 +166,15 @@ namespace Assets.Scripts
 
             if (other.gameObject.name == "Main Character")
             {
+                Disable();
+
                 if (name == "MineCarVehicle(Clone)")
                 {
-                    if (!mainCharacter.inVehicle)
-                    {
-                        Global.Instance.speed += 2f;
-                        Global.Instance.HealthBar.GetComponent<Image>().enabled = true;
-                        Global.Instance.HealthBar.GetComponent<Image>().fillAmount = 1;
-                        Global.Instance.HealthBarBackground.GetComponent<Image>().enabled = true;
-                        Global.Instance.HealthBarBackground.GetComponent<Image>().fillAmount = 1;
-                        mainCharacter.inVehicle = true;
-                        other.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/InMineCart");
-                        other.gameObject.GetComponent<Animator>().enabled = false;
-                        mainCharacter.vehicleHealth = 60;
-                    }
-                    else if (mainCharacter.vehicleHealth < 60)
-                    {
-                        mainCharacter.vehicleHealth += 20;
-                        Global.Instance.HealthBar.GetComponent<Image>().fillAmount += 0.33f;
-                    }
-                    Disable();
+                    GameObject.Find("Resource Manager").GetComponent<ResourceManager>().IncreaseHealth();
                 }
                 else
                 {
-                    if (!mainCharacter.inVehicle)
-                    {
-                        GameOverAnimation.GetInstance().Trigger();
-                    }
-                    else
-                    {
-                        mainCharacter.vehicleHealth -= 20;
-                        Global.Instance.HealthBar.GetComponent<Image>().fillAmount -= 0.33f;
-                        Global.Instance.HealthBarBackground.GetComponent<Image>().fillAmount = 1;
-                        Disable();
-
-                        if (mainCharacter.vehicleHealth <= 0)
-                        {
-                            Disable();
-                            mainCharacter.inVehicle = false;
-                            Global.Instance.HealthBarBackground.GetComponent<Image>().enabled = false;
-                            Global.Instance.HealthBar.GetComponent<Image>().enabled = false;
-                            other.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/character-v2");
-                            other.gameObject.GetComponent<Animator>().enabled = true;
-                            Global.Instance.speed -= 2f;
-                        }
-                    }
+                    GameObject.Find("Resource Manager").GetComponent<ResourceManager>().LowerHealth();
                 }
             }
         }

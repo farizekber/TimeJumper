@@ -9,10 +9,7 @@ public class MainCharacter : MonoBehaviour {
     float previousClickTime = 0;
     public float clickRate = 0.40f;
     public float speedModifier = 1f;
-
-    public bool inVehicle = false;
-    public int vehicleHealth = 0;
-
+    
     public int defaultJumps;
     private int jumps;
     private float downTime;
