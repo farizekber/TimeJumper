@@ -97,14 +97,14 @@ public class Global : MonoBehaviour
             paused = true;
             Time.timeScale = 0f;
             AudioListener.pause = true;
-            GameObject.Find("PauseButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/resume");
+            GameObject.Find("PauseButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/play-button");
         }
         else
         {
             paused = false;
             Time.timeScale = 1f;
             AudioListener.pause = false;
-            GameObject.Find("PauseButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/pause");
+            GameObject.Find("PauseButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/pause-button");
         }
     }
 
@@ -114,12 +114,12 @@ public class Global : MonoBehaviour
         if (AudioListener.volume == 0)
         {
             AudioListener.volume = 1;
-            GameObject.Find("MuteButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/unmute-white");
+            GameObject.Find("MuteButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/audio-button");
         }
         else
         {
             AudioListener.volume = 0;
-            GameObject.Find("MuteButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/mute-white");
+            GameObject.Find("MuteButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/mute-button");
         }
     }
 
