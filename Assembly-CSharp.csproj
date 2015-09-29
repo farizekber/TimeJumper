@@ -46,7 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\ApplicationGlobal.cs" />
      <Compile Include="Assets\BarrelDwarf.cs" />
      <Compile Include="Assets\Dragon.cs" />
      <Compile Include="Assets\GooglePlayGames\BasicApi\Achievement.cs" />
