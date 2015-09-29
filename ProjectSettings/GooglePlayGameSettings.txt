@@ -1,0 +1,6 @@
+lastUpgrade=00925
+proj.AppId=154724600338
+proj.ConstantsClassName=GooglePlayServices
+and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0d%0a%3c%21--%0d%0aGoogle+Play+game+services+IDs.%0d%0aSave+this+file+as+res%2fvalues%2fgames-ids.xml+in+your+project.%0d%0a--%3e%0d%0a%3cresources%3e%0d%0a++%3cstring+name%3d%22app_id%22%3e154724600338%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_jump_into_ten_minecarts%22%3eCgkIkpS4ssAEEAIQAg%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_run_2000m%22%3eCgkIkpS4ssAEEAIQAw%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_run_5000m%22%3eCgkIkpS4ssAEEAIQBg%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_run_a_total_of_5000m%22%3eCgkIkpS4ssAEEAIQBA%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_run_a_total_of_10000m%22%3eCgkIkpS4ssAEEAIQBQ%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22leaderboard_time_jumper_leaderboard%22%3eCgkIkpS4ssAEEAIQAQ%3c%2fstring%3e%0d%0a%3c%2fresources%3e
+and.ClientId=
+android.SetupDone=true

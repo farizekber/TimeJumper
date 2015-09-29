@@ -17,7 +17,7 @@ public class MainMenuScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!acceptsInput)
+        if (!acceptsInput)// && global.ApplicationGlobal.isLoggedIn)
             return;
 
         if (Input.GetMouseButtonDown(0) || Input.touchCount > 0)

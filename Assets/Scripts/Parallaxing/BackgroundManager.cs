@@ -8,6 +8,13 @@ namespace Assets.Scripts.Parallaxing
 {
     public class BackgroundManager : MonoBehaviour
     {
+        public float RedMultiplier;
+        public float GreenMultiplier;
+        public float BlueMultiplier;
+        public bool RedInversed;
+        public bool GreenInversed;
+        public bool BlueInversed;
+
         public void InitHorizontal()
         {
             GameObject background = GameObject.Find("Background Manager");
@@ -34,7 +41,21 @@ namespace Assets.Scripts.Parallaxing
 
                 if (backgroundPlane.pieces[0] == null)
                     continue;
+                
+                backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_RedMultiplier", RedMultiplier);
+                backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_GreenMultiplier", GreenMultiplier);
+                backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_BlueMultiplier", BlueMultiplier);
+                backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_RedInversed", RedInversed ? 1.0f : 0.0f);
+                backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_GreenInversed", GreenInversed ? 1.0f : 0.0f);
+                backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_BlueInversed", BlueInversed ? 1.0f : 0.0f);
 
+                backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_RedMultiplier", RedMultiplier);
+                backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_GreenMultiplier", GreenMultiplier);
+                backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_BlueMultiplier", BlueMultiplier);
+                backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_RedInversed", RedInversed ? 1.0f : 0.0f);
+                backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_GreenInversed", GreenInversed ? 1.0f : 0.0f);
+                backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_BlueInversed", BlueInversed ? 1.0f : 0.0f);
+                
                 backgroundPlane.pieces[0].transform.localPosition = new Vector3((backgroundPlane.pieces[0].transform.localPosition.x - (1.0f * Time.fixedDeltaTime * 0.075f * Global.Instance.speed) * backgroundPlane.SpeedModifier), backgroundPlane.pieces[0].transform.localPosition.y, backgroundPlane.pieces[0].transform.localPosition.z);
                 backgroundPlane.pieces[1].transform.localPosition = new Vector3((backgroundPlane.pieces[1].transform.localPosition.x - (1.0f * Time.fixedDeltaTime * 0.075f * Global.Instance.speed) * backgroundPlane.SpeedModifier), backgroundPlane.pieces[1].transform.localPosition.y, backgroundPlane.pieces[1].transform.localPosition.z);
 

@@ -149,9 +149,12 @@ namespace Assets.Scripts
                 return;
             }
 
-            ObstacleBase otherObstacleBase = other.gameObject.GetComponent<ObstacleBase>();
-
-            if (gameObject.name == "Orb(Clone)" && other.gameObject.name == "Main Character")
+            if ((gameObject.name == "MineCartVehicle(Clone)" || other.gameObject.name == "MineCartVehicle(Clone)") && other.gameObject.name != "Main Character")
+            {
+                if(gameObject.GetComponent<Rigidbody2D>().velocity.x == other.gameObject.GetComponent<Rigidbody2D>().velocity.x)
+                    gameObject.GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(gameObject.GetComponent<Rigidbody2D>().transform.localPosition.x + 0.3f, gameObject.GetComponent<Rigidbody2D>().transform.localPosition.y, gameObject.GetComponent<Rigidbody2D>().transform.localPosition.z);
+            }
+            else if (gameObject.name == "Orb(Clone)" && other.gameObject.name == "Main Character")
             {
                 Disable();
                 GameObject.Find("Resource Manager").GetComponent<ResourceManager>().IncreaseEnergy();
