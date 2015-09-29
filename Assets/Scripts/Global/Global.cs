@@ -97,14 +97,14 @@ public class Global : MonoBehaviour
             paused = true;
             Time.timeScale = 0f;
             AudioListener.pause = true;
-            GameObject.Find("PauseButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/play-button");
+            GameObject.Find("PauseButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/play-button-v2");
         }
         else
         {
             paused = false;
             Time.timeScale = 1f;
             AudioListener.pause = false;
-            GameObject.Find("PauseButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/pause-button");
+            GameObject.Find("PauseButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/pause-button-v2");
         }
     }
 
@@ -114,18 +114,19 @@ public class Global : MonoBehaviour
         if (AudioListener.volume == 0)
         {
             AudioListener.volume = 1;
-            GameObject.Find("MuteButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/audio-button");
+            GameObject.Find("MuteButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/audio-button-v2");
         }
         else
         {
             AudioListener.volume = 0;
-            GameObject.Find("MuteButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/mute-button");
+            GameObject.Find("MuteButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/mute-button-v2");
         }
     }
 
     // Update is called once per frame
     private void Update()
     {
+        // PlayerPrefs.SetInt("Highest Distance", 0);
         if (Input.GetKeyDown(KeyCode.LeftArrow))
             speed--;
         else if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -169,7 +170,6 @@ public class Global : MonoBehaviour
         if ((int)distance > prevHighest)
         {
             DistanceText.color = new Color(255.0f / 255.0f, 208.0f / 255.0f, 66.0f / 255.0f);
-            DistanceText.fontSize = 16;
         }
         DistanceText.text = "Distance : " + (int)distance + "m";
     }
