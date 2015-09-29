@@ -122,7 +122,13 @@ public class MainCharacter : MonoBehaviour {
                         rigid.AddForce(new Vector2(0, 150.0f * 1.5f));
 
                         if (jumps >= 0)
+                        {   
+                            if (!GameObject.Find("Resource Manager").GetComponent<ResourceManager>().inVehicle)
+                                GetComponent<Animator>().Play("Jump", 0, 0);
+                            //if (GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.name == "Jump")
+                            //GetComponent<Animator>().ForceStateNormalizedTime(0);
                             jumps--;
+                        }
                     }
                 }
             }

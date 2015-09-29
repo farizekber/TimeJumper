@@ -83,7 +83,9 @@ namespace Assets.Scripts
 
             GameObject.Find("Background Manager").GetComponent<BackgroundManager>().InitVertical();
 
-            mainCharacter.GetComponent<BoxCollider2D>().size = new Vector2(0.8542318f, 1.699413f) * 2;
+            mainCharacter.GetComponent<BoxCollider2D>().offset = new Vector2(-0.002533523f, 0.0006544814f);
+            mainCharacter.GetComponent<BoxCollider2D>().size = new Vector2(1.085341f, 1.980819f);
+
             mainCharacter.GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(2.66f, 3.1f, mainCharacter.GetComponent<Rigidbody2D>().transform.localPosition.z);
             mainCharacter.GetComponent<SpriteRenderer>().sprite = newTheme.m_mainCharacter;
             mainCharacter.GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(newTheme.m_mainCharacterAnimationString);
@@ -123,6 +125,8 @@ namespace Assets.Scripts
             mainCharacter.transform.localRotation = Quaternion.Euler(mainCharacter.transform.localRotation.x, mainCharacter.transform.localRotation.y, 0);
             //GameObject.Destroy(GameObject.Find("Platform"));
             mainCharacter.GetComponent<Rigidbody2D>().gravityScale = 1;
+            mainCharacter.GetComponent<BoxCollider2D>().size = new Vector2(1.708464f, 3.398826f);
+            mainCharacter.GetComponent<BoxCollider2D>().offset = new Vector2(0.134553f, -0.07604933f);
 
             GameObject.Find("Background Manager").GetComponent<BackgroundManager>().InitHorizontal();
 
@@ -131,9 +135,9 @@ namespace Assets.Scripts
             mainCharacter.GetComponent<SpriteRenderer>().sprite = Resources.Load("Images/character-v2") as Sprite;
             mainCharacter.GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/character_0");
 
-            dragon.transform.localPosition = new Vector3(-5.68f,2.76f,0.5f);
+            dragon.transform.localPosition = new Vector3(-5.4f,2.76f,0.5f);
             dragon.transform.localRotation = Quaternion.Euler(0, 0, 0);
-            dragon.transform.localScale = new Vector3(1.73f, 1.57f, 1);
+            dragon.transform.localScale = new Vector3(0.75f, 0.75f, 1);
             dragon.GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Dragon");
 
             //GameObject.Find("Platform").active = true;

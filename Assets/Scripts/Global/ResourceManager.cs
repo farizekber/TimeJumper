@@ -54,6 +54,7 @@ namespace Assets.Scripts
         public void IncreaseEnergy()
         {
             Mathf.Clamp(activeEnergy++, 0, 3);
+            GameObject.Find("Divine-Shield").GetComponent<Renderer>().enabled = true;
         }
 
         public void IncreaseHealth()
@@ -99,6 +100,7 @@ namespace Assets.Scripts
             else if (activeEnergy > 0)
             {
                 activeEnergy = 0;
+                GameObject.Find("Divine-Shield").GetComponent<Renderer>().enabled = false;
             }
             else
             {
