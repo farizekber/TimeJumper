@@ -103,7 +103,7 @@ namespace Assets.Scripts
             GameObject muteButton = GameObject.Find("MuteButton");
             GameObject pauseButton = GameObject.Find("PauseButton");
             muteButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x, muteButton.transform.localPosition.y * -1, muteButton.transform.localPosition.z);
-            pauseButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x, (pauseButton.transform.localPosition.y * -1) + 30, pauseButton.transform.localPosition.z);
+            pauseButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x, (pauseButton.transform.localPosition.y * -1) + 40, pauseButton.transform.localPosition.z);
             muteButton.transform.rotation = Quaternion.Euler(0, 0, 270);
             pauseButton.transform.rotation = Quaternion.Euler(0, 0, 270);
 
@@ -147,7 +147,7 @@ namespace Assets.Scripts
             GameObject pauseButton = GameObject.Find("PauseButton");
             float oldY = muteButton.transform.localPosition.y;
             muteButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x, oldY * -1, muteButton.transform.localPosition.z);
-            pauseButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x-35, oldY * -1, pauseButton.transform.localPosition.z);
+            pauseButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x-40, oldY * -1, pauseButton.transform.localPosition.z);
             muteButton.transform.rotation = Quaternion.Euler(0, 0, 0);
             pauseButton.transform.rotation = Quaternion.Euler(0, 0, 0);
 

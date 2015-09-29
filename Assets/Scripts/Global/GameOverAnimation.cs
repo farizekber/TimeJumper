@@ -72,7 +72,14 @@ namespace Assets.Scripts
             Global.Instance.addingDistance = false;
 
             if (Global.distance > PlayerPrefs.GetInt("Highest Distance"))
+            {
                 PlayerPrefs.SetInt("Highest Distance", (int)Global.distance);
+                PlayerPrefs.SetInt("IsNewHighScore", 1);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("IsNewHighScore", 0);
+            }
 
             Global.Instance.delay.Start();
         }

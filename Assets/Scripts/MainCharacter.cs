@@ -34,6 +34,8 @@ public class MainCharacter : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        //PlayerPrefs.SetFloat("Highest Distance", 0.0f);
+
         if (Global.Instance == null)
             return;
 
