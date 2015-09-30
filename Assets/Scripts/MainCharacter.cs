@@ -106,11 +106,7 @@ public class MainCharacter : MonoBehaviour {
                 jumps = defaultJumps;
             }
 
-            if (GameOverAnimation.GetInstance().m_fAnimationInProgress)
-            {
-                rigid.velocity = new Vector2(0, 0);
-            }
-            else
+            if (!GameOverAnimation.GetInstance().m_fAnimationInProgress)
             {
                 rigid.velocity = new Vector2(0, rigid.velocity.y);
                 if ((Input.GetMouseButtonDown(0) || (currentSwipe.Enabled && currentSwipe.Tap)) && (Time.time > previousClickTime + (clickRate / Global.Instance.speed)))
@@ -135,11 +131,7 @@ public class MainCharacter : MonoBehaviour {
         }
         else
         {
-            if (GameOverAnimation.GetInstance().m_fAnimationInProgress)
-            {
-                rigid.velocity = new Vector2(0, 0);
-            }
-            else
+            if (!GameOverAnimation.GetInstance().m_fAnimationInProgress)
             {
                 if (currentSwipe.Enabled || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
                 {
@@ -166,11 +158,21 @@ public class MainCharacter : MonoBehaviour {
         }
 
         if (Global.Instance != null)
-        {
-            if (Global.Instance.orientation == 0)
-                rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, 0.765f, 6.45f), rigid.transform.localPosition.z);
+        {   
+            if (GameOverAnimation.GetInstance().m_fAnimationInProgress)
+            {
+                if (Global.Instance.orientation == 0)
+                    rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -6.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, 0.4f, 6.45f), rigid.transform.localPosition.z);
+                else
+                    rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, -0.19f, 6.45f), rigid.transform.localPosition.z);
+            }
             else
-                rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, -0.19f, 6.45f), rigid.transform.localPosition.z);
+            {
+                if (Global.Instance.orientation == 0)
+                    rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, 0.765f, 6.45f), rigid.transform.localPosition.z);
+                else
+                    rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, -0.19f, 6.45f), rigid.transform.localPosition.z);
+            }
         }
     }
 }

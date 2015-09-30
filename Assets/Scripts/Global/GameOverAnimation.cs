@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Objects;
+using Assets.Scripts.Parallaxing;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -7,7 +9,6 @@ namespace Assets.Scripts
         private static GameOverAnimation s_instance;
         public readonly float m_fpTwirlTimeInSeconds = 5;
 
-        private Component m_twirl = null;
         public bool m_fAnimationInProgress = false;
         private float m_fpInitiatedTime = 0;
 
@@ -21,48 +22,46 @@ namespace Assets.Scripts
             s_instance = null;
         }
 
-        public GameOverAnimation()
-        {
-            initializeTwirl();
-        }
-
         public void Update()
         {
-            if (!m_fAnimationInProgress)
+            if (!(m_fAnimationInProgress && (m_fpInitiatedTime + 2 < Time.time)))
                 return;
+            
 
-            (m_twirl as UnityStandardAssets.ImageEffects.Twirl).angle+=3;
+            SpawnManager.Instance.CancelInvoke();
+            SpawnManager.Instance.enabled = false;
 
-            if (/*m_fpInitiatedTime + m_fpTwirlTimeInSeconds < Time.time &&*/ (((m_twirl as UnityStandardAssets.ImageEffects.Twirl).angle % 360) == 0))
-            {
-                SpawnManager.Instance.CancelInvoke();
-                SpawnManager.Instance.enabled = false;
-
-                //foreach (Background item in Resources.FindObjectsOfTypeAll(typeof(Background)))
-                //{
-                //    item.FinalizeObject();
-                //}
+            PerspectiveInitializer.s_Instance.CleanPerspective();
+            PerspectiveInitializer.FinalizeObject();
+             
+            Fader.FinalizeObject();
+            Global.FinalizeObject();
                 
-                PerspectiveInitializer.s_Instance.CleanPerspective();
-                PerspectiveInitializer.FinalizeObject();
-                
-                //Background.Finalize();
-                Fader.FinalizeObject();
-                Global.FinalizeObject();
-                
-                m_fpInitiatedTime = 0;
-                m_fAnimationInProgress = false;
-                //Global.Instance.delay.Stop();
-                GameOverAnimation.FinalizeObject();
+            m_fpInitiatedTime = 0;
+            m_fAnimationInProgress = false;
 
-                Application.LoadLevel("GameOver");
-            }
+            GameOverAnimation.FinalizeObject();
+
+            Application.LoadLevel("GameOver");
         }
 
         public void Trigger()
         {
+
             if (m_fAnimationInProgress)
                 return;
+
+            GameObject.Find("Main Character").GetComponent<Animator>().Play("Death", 0, 0);
+
+            GameObject background = GameObject.Find("Background Manager");
+            for (int i = 0; i < background.transform.childCount; ++i)
+            {
+                background.transform.GetChild(i).GetComponent<BackgroundPlane>().SpeedModifier = 0;
+            }
+
+            GameObject.Find("SpawnManager").GetComponent<SpawnManager>().platformManager.DisableAll();
+            GameObject.Find("SpawnManager").GetComponent<SpawnManager>().CancelInvoke();
+            //GameObject.Find("Main Character").GetComponent<Rigidbody2D>().gravityScale = 2;
 
             m_fAnimationInProgress = true;
 
@@ -84,16 +83,6 @@ namespace Assets.Scripts
             Global.Instance.delay.Start();
         }
 
-        private void initializeTwirl()
-        {
-            foreach (Component component in GameObject.Find("Main Camera").GetComponents<Component>())
-            {
-                if (component is UnityStandardAssets.ImageEffects.Twirl)
-                {
-                    m_twirl = component;
-                }
-            }
-        }
     }
 
 }
