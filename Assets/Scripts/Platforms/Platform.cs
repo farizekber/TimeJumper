@@ -21,22 +21,18 @@ public class Platform : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //if (mainCharacterRigidBody.transform.localPosition.y < transform.localPosition.y)
-        //{
-        //    colliderEnabled = false;
-        //}
-
         m_collider.enabled = colliderEnabled;
 
+        Color c = spriteRenderer.color;
         if (!colliderEnabled)
         {
-            if(spriteRenderer.color.a + float.Epsilon > 0.5)
-                spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0.5f);
+            if(c.a + float.Epsilon > 0.5)
+                spriteRenderer.color = new Color(c.r, c.g, c.b, 0.5f);
         }
         else
         {
-            if (spriteRenderer.color.a - float.Epsilon < 1.0)
-                spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 1.0f);
+            if (c.a - float.Epsilon < 1.0)
+                spriteRenderer.color = new Color(c.r, c.g, c.b, 1.0f);
         }
     }
 

@@ -38,6 +38,10 @@ public class Global : MonoBehaviour
     public GameObject HealthBar;
     public GameObject HealthBarBackground;
 
+    //Performance related.
+    System.TimeSpan t;
+    char[] str = new char[15];
+
     public void PlayPickupSound()
     {
         audioSource.Play();
@@ -88,6 +92,22 @@ public class Global : MonoBehaviour
         Screen.autorotateToLandscapeRight = false;
         Screen.autorotateToLandscapeLeft = false;
         Screen.autorotateToPortraitUpsideDown = false;
+
+        str[0] = 'T';
+        str[1] = 'i';
+        str[2] = 'm';
+        str[3] = 'e';
+        str[4] = ' ';
+        str[5] = ':';
+        str[6] = ' ';
+        str[7] = '0';
+        str[8] = '0';
+        str[9] = ':';
+        str[10] = '0';
+        str[11] = '0';
+        str[12] = ':';
+        str[13] = '0';
+        str[14] = '0';
     }
 
     public void PauseButton()
@@ -110,7 +130,6 @@ public class Global : MonoBehaviour
 
     public void AudioButton()
     {
-
         if (AudioListener.volume == 0)
         {
             AudioListener.volume = 1;
@@ -123,10 +142,80 @@ public class Global : MonoBehaviour
         }
     }
 
+    //Choose an alternative from the commented piece of code, because of performance issues.
+    void updateTimeString(float currentTime)
+    {
+        if (endingTime < 1)
+        {
+            t = System.TimeSpan.FromSeconds(currentTime - startTime);
+        }
+        else
+        {
+            t = System.TimeSpan.FromSeconds(endingTime - startTime);
+        }
+
+        if (t.Hours < 10)
+        {
+            str[7] = '0';
+            str[8] = ((char)(t.Hours + 48));
+        }
+        else
+        {
+            str[7] = (char)(t.Hours / 10 + 48);
+            str[8] = (char)(t.Hours % 10 + 48);
+        }
+
+        if (t.Minutes < 10)
+        {
+            str[10] = '0';
+            str[11] = ((char)(t.Minutes + 48));
+        }
+        else
+        {
+            str[10] = (char)(t.Minutes / 10 + 48);
+            str[11] = (char)(t.Minutes % 10 + 48);
+        }
+
+        if (t.Seconds < 10)
+        {
+            str[13] = '0';
+            str[14] = ((char)(t.Seconds + 48));
+        }
+        else
+        {
+            str[13] = (char)(t.Seconds / 10 + 48);
+            str[14] = (char)(t.Seconds % 10 + 48);
+        }
+        
+        TimeText.text = new string(str, 0, str.Count());
+        
+        /*= string.Format("Time : {0:D2}:{1:D2}:{2:D2}",
+                    t.Hours,
+                    t.Minutes,
+                    t.Seconds);*/
+    }
+
+    void OnGUI()
+    {
+        float currentTime = Time.time;
+
+        if (!(currentTime < lastTime + 0.5f))
+            return;
+
+        updateTimeString(currentTime);
+
+        if ((int)distance > PlayerPrefs.GetInt("Highest Distance"))
+        {
+            DistanceText.color = new Color(255.0f / 255.0f, 208.0f / 255.0f, 66.0f / 255.0f);
+        }
+        DistanceText.text = "Distance : " + (int)distance + "m";
+    }
+    
     // Update is called once per frame
     private void Update()
     {
         // PlayerPrefs.SetInt("Highest Distance", 0);
+
         if (Input.GetKeyDown(KeyCode.LeftArrow))
             speed--;
         else if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -141,36 +230,9 @@ public class Global : MonoBehaviour
             lastSpeedIncrease = currentTime;
         }
 
-        if (endingTime < 1)
-        {
-            System.TimeSpan t = System.TimeSpan.FromSeconds(currentTime - startTime);
-
-            string answer = string.Format("{0:D2}:{1:D2}:{2:D2}",
-                            t.Hours,
-                            t.Minutes,
-                            t.Seconds);
-            TimeText.text = "Time : " + answer;
-        }
-        else
-        {
-            System.TimeSpan t = System.TimeSpan.FromSeconds(endingTime - startTime);
-
-            string answer = string.Format("{0:D2}:{1:D2}:{2:D2}",
-                            t.Hours,
-                            t.Minutes,
-                            t.Seconds);
-            TimeText.text = "Time : " + answer;
-        }
-
         if (addingDistance)
             distance += ((currentTime - lastTime) * speed) * 3;
 
         lastTime = currentTime;
-        float prevHighest = PlayerPrefs.GetInt("Highest Distance");
-        if ((int)distance > prevHighest)
-        {
-            DistanceText.color = new Color(255.0f / 255.0f, 208.0f / 255.0f, 66.0f / 255.0f);
-        }
-        DistanceText.text = "Distance : " + (int)distance + "m";
     }
 }
