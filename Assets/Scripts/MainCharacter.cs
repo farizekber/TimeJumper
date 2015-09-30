@@ -9,7 +9,9 @@ public class MainCharacter : MonoBehaviour {
     float previousClickTime = 0;
     public float clickRate = 0.40f;
     public float speedModifier = 1f;
-    
+    float lastButtonPresstime = 0;
+    int currentTime = 0;
+
     public int defaultJumps;
     private int jumps;
     private float downTime;
@@ -31,16 +33,8 @@ public class MainCharacter : MonoBehaviour {
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void processInput()
     {
-        //PlayerPrefs.SetFloat("Highest Distance", 0.0f);
-
-        if (Global.Instance == null)
-            return;
-
-        if(animator != null)
-            animator.speed = (Global.Instance.speed < 0.0f ? 0.0f : Global.Instance.speed / speedModifier);
 
         foreach (Touch touch in Input.touches)
         {
@@ -95,82 +89,121 @@ public class MainCharacter : MonoBehaviour {
         {
             currentSwipe.Reset();
         }
+    }
 
-        SpawnManager.Instance.platformManager.UpdateActive(currentSwipe, transform, Input.GetKey(KeyCode.DownArrow));
-
-        if (Global.Instance.orientation == 0)
+    void processHorizontalPerspective()
+    {
+        if (rigid.transform.localPosition.y >= 0.765f - float.Epsilon && rigid.transform.localPosition.y <= 0.765f + float.Epsilon)
         {
-            if (rigid.transform.localPosition.y >= 0.765f - float.Epsilon && rigid.transform.localPosition.y <= 0.765f + float.Epsilon)
-            {
-                rigid.velocity = new Vector2(rigid.velocity.x, 0);
-                jumps = defaultJumps;
-            }
+            rigid.velocity = new Vector2(rigid.velocity.x, 0);
+            jumps = defaultJumps;
+        }
 
-            if (GameOverAnimation.GetInstance().m_fAnimationInProgress)
-            {
-                rigid.velocity = new Vector2(0, 0);
-            }
-            else
-            {
-                rigid.velocity = new Vector2(0, rigid.velocity.y);
-                if ((Input.GetMouseButtonDown(0) || (currentSwipe.Enabled && currentSwipe.Tap)) && (Time.time > previousClickTime + (clickRate / Global.Instance.speed)))
-                {
-                    if (jumps > 0 || jumps == -1)
-                    {
-                        previousClickTime = Time.time;
-                        rigid.velocity = new Vector2(0, 0);
-                        rigid.AddForce(new Vector2(0, 150.0f * 1.5f));
-
-                        if (jumps >= 0)
-                        {   
-                            if (!GameObject.Find("Resource Manager").GetComponent<ResourceManager>().inVehicle)
-                                GetComponent<Animator>().Play("Jump", 0, 0);
-                            //if (GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.name == "Jump")
-                            //GetComponent<Animator>().ForceStateNormalizedTime(0);
-                            jumps--;
-                        }
-                    }
-                }
-            }
+        if (GameOverAnimation.GetInstance().m_fAnimationInProgress)
+        {
+            rigid.velocity = new Vector2(0, 0);
         }
         else
         {
-            if (GameOverAnimation.GetInstance().m_fAnimationInProgress)
+            rigid.velocity = new Vector2(0, rigid.velocity.y);
+            if ((Input.GetMouseButtonDown(0) || (currentSwipe.Enabled && currentSwipe.Tap)) && (Time.time > previousClickTime + (clickRate / Global.Instance.speed)))
             {
-                rigid.velocity = new Vector2(0, 0);
-            }
-            else
-            {
-                if (currentSwipe.Enabled || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+                if (jumps > 0 || jumps == -1)
                 {
-                    if (currentSwipe.Enabled)
+                    previousClickTime = Time.time;
+                    rigid.velocity = new Vector2(0, 0);
+                    rigid.AddForce(new Vector2(0, 150.0f * 1.5f));
+
+                    if (jumps >= 0)
                     {
-                        //if (rigid.velocity.y > 0 && currentSwipe.yDirectionEnd < 3.1f || rigid.velocity.y < 0 && currentSwipe.yDirectionEnd > 3.1f) rigid.velocity = new Vector2(0, 0);
-                        rigid.velocity = new Vector2(0, 0);
-                        if (currentSwipe.yDirectionEnd < 3.1f)
-                        {
-                            rigid.AddForce(new Vector2(0, -100f));
-                        }
-                        else
-                        {
-                            rigid.AddForce(new Vector2(0, 100f));
-                        }
-                    }
-                    else
-                    {
-                        rigid.velocity = new Vector2(0, 0);
-                        rigid.AddForce(new Vector2(0, (Input.GetMouseButtonDown(0) ? 1 : -1) * 100.0f));
+                        if (!GameObject.Find("Resource Manager").GetComponent<ResourceManager>().inVehicle)
+                            GetComponent<Animator>().Play("Jump", 0, 0);
+
+                        jumps--;
                     }
                 }
             }
         }
+    }
 
-        if (Global.Instance != null)
+    void processVerticalPerspective()
+    {
+        if (GameOverAnimation.GetInstance().m_fAnimationInProgress)
         {
-            if (Global.Instance.orientation == 0)
-                rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, 0.765f, 6.45f), rigid.transform.localPosition.z);
-            else
-                rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, -0.19f, 6.45f), rigid.transform.localPosition.z);
+            rigid.velocity = new Vector2(0, 0);
         }
+        else
+        {
+            if (!(currentSwipe.Enabled || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)))
+                return;
+
+            if (currentSwipe.Enabled)
+            {
+                rigid.velocity = new Vector2(0, 0);
+                if (currentSwipe.yDirectionEnd < 3.1f)
+                {
+                    rigid.AddForce(new Vector2(0, -100f));
+                }
+                else
+                {
+                    rigid.AddForce(new Vector2(0, 100f));
+                }
+            }
+            else
+            {
+                rigid.velocity = new Vector2(0, 0);
+                rigid.AddForce(new Vector2(0, (Input.GetMouseButtonDown(0) ? 1 : -1) * 100.0f));
+            }
+        }
+    }
+
+    void keepWithinScreen()
+    {
+        if (Global.Instance.orientation == 0)
+            rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, 0.765f, 6.45f), rigid.transform.localPosition.z);
+        else
+            rigid.transform.localPosition = new Vector3(Mathf.Clamp(rigid.transform.localPosition.x, -4.35f, 4.1f), Mathf.Clamp(rigid.transform.localPosition.y, -0.19f, 6.45f), rigid.transform.localPosition.z);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Global.Instance == null)
+            return;
+
+        if (animator != null)
+            animator.speed = (Global.Instance.speed < 0.0f ? 0.0f : Global.Instance.speed / speedModifier);
+
+        processInput();
+
+        SpawnManager.Instance.platformManager.UpdateActive(currentSwipe, transform, Input.GetKey(KeyCode.DownArrow));
+
+        currentTime++;
+        if (currentTime > int.MaxValue - short.MaxValue)
+        {
+            currentTime = 0;
+            lastButtonPresstime = 0;
+        }
+
+        if(lastButtonPresstime + 10 < currentTime)
+        {
+            if (currentSwipe.Enabled && currentSwipe.xDirectionEnd > 12.0f && currentSwipe.xDirectionEnd < 12.8f && currentSwipe.yDirectionEnd > 6.45f)
+            {
+                lastButtonPresstime = currentTime;
+                GameObject.Find("Global").GetComponent<Global>().PauseButton();
+            }
+            else if (currentSwipe.Enabled && currentSwipe.xDirectionEnd > 12.8f && currentSwipe.yDirectionEnd > 6.45f)
+            {
+                lastButtonPresstime = currentTime;
+                GameObject.Find("Global").GetComponent<Global>().AudioButton();
+            }
+        }
+
+        if (Global.Instance.orientation == 0)
+            processHorizontalPerspective();
+        else
+            processVerticalPerspective();
+
+        keepWithinScreen();
     }
 }
