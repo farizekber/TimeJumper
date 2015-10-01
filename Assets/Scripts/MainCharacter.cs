@@ -112,7 +112,7 @@ public class MainCharacter : MonoBehaviour {
 
                     if (jumps >= 0)
                     {
-                        if (!GameObject.Find("Resource Manager").GetComponent<ResourceManager>().inVehicle)
+                        if ((!GameObject.Find("Resource Manager").GetComponent<ResourceManager>().inVehicle) && ((GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("MainCharacter")) || GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Jump")))
                             GetComponent<Animator>().Play("Jump", 0, 0);
 
                         jumps--;

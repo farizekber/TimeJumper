@@ -61,6 +61,8 @@ public class Global : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        AudioListener.volume = 1 - PlayerPrefs.GetInt("MuteState");
+        GameObject.Find("Main Camera").GetComponent<AudioSource>().enabled = true;
     }
 
     // Use this for initialization
@@ -92,6 +94,15 @@ public class Global : MonoBehaviour
         Screen.autorotateToLandscapeRight = false;
         Screen.autorotateToLandscapeLeft = false;
         Screen.autorotateToPortraitUpsideDown = false;
+        
+        if (AudioListener.volume == 0)
+        {
+            GameObject.Find("MuteButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/mute-button-v2");
+        }
+        else
+        {
+            GameObject.Find("MuteButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/audio-button-v2");
+        }
 
         str[0] = 'T';
         str[1] = 'i';
@@ -134,11 +145,13 @@ public class Global : MonoBehaviour
         {
             AudioListener.volume = 1;
             GameObject.Find("MuteButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/audio-button-v2");
+            PlayerPrefs.SetInt("MuteState", 0);
         }
         else
         {
             AudioListener.volume = 0;
             GameObject.Find("MuteButton").GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/System Icons/mute-button-v2");
+            PlayerPrefs.SetInt("MuteState", 1);
         }
     }
 

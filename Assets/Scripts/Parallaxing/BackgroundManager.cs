@@ -8,13 +8,6 @@ namespace Assets.Scripts.Parallaxing
 {
     public class BackgroundManager : MonoBehaviour
     {
-        public float RedMultiplier;
-        public float GreenMultiplier;
-        public float BlueMultiplier;
-        public bool RedInversed;
-        public bool GreenInversed;
-        public bool BlueInversed;
-
         public void UpdateShader()
         {
             for (int i = 0; i < transform.childCount; i++)
@@ -24,19 +17,19 @@ namespace Assets.Scripts.Parallaxing
                 if (backgroundPlane.pieces[0] == null)
                     continue;
                 
-                backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_RedMultiplier", RedMultiplier);
-                backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_GreenMultiplier", GreenMultiplier);
-                backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_BlueMultiplier", BlueMultiplier);
-                backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_RedInversed", RedInversed ? 1.0f : 0.0f);
-                backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_GreenInversed", GreenInversed ? 1.0f : 0.0f);
-                backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_BlueInversed", BlueInversed ? 1.0f : 0.0f);
+                backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_RedMultiplier", backgroundPlane.RedMultiplier);
+                backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_GreenMultiplier", backgroundPlane.GreenMultiplier);
+                backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_BlueMultiplier", backgroundPlane.BlueMultiplier);
+                backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_RedInversed", backgroundPlane.RedInversed ? 1.0f : 0.0f);
+                backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_GreenInversed", backgroundPlane.GreenInversed ? 1.0f : 0.0f);
+                backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_BlueInversed", backgroundPlane.BlueInversed ? 1.0f : 0.0f);
 
-                backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_RedMultiplier", RedMultiplier);
-                backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_GreenMultiplier", GreenMultiplier);
-                backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_BlueMultiplier", BlueMultiplier);
-                backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_RedInversed", RedInversed ? 1.0f : 0.0f);
-                backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_GreenInversed", GreenInversed ? 1.0f : 0.0f);
-                backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_BlueInversed", BlueInversed ? 1.0f : 0.0f);
+                backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_RedMultiplier", backgroundPlane.RedMultiplier);
+                backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_GreenMultiplier", backgroundPlane.GreenMultiplier);
+                backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_BlueMultiplier", backgroundPlane.BlueMultiplier);
+                backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_RedInversed", backgroundPlane.RedInversed ? 1.0f : 0.0f);
+                backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_GreenInversed", backgroundPlane.GreenInversed ? 1.0f : 0.0f);
+                backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_BlueInversed", backgroundPlane.BlueInversed ? 1.0f : 0.0f);
             }
         }
 

@@ -148,16 +148,15 @@ namespace Assets.Scripts
             {
                 return;
             }
-
-            bool first = false;
-            if ((first = (gameObject.name == "MineCarVehicle(Clone)") || other.gameObject.name == "MineCarVehicle(Clone)") && other.gameObject.name != "Main Character")
+            
+            if ((gameObject.name == "MineCarVehicle(Clone)" || other.gameObject.name == "MineCarVehicle(Clone)") && other.gameObject.name != "Main Character")
             {
                 if (gameObject.GetComponent<ObstacleBase>().m_fpSpeedModifier >= other.gameObject.GetComponent<ObstacleBase>().m_fpSpeedModifier - 0.01 && gameObject.GetComponent<ObstacleBase>().m_fpSpeedModifier <= other.gameObject.GetComponent<ObstacleBase>().m_fpSpeedModifier + 0.01)
                 {
-                    if(first)
-                        gameObject.GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(gameObject.GetComponent<Rigidbody2D>().transform.localPosition.x + 0.3f, gameObject.GetComponent<Rigidbody2D>().transform.localPosition.y, gameObject.GetComponent<Rigidbody2D>().transform.localPosition.z);
-                    else
-                        other.gameObject.GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(other.gameObject.GetComponent<Rigidbody2D>().transform.localPosition.x + 0.3f, other.gameObject.GetComponent<Rigidbody2D>().transform.localPosition.y, other.gameObject.GetComponent<Rigidbody2D>().transform.localPosition.z);
+                    if (gameObject.name == "MineCarVehicle(Clone)")
+                    {
+                        gameObject.GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(gameObject.GetComponent<Rigidbody2D>().transform.localPosition.x + 2.0f, gameObject.GetComponent<Rigidbody2D>().transform.localPosition.y, gameObject.GetComponent<Rigidbody2D>().transform.localPosition.z);
+                    }
                 }
             }
             else if (gameObject.name == "Orb(Clone)" && other.gameObject.name == "Main Character")

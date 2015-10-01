@@ -12,6 +12,13 @@ namespace Assets.Scripts.Parallaxing
         public GameObject[] pieces = new GameObject[2];
         public float SpeedModifier;
         public bool Horizontal;
+        
+        public float RedMultiplier;
+        public float GreenMultiplier;
+        public float BlueMultiplier;
+        public bool RedInversed;
+        public bool GreenInversed;
+        public bool BlueInversed;
 
         void Start()
         {
