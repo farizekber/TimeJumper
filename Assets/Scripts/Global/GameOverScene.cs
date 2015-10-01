@@ -31,7 +31,10 @@ public class GameOverScene : MonoBehaviour {
 	void Update ()
     {
         if (Input.GetKey(KeyCode.Escape))
+        {
+            ApplicationGlobal.GlobalBackButtonEnabled = true;
             Application.LoadLevel("MainMenu");
+        }
 
         if (Input.GetMouseButtonDown(0) || Input.touchCount > 0)
         {
