@@ -10,6 +10,7 @@ public class MainMenuScene : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        grayButtons();
         PlayGamesPlatform.Activate();
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().Build();
         PlayGamesPlatform.InitializeInstance(config);
@@ -49,10 +50,6 @@ public class MainMenuScene : MonoBehaviour
             {
                 if (success)
                 {
-                    //Social.ReportScore(10, GooglePlayServices.leaderboard_time_jumper_leaderboard, (bool success2) =>
-                    //{
-
-                    //});
                     coloredButtons();
                     loggedIn = true;
                 }

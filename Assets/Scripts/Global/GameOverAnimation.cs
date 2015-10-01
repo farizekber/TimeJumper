@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Objects;
 using Assets.Scripts.Parallaxing;
+using GooglePlayGames;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -69,6 +70,14 @@ namespace Assets.Scripts
             Global.endingTime = Time.time;
             //Global.Instance.PlayDeathSound();
             Global.Instance.addingDistance = false;
+
+            if (PlayGamesPlatform.Instance.localUser.authenticated)
+            {
+                Social.ReportScore((int)Global.distance, GooglePlayServices.leaderboard_time_jumper_leaderboard, (bool success2) =>
+                {
+
+                });
+            }
 
             if (Global.distance > PlayerPrefs.GetInt("Highest Distance"))
             {

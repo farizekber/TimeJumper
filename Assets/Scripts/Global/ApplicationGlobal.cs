@@ -9,6 +9,7 @@ namespace global
 {
     public class ApplicationGlobal : MonoBehaviour
     {
+        public static bool GlobalBackButtonEnabled = true;
         public static bool isLoggedIn = false;
 
         // Use this for initialization
@@ -20,8 +21,11 @@ namespace global
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKey(KeyCode.Escape))
-                Application.Quit();
+            if (GlobalBackButtonEnabled)
+            {
+                if (Input.GetKey(KeyCode.Escape))
+                    Application.Quit();
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Linq;
 using System;
+using global;
 
 public class GameOverScene : MonoBehaviour {
 
@@ -22,10 +23,16 @@ public class GameOverScene : MonoBehaviour {
         GameObject.Find("Particle System").SetActive(PlayerPrefs.GetInt("IsNewHighScore") == 1);
         GameObject.Find("Particle System (1)").SetActive(PlayerPrefs.GetInt("IsNewHighScore") == 1);
         GameObject.Find("Particle System (2)").SetActive(PlayerPrefs.GetInt("IsNewHighScore") == 1);
+
+        ApplicationGlobal.GlobalBackButtonEnabled = false;
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+            Application.LoadLevel("MainMenu");
+
         if (Input.GetMouseButtonDown(0) || Input.touchCount > 0)
         {
             Vector3 inputLocation = Vector3.zero;
@@ -42,8 +49,10 @@ public class GameOverScene : MonoBehaviour {
 
             if (GetComponentInChildren<BoxCollider2D>().bounds.Intersects(new Bounds(inputLocation, new Vector3(20, 20, 100))))
             {
+                ApplicationGlobal.GlobalBackButtonEnabled = true;
                 Application.LoadLevel("Loading");
             }
         }
+
     }
 }
