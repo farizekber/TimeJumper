@@ -1,43 +1,88 @@
 ﻿using UnityEngine;
 using System.Collections;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
+using UnityEngine.SocialPlatforms;
 
 public class MainMenuScene : MonoBehaviour
 {
-    private static bool acceptsInput = true;
-    private BoxCollider2D boxCollider;
-
+    bool loggedIn = false;
     // Use this for initialization
     void Start()
     {
-        acceptsInput = true;
-        Application.targetFrameRate = -1;
-        boxCollider = GetComponentInChildren<BoxCollider2D>();
+        PlayGamesPlatform.Activate();
+        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().Build();
+        PlayGamesPlatform.InitializeInstance(config);
+
+        if (PlayGamesPlatform.Instance.localUser.authenticated)
+        {
+            loggedIn = true;
+            coloredButtons();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!acceptsInput)// && global.ApplicationGlobal.isLoggedIn)
-            return;
+    }
 
-        if (Input.GetMouseButtonDown(0) || Input.touchCount > 0)
+    public void loadPlay()
+    {
+        Application.LoadLevel("Loading");
+    }
+
+    public void loadLeaderboards()
+    {
+        Social.ShowLeaderboardUI();
+    }
+
+    public void loadAchievements()
+    {
+        Social.ShowAchievementsUI();
+    }
+    
+    public void loadAuthentication()
+    {
+        if (!loggedIn)
         {
-            Vector3 inputLocation = Vector3.zero;
+            Social.localUser.Authenticate((bool success) =>
+            {
+                if (success)
+                {
+                    //Social.ReportScore(10, GooglePlayServices.leaderboard_time_jumper_leaderboard, (bool success2) =>
+                    //{
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                inputLocation = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            }
-            else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
-            {
-                // Get movement of the finger since last frame
-                inputLocation = Input.GetTouch(0).deltaPosition;
-            }
-
-            if (boxCollider.bounds.Intersects(new Bounds(inputLocation, new Vector3(20, 20, 100))))
-            {
-                Application.LoadLevel("Loading");
-            }
+                    //});
+                    coloredButtons();
+                    loggedIn = true;
+                }
+                else
+                {
+                    grayButtons();
+                    loggedIn = false;
+                }
+            });
         }
+        else
+        {
+            PlayGamesPlatform.Instance.SignOut();
+            grayButtons();
+            loggedIn = false;
+        }
+
+    }
+
+    void grayButtons()
+    {
+        GameObject.Find("AuthenticationCover").GetComponent<SpriteRenderer>().enabled = false;
+        GameObject.Find("LeaderboardCover").GetComponent<SpriteRenderer>().enabled = false;
+        GameObject.Find("AchievementsCover").GetComponent<SpriteRenderer>().enabled = false;
+    }
+
+    void coloredButtons()
+    {
+        GameObject.Find("AuthenticationCover").GetComponent<SpriteRenderer>().enabled = true;
+        GameObject.Find("LeaderboardCover").GetComponent<SpriteRenderer>().enabled = true;
+        GameObject.Find("AchievementsCover").GetComponent<SpriteRenderer>().enabled = true;
     }
 }
