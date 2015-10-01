@@ -133,7 +133,7 @@ namespace Assets.Scripts
             mainCharacter.GetComponent<BoxCollider2D>().size = new Vector2(0.8542318f, 1.699413f);
             mainCharacter.GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(-3.459f, 2.216f, mainCharacter.GetComponent<Rigidbody2D>().transform.localPosition.z);
             mainCharacter.GetComponent<SpriteRenderer>().sprite = Resources.Load("Images/character-v2") as Sprite;
-            mainCharacter.GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/character_0");
+            mainCharacter.GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Main Character");
 
             dragon.transform.localPosition = new Vector3(-5.4f,2.76f,0.5f);
             dragon.transform.localRotation = Quaternion.Euler(0, 0, 0);
