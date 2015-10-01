@@ -74,8 +74,8 @@ namespace Assets.Scripts.Perspective
                                  PerspectiveInitializer.s_Instance.InvokeMethod("LoadVerticalPerspective", 2.75f);
                                  Fader.s_Instance.InvokeMethod("Disable", 3.25f);
                              }) },
-                             Resources.Load("Images/back") as Texture, 
-                             Resources.Load("Images/character-falling-v1") as Sprite, 
+                             Resources.Load("Images/back") as Texture,
+                             Resources.Load("Images/character-falling-v1") as Sprite,
                              "Animations/Main Character 2",
                              Resources.Load("Images/dragon") as Sprite,
                              "Animations/Dragon");
