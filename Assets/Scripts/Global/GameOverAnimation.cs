@@ -52,7 +52,8 @@ namespace Assets.Scripts
             if (m_fAnimationInProgress)
                 return;
 
-            GameObject.Find("Main Character").GetComponent<Animator>().Play("Death", 0, 0);
+            if(Global.Instance.orientation == 0)
+                GameObject.Find("Main Character").GetComponent<Animator>().Play("Death", 0, 0);
 
             GameObject background = GameObject.Find("Background Manager");
             for (int i = 0; i < background.transform.childCount; ++i)

@@ -97,6 +97,7 @@ namespace Assets.Scripts
             dragon.GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Dragon2");
 
             SpawnManager.Instance.spawnables.AddRange(newTheme.m_spawnables);
+            SpawnManager.Instance.spawnables.RemoveAt(4);
             SpawnManager.Instance.collectables.Add(newTheme.m_collectables[1]);
             SpawnManager.Instance.Init();
 

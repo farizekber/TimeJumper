@@ -68,6 +68,38 @@ public class SpawnManager : MonoBehaviour {
         collectables.Clear();
     }
 
+    public bool IsAnyFireballActive()
+    {
+        bool temp = false;
+        int index = 0;
+
+        for (int i = 0; i < spawnables.Count; ++i)
+        {
+            ObstacleBase o = spawnables[i];
+            if (o.name == "Fireball" || o.name == "Fireball(Clone)")
+            {
+                index = i;
+                temp = true;
+                break;
+            }
+        }
+
+        if (!temp)
+            return false;
+
+        temp = false;
+        foreach (GameObject gobject in spawnableInstances[spawnables[index]])
+        {
+            if ((gobject.name == "Fireball" || gobject.name == "Fireball(Clone)") && gobject.GetComponent<ObstacleBase>().active)
+            {
+                temp = true;
+                break;
+            }
+        }
+
+        return temp;
+    }
+
     public void Init()
     {
         foreach (var item in spawnables)
@@ -151,6 +183,11 @@ public class SpawnManager : MonoBehaviour {
         foreach (GameObject o2 in spawnableInstances[spawnables[(int)(randomNumber / amountSpawn)]])
         {
             if (o2.name == "Pickaxe(Clone)" && Time.time < 30)
+                break;
+
+            if (o2.name == "Fireball(Clone)" && Time.time < 80)
+                break;
+            if (o2.name == "Fireball(Clone)" && Random.value < 0.5f)
                 break;
 
             ObstacleBase o = o2.GetComponent<ObstacleBase>();

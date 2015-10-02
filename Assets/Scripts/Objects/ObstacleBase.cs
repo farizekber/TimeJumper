@@ -33,9 +33,9 @@ namespace Assets.Scripts
         public SpawnData m_verticalSpawnData;
         public bool active = false;
 
-        private Collider2D m_collider;
-        private Rigidbody2D rigid;
-        private MainCharacter mainCharacter;
+        protected Collider2D m_collider;
+        protected Rigidbody2D rigid;
+        protected MainCharacter mainCharacter;
 
         public ObstacleBase(Obstacles obstacleKind, float fpSpeedModifier, string szPrefab, SpawnData horizontalSpawnData, SpawnData verticalSpawnData)
         {
@@ -76,7 +76,7 @@ namespace Assets.Scripts
             return gobject;
         }
 
-        public void Activate()
+        public virtual void Activate()
         {
             m_collider.enabled = true;
             transform.parent = null;
@@ -103,14 +103,14 @@ namespace Assets.Scripts
         }
 
         // Use this for initialization
-        public void Start() {
+        public virtual void Start() {
             m_collider = GetComponent<Collider2D>();
             rigid = GetComponent<Rigidbody2D>();
             mainCharacter = GameObject.Find("Main Character").GetComponent<MainCharacter>();
         }
 
         // Update is called once per frame
-        public void FixedUpdate()
+        public virtual void FixedUpdate()
         {
             if (!active)
             {
@@ -125,12 +125,13 @@ namespace Assets.Scripts
                     rigid.velocity = new Vector2(m_fpSpeedModifier * Global.Instance.speed, 0);
             }
             else
+            {
                 rigid.velocity = new Vector2(0, 0);
+            }
 
-            if ((Global.Instance.orientation == 0 && transform.localPosition.x < -8) || (Global.Instance.orientation == 1 && transform.localPosition.x > 15))
+            if (transform.localPosition.x < -8 || transform.localPosition.x > 15)
             {
                 Disable();
-                //Destroy(this.gameObject);
             }
         }
 

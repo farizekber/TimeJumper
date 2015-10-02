@@ -16,13 +16,13 @@ public class Pickaxe : ObstacleBase
         false, 1.0f, 0.5f))
     { }
 
-    public new void Start()
+    public override void Start()
     {
         base.Start();
         animator = GetComponent<Animator>();
     }
 
-    public new void FixedUpdate()
+    public override void FixedUpdate()
     {
         base.FixedUpdate();
         
