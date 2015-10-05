@@ -14,7 +14,6 @@ public class MainCharacter : MonoBehaviour {
 
     public int defaultJumps;
     private int jumps;
-    private float downTime;
     private Swipe currentSwipe = new Swipe();
     Rigidbody2D rigid;
     Animator animator;
@@ -31,6 +30,30 @@ public class MainCharacter : MonoBehaviour {
         jumps = defaultJumps;
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+    }
+
+    public void LoadVertical(PerspectiveInitializer.ThemeState themeState)
+    {
+        transform.localRotation = Quaternion.Euler(transform.localRotation.x, transform.localRotation.y, -90);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        GetComponent<Rigidbody2D>().gravityScale = 0;
+        GetComponent<BoxCollider2D>().offset = new Vector2(-0.002533523f, 0.0006544814f);
+        GetComponent<BoxCollider2D>().size = new Vector2(1.085341f, 1.980819f);
+        GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(2.66f, 3.1f, GetComponent<Rigidbody2D>().transform.localPosition.z);
+        GetComponent<SpriteRenderer>().sprite = Resources.Load("Images/character-falling-v1") as Sprite;
+        GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Main Character 2");
+    }
+
+    public void LoadHorizontal(PerspectiveInitializer.ThemeState themeState)
+    {
+        transform.localRotation = Quaternion.Euler(transform.localRotation.x, transform.localRotation.y, 0);
+        GetComponent<Rigidbody2D>().gravityScale = 1;
+        GetComponent<BoxCollider2D>().size = new Vector2(1.708464f, 3.398826f);
+        GetComponent<BoxCollider2D>().offset = new Vector2(0.134553f, -0.07604933f);
+        GetComponent<BoxCollider2D>().size = new Vector2(0.8542318f, 1.699413f);
+        GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(-3.459f, 2.216f, GetComponent<Rigidbody2D>().transform.localPosition.z);
+        GetComponent<SpriteRenderer>().sprite = Resources.Load("Images/character-v2") as Sprite;
+        GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Main Character");
     }
 
     void processInput()

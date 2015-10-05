@@ -152,6 +152,9 @@ namespace Assets.Scripts
             
             if ((gameObject.name == "MineCarVehicle(Clone)" || other.gameObject.name == "MineCarVehicle(Clone)") && other.gameObject.name != "Main Character")
             {
+                if (gameObject.GetComponent<ObstacleBase>() == null || other.gameObject.GetComponent<ObstacleBase>() == null)
+                    return;
+                
                 if (gameObject.GetComponent<ObstacleBase>().m_fpSpeedModifier >= other.gameObject.GetComponent<ObstacleBase>().m_fpSpeedModifier - 0.01 && gameObject.GetComponent<ObstacleBase>().m_fpSpeedModifier <= other.gameObject.GetComponent<ObstacleBase>().m_fpSpeedModifier + 0.01)
                 {
                     if (gameObject.name == "MineCarVehicle(Clone)")

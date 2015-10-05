@@ -20,10 +20,12 @@ namespace Assets.Scripts.Parallaxing
         public bool GreenInversed;
         public bool BlueInversed;
 
+        public bool Replace;
+
         void Start()
         {
             pieces[0] = Instantiate(Resources.Load("Prefabs/BackgroundPiece"), new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
-            pieces[1] = Instantiate(Resources.Load("Prefabs/BackgroundPiece"), new Vector3(0, 0, 0), Quaternion.Euler(0, 0,0)) as GameObject;
+            pieces[1] = Instantiate(Resources.Load("Prefabs/BackgroundPiece"), new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
 
             pieces[0].GetComponent<SpriteRenderer>().sprite = background;
             pieces[1].GetComponent<SpriteRenderer>().sprite = background;
@@ -31,6 +33,9 @@ namespace Assets.Scripts.Parallaxing
             pieces[0].GetComponent<SpriteRenderer>().material = Resources.Load("Materials/diffuseSprite") as Material;
             pieces[1].GetComponent<SpriteRenderer>().material = Resources.Load("Materials/diffuseSprite") as Material;
 
+            pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_Replace", Replace ? 1.0f : 0.0f);
+            pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_Replace", Replace ? 1.0f : 0.0f);
+            
             pieces[0].transform.parent = transform;
             pieces[1].transform.parent = transform;
 

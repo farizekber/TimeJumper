@@ -46,8 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\BarrelDwarf.cs" />
-     <Compile Include="Assets\Dragon.cs" />
      <Compile Include="Assets\GooglePlayGames\BasicApi\Achievement.cs" />
      <Compile Include="Assets\GooglePlayGames\BasicApi\CommonTypes.cs" />
      <Compile Include="Assets\GooglePlayGames\BasicApi\DummyClient.cs" />
@@ -205,8 +203,7 @@
      <Compile Include="Assets\GooglePlayGames\Platforms\TokenClient.cs" />
      <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
      <Compile Include="Assets\GooglePlayServices.cs" />
-     <Compile Include="Assets\Recolor.cs" />
-     <Compile Include="Assets\Scripts\Boulder.cs" />
+     <Compile Include="Assets\Scripts\Dragon.cs" />
      <Compile Include="Assets\Scripts\Global\ApplicationGlobal.cs" />
      <Compile Include="Assets\Scripts\Global\Fader.cs" />
      <Compile Include="Assets\Scripts\Global\GameOverAnimation.cs" />
@@ -214,10 +211,15 @@
      <Compile Include="Assets\Scripts\Global\Global.cs" />
      <Compile Include="Assets\Scripts\Global\LoadingScene.cs" />
      <Compile Include="Assets\Scripts\Global\MainMenuScene.cs" />
+     <Compile Include="Assets\Scripts\Global\Recolor.cs" />
      <Compile Include="Assets\Scripts\Global\ResourceManager.cs" />
      <Compile Include="Assets\Scripts\MainCharacter.cs" />
+     <Compile Include="Assets\Scripts\Objects\BarrelDwarf.cs" />
+     <Compile Include="Assets\Scripts\Objects\Boulder.cs" />
      <Compile Include="Assets\Scripts\Objects\Crate.cs" />
      <Compile Include="Assets\Scripts\Objects\Fireball.cs" />
+     <Compile Include="Assets\Scripts\Objects\Iceball.cs" />
+     <Compile Include="Assets\Scripts\Objects\MineCarVehicle.cs" />
      <Compile Include="Assets\Scripts\Objects\Minecart.cs" />
      <Compile Include="Assets\Scripts\Objects\ObstacleBase.cs" />
      <Compile Include="Assets\Scripts\Objects\Obstacles.cs" />
@@ -226,17 +228,13 @@
      <Compile Include="Assets\Scripts\Objects\SpawnManager.cs" />
      <Compile Include="Assets\Scripts\Objects\Stone.cs" />
      <Compile Include="Assets\Scripts\Objects\TNT.cs" />
-     <Compile Include="Assets\Scripts\Obstacles\MineCarVehicle.cs" />
+     <Compile Include="Assets\Scripts\Objects\pillarcrash.cs" />
      <Compile Include="Assets\Scripts\Parallaxing\BackgroundManager.cs" />
      <Compile Include="Assets\Scripts\Parallaxing\BackgroundPlane.cs" />
      <Compile Include="Assets\Scripts\Perspective\PerspectiveInitializer.cs" />
-     <Compile Include="Assets\Scripts\Perspective\PerspectiveTransition.cs" />
-     <Compile Include="Assets\Scripts\Perspective\Perspectives.cs" />
-     <Compile Include="Assets\Scripts\Perspective\Theme.cs" />
      <Compile Include="Assets\Scripts\Platforms\Platform.cs" />
      <Compile Include="Assets\Scripts\Platforms\PlatformManager.cs" />
      <Compile Include="Assets\Scripts\Swipe.cs" />
-     <Compile Include="Assets\Scripts\pillarcrash.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-tl\common_strings.xml" />

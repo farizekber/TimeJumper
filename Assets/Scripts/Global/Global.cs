@@ -42,6 +42,43 @@ public class Global : MonoBehaviour
     System.TimeSpan t;
     char[] str = new char[15];
 
+    public void LoadHorizontal(PerspectiveInitializer.ThemeState themeState)
+    {
+        orientation = 0;
+
+        TimeText.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        TimeText.transform.localPosition = new Vector3(-239, 180, TimeText.transform.localPosition.z);
+
+        DistanceText.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        DistanceText.transform.localPosition = new Vector3(-100, 180, DistanceText.transform.localPosition.z);
+
+        GameObject muteButton = GameObject.Find("MuteButton");
+        GameObject pauseButton = GameObject.Find("PauseButton");
+        float oldY = muteButton.transform.localPosition.y;
+        muteButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x, oldY * -1, muteButton.transform.localPosition.z);
+        pauseButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x - 40, oldY * -1, pauseButton.transform.localPosition.z);
+        muteButton.transform.rotation = Quaternion.Euler(0, 0, 0);
+        pauseButton.transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    public void LoadVertical(PerspectiveInitializer.ThemeState themeState)
+    {
+        orientation = 1;
+
+        TimeText.transform.localRotation = Quaternion.Euler(0, 0, -90);
+        TimeText.transform.localPosition = new Vector3(-300, 110, TimeText.transform.localPosition.z);
+
+        DistanceText.transform.localRotation = Quaternion.Euler(0, 0, -90);
+        DistanceText.transform.localPosition = new Vector3(-300, -40, DistanceText.transform.localPosition.z);
+
+        GameObject muteButton = GameObject.Find("MuteButton");
+        GameObject pauseButton = GameObject.Find("PauseButton");
+        muteButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x, muteButton.transform.localPosition.y * -1, muteButton.transform.localPosition.z);
+        pauseButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x, (pauseButton.transform.localPosition.y * -1) + 40, pauseButton.transform.localPosition.z);
+        muteButton.transform.rotation = Quaternion.Euler(0, 0, 270);
+        pauseButton.transform.rotation = Quaternion.Euler(0, 0, 270);
+    }
+
     public void PlayPickupSound()
     {
         audioSource.Play();

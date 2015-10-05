@@ -66,7 +66,6 @@ public class MainMenuScene : MonoBehaviour
             grayButtons();
             loggedIn = false;
         }
-
     }
 
     void grayButtons()

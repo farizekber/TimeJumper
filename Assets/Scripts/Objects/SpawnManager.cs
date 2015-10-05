@@ -76,7 +76,7 @@ public class SpawnManager : MonoBehaviour {
         for (int i = 0; i < spawnables.Count; ++i)
         {
             ObstacleBase o = spawnables[i];
-            if (o.name == "Fireball" || o.name == "Fireball(Clone)")
+            if (o.name == "Iceball" || o.name == "Fireball(Clone)" || o.name == "Fireball" || o.name == "Iceball(Clone)")
             {
                 index = i;
                 temp = true;
@@ -90,7 +90,7 @@ public class SpawnManager : MonoBehaviour {
         temp = false;
         foreach (GameObject gobject in spawnableInstances[spawnables[index]])
         {
-            if ((gobject.name == "Fireball" || gobject.name == "Fireball(Clone)") && gobject.GetComponent<ObstacleBase>().active)
+            if ((gobject.name == "Iceball(Clone)" || gobject.name == "Fireball(Clone)") && gobject.GetComponent<ObstacleBase>().active)
             {
                 temp = true;
                 break;
@@ -143,6 +143,35 @@ public class SpawnManager : MonoBehaviour {
         Invoke("InvokeCollectableSpawns", 2f);
     }
 
+    public void LoadVertical(PerspectiveInitializer.ThemeState themeState)
+    {
+        spawnables.AddRange(new List<ObstacleBase>() { (Resources.Load("Prefabs/" + "Crate") as GameObject).GetComponent<Crate>(),
+                                                           (Resources.Load("Prefabs/" + "Minecart") as GameObject).GetComponent<Minecart>(),
+                                                           (Resources.Load("Prefabs/" + "Stone") as GameObject).GetComponent<Stone>(),
+                                                           (Resources.Load("Prefabs/" + "TNT") as GameObject).GetComponent<TNT>()});
+
+        collectables.Add((Resources.Load("Prefabs/" + "Orb") as GameObject).GetComponent<Orb>());
+        Init();
+    }
+
+    public void LoadHorizontal(PerspectiveInitializer.ThemeState themeState)
+    {
+        platformManager.Spawn();
+        spawnables.AddRange(new List<ObstacleBase>() { (Resources.Load("Prefabs/" + "Crate") as GameObject).GetComponent<Crate>(),
+                                                           (Resources.Load("Prefabs/" + "Minecart") as GameObject).GetComponent<Minecart>(),
+                                                           (Resources.Load("Prefabs/" + "Stone") as GameObject).GetComponent<Stone>(),
+                                                           (Resources.Load("Prefabs/" + "TNT") as GameObject).GetComponent<TNT>()});
+
+        if (themeState == PerspectiveInitializer.ThemeState.Mine)
+            spawnables.Add((Resources.Load("Prefabs/" + "Fireball") as GameObject).GetComponent<Fireball>());
+        else
+            spawnables.Add((Resources.Load("Prefabs/" + "Iceball") as GameObject).GetComponent<Iceball>());
+
+        collectables.AddRange(new List<ObstacleBase>() { (Resources.Load("Prefabs/" + "MineCarVehicle") as GameObject).GetComponent<MineCarVehicle>(),
+                                                             (Resources.Load("Prefabs/" + "Orb") as GameObject).GetComponent<Orb>()});
+        Init();
+    }
+
     // Update is called once per frame
     void Update () {
         platformManager.Update();
@@ -182,12 +211,12 @@ public class SpawnManager : MonoBehaviour {
 
         foreach (GameObject o2 in spawnableInstances[spawnables[(int)(randomNumber / amountSpawn)]])
         {
-            if (o2.name == "Pickaxe(Clone)" && Time.time < 30)
+            if (o2.name == "Pickaxe(Clone)" && Time.time - Global.startTime < 30)
                 break;
 
-            if (o2.name == "Fireball(Clone)" && Time.time < 80)
+            if ((o2.name == "Fireball(Clone)" || o2.name == "Iceball(Clone)") && Time.time - Global.startTime < 80)
                 break;
-            if (o2.name == "Fireball(Clone)" && Random.value < 0.5f)
+            if ((o2.name == "Fireball(Clone)" || o2.name == "Iceball(Clone)" ) && Random.value < 0.5f)
                 break;
 
             ObstacleBase o = o2.GetComponent<ObstacleBase>();

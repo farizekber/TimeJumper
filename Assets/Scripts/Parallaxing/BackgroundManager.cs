@@ -30,24 +30,41 @@ namespace Assets.Scripts.Parallaxing
                 backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_RedInversed", backgroundPlane.RedInversed ? 1.0f : 0.0f);
                 backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_GreenInversed", backgroundPlane.GreenInversed ? 1.0f : 0.0f);
                 backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_BlueInversed", backgroundPlane.BlueInversed ? 1.0f : 0.0f);
+                
+                backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_Replace", backgroundPlane.Replace ? 1.0f : 0.0f);
+                backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_Replace", backgroundPlane.Replace ? 1.0f : 0.0f);
             }
         }
 
-        public void InitHorizontal()
+        public void InitHorizontal(PerspectiveInitializer.ThemeState themeState)
         {
             GameObject background = GameObject.Find("Background Manager");
             for (int i = 0; i < background.transform.childCount; ++i)
             {
                 background.transform.GetChild(i).gameObject.SetActive(background.transform.GetChild(i).gameObject.name.Length < 8);
+                background.transform.GetChild(i).GetComponent<BackgroundPlane>().Replace = themeState == PerspectiveInitializer.ThemeState.Ice;
+
+                if (background.transform.GetChild(i).GetComponent<BackgroundPlane>().pieces[0] == null)
+                    continue;
+
+                background.transform.GetChild(i).GetComponent<BackgroundPlane>().pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_Replace", background.transform.GetChild(i).GetComponent<BackgroundPlane>().Replace ? 1.0f : 0.0f);
+                background.transform.GetChild(i).GetComponent<BackgroundPlane>().pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_Replace", background.transform.GetChild(i).GetComponent<BackgroundPlane>().Replace ? 1.0f : 0.0f);
             }
         }
 
-        public void InitVertical()
+        public void InitVertical(PerspectiveInitializer.ThemeState themeState)
         {
             GameObject background = GameObject.Find("Background Manager");
             for (int i = 0; i < background.transform.childCount; ++i)
             {
                 background.transform.GetChild(i).gameObject.SetActive(background.transform.GetChild(i).gameObject.name.Length >= 8);
+                background.transform.GetChild(i).GetComponent<BackgroundPlane>().Replace = themeState == PerspectiveInitializer.ThemeState.Ice;
+
+                if (background.transform.GetChild(i).GetComponent<BackgroundPlane>().pieces[0] == null)
+                    continue;
+
+                background.transform.GetChild(i).GetComponent<BackgroundPlane>().pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_Replace", background.transform.GetChild(i).GetComponent<BackgroundPlane>().Replace ? 1.0f : 0.0f);
+                background.transform.GetChild(i).GetComponent<BackgroundPlane>().pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_Replace", background.transform.GetChild(i).GetComponent<BackgroundPlane>().Replace ? 1.0f : 0.0f);
             }
         }
 
