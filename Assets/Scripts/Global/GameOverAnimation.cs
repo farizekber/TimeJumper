@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Objects;
 using Assets.Scripts.Parallaxing;
+using global;
 using GooglePlayGames;
 using UnityEngine;
 
@@ -42,7 +43,7 @@ namespace Assets.Scripts
             m_fAnimationInProgress = false;
 
             GameOverAnimation.FinalizeObject();
-
+            ApplicationGlobal.GlobalBackButtonEnabled = true;
             Application.LoadLevel("GameOver");
         }
 

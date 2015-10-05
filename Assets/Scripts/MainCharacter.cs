@@ -3,6 +3,7 @@ using System.Collections;
 using Assets.Scripts;
 using System.Linq;
 using UnityEngine.UI;
+using global;
 
 public class MainCharacter : MonoBehaviour {
 
@@ -30,6 +31,8 @@ public class MainCharacter : MonoBehaviour {
         jumps = defaultJumps;
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        ApplicationGlobal.GlobalBackButtonEnabled = false;
     }
 
     public void LoadVertical(PerspectiveInitializer.ThemeState themeState)
@@ -58,6 +61,8 @@ public class MainCharacter : MonoBehaviour {
 
     void processInput()
     {
+        if (Input.GetKey(KeyCode.Escape))
+            Application.LoadLevel("MainMenu");
 
         foreach (Touch touch in Input.touches)
         {
