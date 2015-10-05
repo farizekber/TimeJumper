@@ -1,0 +1,147 @@
+fileFormatVersion: 2
+guid: 112a9139e75fd124ea6894eec65b173c
+timeCreated: 1444002823
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: teleport_0
+    21300002: teleport_1
+    21300004: teleport_2
+    21300006: teleport_3
+    21300008: teleport_4
+    21300010: teleport_5
+    21300012: teleport_6
+    21300014: teleport_7
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 2
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings:
+  - buildTarget: Android
+    maxTextureSize: 4096
+    textureFormat: -3
+    compressionQuality: 50
+  spriteSheet:
+    sprites:
+    - name: teleport_0
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 55
+        width: 344
+        height: 596
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: teleport_1
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 55
+        width: 344
+        height: 596
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: teleport_2
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 55
+        width: 344
+        height: 596
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: teleport_3
+      rect:
+        serializedVersion: 2
+        x: 1461
+        y: 55
+        width: 344
+        height: 596
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: teleport_4
+      rect:
+        serializedVersion: 2
+        x: 1925
+        y: 55
+        width: 344
+        height: 596
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: teleport_5
+      rect:
+        serializedVersion: 2
+        x: 2391
+        y: 55
+        width: 344
+        height: 596
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: teleport_6
+      rect:
+        serializedVersion: 2
+        x: 2858
+        y: 55
+        width: 344
+        height: 596
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: teleport_7
+      rect:
+        serializedVersion: 2
+        x: 3324
+        y: 55
+        width: 344
+        height: 596
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

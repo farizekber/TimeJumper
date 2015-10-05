@@ -1,0 +1,186 @@
+fileFormatVersion: 2
+guid: e1122b85f08a5874199a150e362602f5
+timeCreated: 1443990846
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: ice-dragon_0
+    21300002: ice-dragon_2
+    21300004: ice-dragon_4
+    21300006: ice-dragon_6
+    21300008: ice-dragon_7
+    21300010: ice-dragon_8
+    21300012: ice-dragon_10
+    21300014: ice-dragon_12
+    21300016: ice-dragon_14
+    21300018: ice-dragon_15
+    21300020: ice-dragon_18
+    21300022: ice-dragon_29
+    21300024: ice-dragon_30
+    21300026: ice-dragon_31
+    21300028: ice-dragon_32
+    21300030: ice-dragon_33
+    21300032: ice-dragon_34
+    21300034: ice-dragon_35
+    21300036: ice-dragon_36
+    21300038: ice-dragon_37
+    21300040: ice-dragon_38
+    21300042: ice-dragon_39
+    21300044: ice-dragon_40
+    21300046: ice-dragon_41
+    21300048: ice-dragon_42
+    21300050: ice-dragon_43
+    21300052: ice-dragon_44
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 2
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings:
+  - buildTarget: Android
+    maxTextureSize: 4096
+    textureFormat: -3
+    compressionQuality: 50
+  spriteSheet:
+    sprites:
+    - name: ice-dragon_0
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 31
+        width: 560
+        height: 443
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ice-dragon_2
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 31
+        width: 560
+        height: 443
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ice-dragon_4
+      rect:
+        serializedVersion: 2
+        x: 1243
+        y: 31
+        width: 560
+        height: 443
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ice-dragon_6
+      rect:
+        serializedVersion: 2
+        x: 1856
+        y: 31
+        width: 560
+        height: 443
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ice-dragon_7
+      rect:
+        serializedVersion: 2
+        x: 2476
+        y: 31
+        width: 560
+        height: 443
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ice-dragon_8
+      rect:
+        serializedVersion: 2
+        x: 3071
+        y: 31
+        width: 560
+        height: 443
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ice-dragon_10
+      rect:
+        serializedVersion: 2
+        x: 3651
+        y: 31
+        width: 560
+        height: 443
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ice-dragon_12
+      rect:
+        serializedVersion: 2
+        x: 4270
+        y: 31
+        width: 560
+        height: 443
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ice-dragon_14
+      rect:
+        serializedVersion: 2
+        x: 4940
+        y: 31
+        width: 560
+        height: 443
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ice-dragon_15
+      rect:
+        serializedVersion: 2
+        x: 5650
+        y: 31
+        width: 560
+        height: 443
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
