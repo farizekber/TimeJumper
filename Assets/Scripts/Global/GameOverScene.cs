@@ -29,13 +29,15 @@ public class GameOverScene : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update ()
-    {
+    {   
+
         if (Input.GetKey(KeyCode.Escape))
         {
             ApplicationGlobal.GlobalBackButtonEnabled = true;
             Application.LoadLevel("MainMenu");
         }
 
+        /*
         if (Input.GetMouseButtonDown(0) || Input.touchCount > 0)
         {
             Vector3 inputLocation = Vector3.zero;
@@ -56,6 +58,13 @@ public class GameOverScene : MonoBehaviour {
                 Application.LoadLevel("Loading");
             }
         }
+        */
 
     }
+
+    public void loadPlay()
+    {
+        Application.LoadLevel("Loading");
+    }
+
 }
