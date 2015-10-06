@@ -11,6 +11,11 @@ namespace Assets.Scripts
     {
         GameObject vehicleHealth;
         GameObject[] energy = new GameObject[3];
+        
+        public AudioClip shieldLoss;
+        public AudioClip pickupSound;
+        public AudioClip gameOverSound;
+        private AudioSource audSource;
 
         public bool inVehicle = false;
         public int activeEnergy;
@@ -20,6 +25,7 @@ namespace Assets.Scripts
 
         void Start()
         {
+            audSource = GameObject.Find("ApplicationGlobal").GetComponent<AudioSource>();
             vehicleHealth = GameObject.Find("HealthBar");
             energy[0] = GameObject.Find("EnergyBar1");
             energy[1] = GameObject.Find("EnergyBar2");
@@ -70,6 +76,7 @@ namespace Assets.Scripts
         {
             Mathf.Clamp(activeEnergy++, 0, 3);
             GameObject.Find("Divine-Shield").GetComponent<Renderer>().enabled = true;
+            audSource.PlayOneShot(pickupSound);
         }
 
         public void IncreaseHealth()
@@ -116,9 +123,11 @@ namespace Assets.Scripts
             {
                 activeEnergy = 0;
                 GameObject.Find("Divine-Shield").GetComponent<Renderer>().enabled = false;
+                audSource.PlayOneShot(shieldLoss);
             }
             else
             {
+                audSource.PlayOneShot(gameOverSound,0.3f);
                 GameOverAnimation.GetInstance().Trigger();
             }
         }

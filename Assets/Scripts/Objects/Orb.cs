@@ -39,40 +39,40 @@ public class Orb : ObstacleBase
 
         animator.speed = (Global.Instance.speed < 0 ? 0 : Global.Instance.speed);
 
-        if (GameObject.Find("Resource Manager").GetComponent<ResourceManager>().activeEnergy >= 3)
-        {
-            isTeleport = true;
-            transform.localScale = new Vector3(0.35f, 0.35f, 0.35f);
-            GetComponent<CircleCollider2D>().radius = 2f;
-            animator.SetBool("IsTeleport", true);
-        }
-        else
-        {
+        //if (GameObject.Find("Resource Manager").GetComponent<ResourceManager>().activeEnergy >= 3)
+        //{
+        //    isTeleport = true;
+        //    transform.localScale = new Vector3(0.35f, 0.35f, 0.35f);
+        //    GetComponent<CircleCollider2D>().radius = 2f;
+        //    animator.SetBool("IsTeleport", true);
+        //}
+        //else
+        //{
             isTeleport = false;
             transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
             GetComponent<CircleCollider2D>().radius = 0.64f;
             animator.SetBool("IsTeleport", false);
-        }
+        //}
     }
 
     public override void Activate()
     {
         base.Activate();
 
-        if (GameObject.Find("Resource Manager").GetComponent<ResourceManager>().activeEnergy >= 3)
-        {
-            isTeleport = true;
-            transform.localScale = new Vector3(0.35f, 0.35f, 0.35f);
-            GetComponent<CircleCollider2D>().radius = 2f;
-            animator.SetBool("IsTeleport", true);
-        }
-        else
-        {
+        //if (GameObject.Find("Resource Manager").GetComponent<ResourceManager>().activeEnergy >= 3)
+        //{
+        //    isTeleport = true;
+        //    transform.localScale = new Vector3(0.35f, 0.35f, 0.35f);
+        //    GetComponent<CircleCollider2D>().radius = 2f;
+        //    animator.SetBool("IsTeleport", true);
+        //}
+        //else
+        //{
             isTeleport = false;
             transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
             GetComponent<CircleCollider2D>().radius = 0.64f;
             animator.SetBool("IsTeleport", false);
-        }
+        //}
     }
 
     public override void OnTriggerEnter2D(Collider2D other)

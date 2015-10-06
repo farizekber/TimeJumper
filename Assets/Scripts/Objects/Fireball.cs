@@ -7,7 +7,6 @@ public class Fireball : ObstacleBase
     private Animator dragonAnimator;
     private SpriteRenderer spriteRenderer;
     bool fireball = false;
-    private float lastGUIUpdate = 0;
 
     public Fireball() : base(Obstacles.Flying, -1.5f, "Fireball", new SpawnData(
         false, 1.0f, -5.5f,
@@ -31,15 +30,6 @@ public class Fireball : ObstacleBase
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-
-        float currentTime = Time.time;
-
-        if (!(currentTime > lastGUIUpdate + 0.2f))
-        {
-            return;
-        }
-
-        lastGUIUpdate = currentTime;
 
         animator.speed = (Global.Instance.speed < 0 || !dragonAnimator.GetCurrentAnimatorStateInfo(0).IsName("Firing") ? 0 : Global.Instance.speed);
         //Color c = spriteRenderer.material.color;

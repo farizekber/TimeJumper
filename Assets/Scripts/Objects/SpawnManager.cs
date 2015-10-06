@@ -300,8 +300,8 @@ public class SpawnManager : MonoBehaviour {
             if (o2.name == "Pickaxe(Clone)" && Time.time - Global.startTime < 30)
                 break;
 
-            if ((o2.name == "Fireball(Clone)" || o2.name == "Iceball(Clone)") && Time.time - Global.startTime < 80)
-                break;
+            //if ((o2.name == "Fireball(Clone)" || o2.name == "Iceball(Clone)") && Time.time - Global.startTime < 80)
+            //    break;
             if ((o2.name == "Fireball(Clone)" || o2.name == "Iceball(Clone)" ) && Random.value < 0.5f)
                 break;
 

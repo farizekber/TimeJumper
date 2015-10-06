@@ -3,6 +3,7 @@ using System.Collections;
 using Assets.Scripts;
 using System.Linq;
 using UnityEngine.UI;
+using global;
 
 public class MainCharacter : MonoBehaviour {
 
@@ -30,6 +31,8 @@ public class MainCharacter : MonoBehaviour {
         jumps = defaultJumps;
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        ApplicationGlobal.GlobalBackButtonEnabled = false;
     }
 
     public void LoadVertical(PerspectiveInitializer.ThemeState themeState)
@@ -51,13 +54,15 @@ public class MainCharacter : MonoBehaviour {
         GetComponent<BoxCollider2D>().size = new Vector2(1.708464f, 3.398826f);
         GetComponent<BoxCollider2D>().offset = new Vector2(0.134553f, -0.07604933f);
         GetComponent<BoxCollider2D>().size = new Vector2(0.8542318f, 1.699413f);
-        GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(-3.459f, 2.216f, GetComponent<Rigidbody2D>().transform.localPosition.z);
+        GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(-3.459f, 6f, GetComponent<Rigidbody2D>().transform.localPosition.z);
         GetComponent<SpriteRenderer>().sprite = Resources.Load("Images/character-v2") as Sprite;
         GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Main Character");
     }
 
     void processInput()
     {
+        if (Input.GetKey(KeyCode.Escape))
+            Application.LoadLevel("MainMenu");
 
         foreach (Touch touch in Input.touches)
         {
@@ -193,6 +198,7 @@ public class MainCharacter : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        // PlayerPrefs.SetInt("Highest Distance", 0);
         if (Global.Instance == null)
             return;
 
