@@ -52,7 +52,7 @@ public class Dragon : MonoBehaviour
 
     void playDragonRoar()
     {
-        audSource.PlayOneShot(warningSound,0.5f);
+        audSource.PlayOneShot(warningSound,0.05f);
     }
 
     public void ToggleLighting(int lightingOn)

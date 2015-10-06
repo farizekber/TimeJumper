@@ -35,12 +35,17 @@ public class GameOverScene : MonoBehaviour {
             GameObject.Find("Particle System (2)").GetComponent<ParticleSystem>().Play();
             GameObject highscoreObject = GameObject.Find("HighscoreText");
             highscoreObject.GetComponent<SpriteRenderer>().transform.localPosition = new Vector3(highscoreObject.GetComponent<SpriteRenderer>().transform.localPosition.x, highscoreObject.GetComponent<SpriteRenderer>().transform.localPosition.y, -1f);
-            audSource.PlayOneShot(highscore,0.3f);
+            Invoke("playHighscoreSound", 1);
         }
 
         ApplicationGlobal.GlobalBackButtonEnabled = false;
     }
 	
+    void playHighscoreSound()
+    {
+        audSource.PlayOneShot(highscore, 0.03f);
+    }
+
 	// Update is called once per frame
 	void Update ()
     {   
