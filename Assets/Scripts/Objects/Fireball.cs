@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Fireball : ObstacleBase
 {
+
     private Animator animator;
     private Animator dragonAnimator;
     private SpriteRenderer spriteRenderer;
@@ -45,7 +46,9 @@ public class Fireball : ObstacleBase
         }
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Warning"))
+        {
             rigid.velocity = new Vector2(0, 0);
+        }
     }
 
     public override void Activate()

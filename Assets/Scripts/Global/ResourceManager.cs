@@ -12,6 +12,10 @@ namespace Assets.Scripts
         GameObject vehicleHealth;
         GameObject[] energy = new GameObject[3];
 
+
+        public AudioClip shieldLoss;
+        private AudioSource audSource;
+
         public bool inVehicle = false;
         public int activeEnergy;
         public float activeVehicleHealth = 0.0f;
@@ -19,6 +23,7 @@ namespace Assets.Scripts
 
         void Start()
         {
+            audSource = GameObject.Find("ApplicationGlobal").GetComponent<AudioSource>();
             vehicleHealth = GameObject.Find("HealthBar");
             energy[0] = GameObject.Find("EnergyBar1");
             energy[1] = GameObject.Find("EnergyBar2");
@@ -101,6 +106,7 @@ namespace Assets.Scripts
             {
                 activeEnergy = 0;
                 GameObject.Find("Divine-Shield").GetComponent<Renderer>().enabled = false;
+                audSource.PlayOneShot(shieldLoss);
             }
             else
             {

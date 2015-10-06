@@ -10,9 +10,12 @@ public class Dragon : MonoBehaviour
     private Light m_light;
     private SpawnManager spawnManager;
     private Color pointLightColor = new Color(188, 85, 41, 255);
+    public AudioClip warningSound;
+    private AudioSource audSource;
 
     // Use this for initialization
     void Start() {
+        audSource = GameObject.Find("ApplicationGlobal").GetComponent<AudioSource>();
         m_light = GameObject.Find("Directional light").GetComponent<Light>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
     }
@@ -25,7 +28,11 @@ public class Dragon : MonoBehaviour
 
         if (Global.Instance.orientation == 0)
         {
-            GetComponent<Animator>().SetBool("FireballIncomming", spawnManager.IsAnyFireballActive());
+            
+            bool fireBallActive = spawnManager.IsAnyFireballActive();
+            GetComponent<Animator>().SetBool("FireballIncomming", fireBallActive);
+            if (fireBallActive)
+                Invoke("playDragonRoar",1);
         }
 
         if (pointLightingOn)
@@ -41,6 +48,11 @@ public class Dragon : MonoBehaviour
             m_light.type = LightType.Directional;
             m_light.color = new Color(1, 1, 1);
         }
+    }
+
+    void playDragonRoar()
+    {
+        audSource.PlayOneShot(warningSound,0.5f);
     }
 
     public void ToggleLighting(int lightingOn)

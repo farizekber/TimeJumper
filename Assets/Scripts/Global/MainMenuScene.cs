@@ -7,9 +7,12 @@ using UnityEngine.SocialPlatforms;
 public class MainMenuScene : MonoBehaviour
 {
     bool loggedIn = false;
+    public AudioClip button;
+    private AudioSource audSource;
     // Use this for initialization
     void Start()
     {
+        audSource = GameObject.Find("ApplicationGlobal").GetComponent<AudioSource>();
         grayButtons();
         PlayGamesPlatform.Activate();
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().Build();
@@ -25,25 +28,30 @@ public class MainMenuScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 
     public void loadPlay()
     {
+        audSource.PlayOneShot(button);
         Application.LoadLevel("Loading");
     }
 
     public void loadLeaderboards()
     {
+        audSource.PlayOneShot(button);
         Social.ShowLeaderboardUI();
     }
 
     public void loadAchievements()
     {
+        audSource.PlayOneShot(button);
         Social.ShowAchievementsUI();
     }
     
     public void loadAuthentication()
     {
+        audSource.PlayOneShot(button);
         if (!loggedIn)
         {
             Social.localUser.Authenticate((bool success) =>

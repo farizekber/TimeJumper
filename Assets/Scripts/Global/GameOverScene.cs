@@ -7,9 +7,15 @@ using global;
 
 public class GameOverScene : MonoBehaviour {
 
-	// Use this for initialization
-	void Start ()
+    public AudioClip highscore;
+    public AudioClip button;
+    private AudioSource audSource;
+
+    // Use this for initialization
+    void Start ()
     {
+        audSource = GameObject.Find("ApplicationGlobal").GetComponent<AudioSource>();
+
         TimeSpan t = TimeSpan.FromSeconds(Global.endingTime - Global.startTime);
         string answer = string.Format("{0:D2}:{1:D2}:{2:D2}",
                         t.Hours,
@@ -20,9 +26,17 @@ public class GameOverScene : MonoBehaviour {
         GetComponentsInChildren<Text>().Where(s => s.name == "Distance2").First().text = (int)Global.distance + "m";
         GetComponentsInChildren<Text>().Where(s => s.name == "HighestDistance2").First().text = PlayerPrefs.GetInt("Highest Distance") + "m";
 
-        GameObject.Find("Particle System").SetActive(PlayerPrefs.GetInt("IsNewHighScore") == 1);
-        GameObject.Find("Particle System (1)").SetActive(PlayerPrefs.GetInt("IsNewHighScore") == 1);
-        GameObject.Find("Particle System (2)").SetActive(PlayerPrefs.GetInt("IsNewHighScore") == 1);
+        int HighScoreBool = PlayerPrefs.GetInt("IsNewHighScore");
+
+        if (HighScoreBool == 1)
+        {
+            GameObject.Find("Particle System").GetComponent<ParticleSystem>().Play();
+            GameObject.Find("Particle System (1)").GetComponent<ParticleSystem>().Play();
+            GameObject.Find("Particle System (2)").GetComponent<ParticleSystem>().Play();
+            GameObject highscoreObject = GameObject.Find("HighscoreText");
+            highscoreObject.GetComponent<SpriteRenderer>().transform.localPosition = new Vector3(highscoreObject.GetComponent<SpriteRenderer>().transform.localPosition.x, highscoreObject.GetComponent<SpriteRenderer>().transform.localPosition.y, -1f);
+            audSource.PlayOneShot(highscore,0.3f);
+        }
 
         ApplicationGlobal.GlobalBackButtonEnabled = false;
     }
@@ -39,11 +53,13 @@ public class GameOverScene : MonoBehaviour {
 
     public void loadPlay()
     {
+        audSource.PlayOneShot(button);
         Application.LoadLevel("Loading");
     }
 
     public void loadMenu()
     {
+        audSource.PlayOneShot(button);
         Application.LoadLevel("MainMenu");
     }
 
