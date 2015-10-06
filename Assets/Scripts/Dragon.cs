@@ -10,11 +10,21 @@ public class Dragon : MonoBehaviour
     private Light m_light;
     private SpawnManager spawnManager;
     private Color pointLightColor = new Color(188, 85, 41, 255);
+    private float lastGUIUpdate = 0;
+
+    private RuntimeAnimatorController dragon;
+    private RuntimeAnimatorController dragonIce;
+    private RuntimeAnimatorController dragon2;
+    private RuntimeAnimatorController dragon2Ice;
 
     // Use this for initialization
     void Start() {
         m_light = GameObject.Find("Directional light").GetComponent<Light>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        dragon = Resources.Load<RuntimeAnimatorController>("Animations/Dragon");
+        dragonIce = Resources.Load<RuntimeAnimatorController>("Animations/DragonIce");
+        dragon2 = Resources.Load<RuntimeAnimatorController>("Animations/Dragon2");
+        dragon2Ice = Resources.Load<RuntimeAnimatorController>("Animations/Dragon2Ice");
     }
 
     // Update is called once per frame
@@ -22,6 +32,15 @@ public class Dragon : MonoBehaviour
     {
         if (Global.Instance == null)
             return;
+
+        float currentTime = Time.time;
+
+        if (!(currentTime > lastGUIUpdate + 0.2f))
+        {
+            return;
+        }
+
+        lastGUIUpdate = currentTime;
 
         if (Global.Instance.orientation == 0)
         {
@@ -59,12 +78,12 @@ public class Dragon : MonoBehaviour
 
         if (themeState == Assets.Scripts.PerspectiveInitializer.ThemeState.Mine)
         {
-            GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Dragon");
+            GetComponent<Animator>().runtimeAnimatorController = dragon;
             pointLightColor = new Color(188, 85, 41, 255);
         }
         else
         {
-            GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/DragonIce");
+            GetComponent<Animator>().runtimeAnimatorController = dragonIce;
             pointLightColor = new Color(41, 85, 188, 255);
         }
     }
@@ -77,12 +96,12 @@ public class Dragon : MonoBehaviour
 
         if (themeState == Assets.Scripts.PerspectiveInitializer.ThemeState.Mine)
         {
-            GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Dragon2");
+            GetComponent<Animator>().runtimeAnimatorController = dragon2;
             pointLightColor = new Color(188, 85, 41, 255);
         }
         else
         {
-            GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Dragon2Ice");
+            GetComponent<Animator>().runtimeAnimatorController = dragon2Ice;
             pointLightColor = new Color(41, 85, 188, 255);
         }
     }

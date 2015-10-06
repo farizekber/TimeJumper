@@ -3,24 +3,40 @@ using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts;
 using Assets.Scripts.Objects;
+using Assets.Scripts.Parallaxing;
 
 public class SpawnManager : MonoBehaviour {
 
-    public static SpawnManager Instance;// = new SpawnManager();
-    public List<ObstacleBase> spawnables = new List<ObstacleBase>();
-    public List<ObstacleBase> collectables = new List<ObstacleBase>();
-    public Dictionary<ObstacleBase, List<GameObject>> spawnableInstances = new Dictionary<ObstacleBase, List<GameObject>>();
-    public Dictionary<ObstacleBase, List<GameObject>> collectableInstances = new Dictionary<ObstacleBase, List<GameObject>>();
+    public static SpawnManager Instance;
+    public List<string> spawnables = new List<string>();
+    public List<string> collectables = new List<string>();
+    public Dictionary<string, List<GameObject>> spawnableInstances = new Dictionary<string, List<GameObject>>();
+    public Dictionary<string, List<GameObject>> collectableInstances = new Dictionary<string, List<GameObject>>();
 
     public PlatformManager platformManager = new PlatformManager();
 
     public float obstacleSpawnRate = 5f;
     public float collectableSpawnRate = 10f;
     public int defaultSpawnableCount = 5;
-    public int defaultCollectableCount = 20;
-    
+    public int defaultCollectableCount = 1;
+
+    public Sprite mineBegin;
+    public Sprite iceBegin;
+    public Sprite mineMiddle;
+    public Sprite iceMiddle;
+    public Sprite mineEnd;
+    public Sprite iceEnd;
+
     void Awake() {
         Instance = this;
+    }
+
+    void Start()
+    {
+        Init();
+        platformManager.Start();
+        platformManager.Spawn();
+        LoadHorizontal(PerspectiveInitializer.ThemeState.Mine);
     }
 
     public void SpawnPlatform()
@@ -42,32 +58,6 @@ public class SpawnManager : MonoBehaviour {
         Invoke("SpawnPlatform", 2.5f);
     }
 
-    public void RemoveAll()
-    {
-        CancelInvoke();
-
-        foreach (var item in spawnableInstances)
-        {
-            foreach (var item2 in item.Value)
-            {
-                GameObject.Destroy(item2);
-            }
-        }
-
-        foreach (var item in collectableInstances)
-        {
-            foreach (var item2 in item.Value)
-            {
-                GameObject.Destroy(item2);
-            }
-        }
-
-        spawnableInstances.Clear();
-        collectableInstances.Clear();
-        spawnables.Clear();
-        collectables.Clear();
-    }
-
     public bool IsAnyFireballActive()
     {
         bool temp = false;
@@ -75,8 +65,8 @@ public class SpawnManager : MonoBehaviour {
 
         for (int i = 0; i < spawnables.Count; ++i)
         {
-            ObstacleBase o = spawnables[i];
-            if (o.name == "Iceball" || o.name == "Fireball(Clone)" || o.name == "Fireball" || o.name == "Iceball(Clone)")
+            string o = spawnables[i];
+            if (o == "Iceball" || o == "Fireball(Clone)" || o == "Fireball" || o == "Iceball(Clone)")
             {
                 index = i;
                 temp = true;
@@ -100,76 +90,172 @@ public class SpawnManager : MonoBehaviour {
         return temp;
     }
 
-    public void Init()
+    private void Init()
     {
+        List<ObstacleBase> spawnables = new List<ObstacleBase>();
+        spawnables.Add((Resources.Load("Prefabs/" + "Crate") as GameObject).GetComponent<Crate>());
+        spawnables.Add((Resources.Load("Prefabs/" + "Fireball") as GameObject).GetComponent<Fireball>());
+        spawnables.Add((Resources.Load("Prefabs/" + "Pickaxe") as GameObject).GetComponent<Pickaxe>());
+        spawnables.Add((Resources.Load("Prefabs/" + "TNT") as GameObject).GetComponent<TNT>());
+        spawnables.Add((Resources.Load("Prefabs/" + "BarrelDwarf") as GameObject).GetComponent<BarrelDwarf>());
+        spawnables.Add((Resources.Load("Prefabs/" + "IceCrate") as GameObject).GetComponent<IceCrate>());
+        spawnables.Add((Resources.Load("Prefabs/" + "Iceball") as GameObject).GetComponent<Iceball>());
+        spawnables.Add((Resources.Load("Prefabs/" + "Snowball") as GameObject).GetComponent<Snowball>());
+        spawnables.Add((Resources.Load("Prefabs/" + "Snowman") as GameObject).GetComponent<Snowman>());
+        spawnables.Add((Resources.Load("Prefabs/" + "BarrelEskimo") as GameObject).GetComponent<BarrelEskimo>());
+
+        List<ObstacleBase> collectables = new List<ObstacleBase>();
+        collectables.Add((Resources.Load("Prefabs/" + "MineCarVehicle") as GameObject).GetComponent<MineCarVehicle>());
+        collectables.Add((Resources.Load("Prefabs/" + "Orb") as GameObject).GetComponent<Orb>());
+
         foreach (var item in spawnables)
         {
+            spawnableInstances.Add(item.name + "(Clone)", new List<GameObject>());
+
             for (int i = 0; i < defaultSpawnableCount; i++)
             {
-                if (!spawnableInstances.ContainsKey(item))
-                {
-                    spawnableInstances.Add(item, new List<GameObject>());
-                }
-
-                spawnableInstances[item].Add(item.Spawn());
+                spawnableInstances[item.name + "(Clone)"].Add(item.Spawn());
             }
         }
 
         foreach (var item in collectables)
         {
-            if (!collectableInstances.ContainsKey(item))
-            {
-                collectableInstances.Add(item, new List<GameObject>());
-            }
+            collectableInstances.Add(item.name + "(Clone)", new List<GameObject>());
 
-            for (int i = 0; i < defaultSpawnableCount; i++)
+            for (int i = 0; i < defaultCollectableCount; i++)
             {
-                collectableInstances[item].Add(item.Spawn());
+                collectableInstances[item.name + "(Clone)"].Add(item.Spawn());
             }
         }
+    }
 
-        if (Global.Instance.orientation == 0)
+    public void LoadVertical(PerspectiveInitializer.ThemeState themeState)
+    {
+        platformManager.DisableAll();
+
+        spawnables.Clear();
+        collectables.Clear();
+
+        if (themeState == PerspectiveInitializer.ThemeState.Mine)
         {
-            platformManager.Start();
-            platformManager.Spawn();
-            Invoke("SpawnPlatform", 1.5f);
+            spawnables.Add("Crate(Clone)");
+            spawnables.Add("TNT(Clone)");
+            spawnables.Add("BarrelDwarf(Clone)");
         }
         else
         {
-            platformManager.FinalizeObject();
+            spawnables.Add("IceCrate(Clone)");
+            spawnables.Add("Snowman(Clone)");
+            spawnables.Add("BarrelEskimo(Clone)");
         }
+
+        foreach (KeyValuePair<string, List<GameObject>> entry in spawnableInstances)
+        {
+            foreach (GameObject gobject in entry.Value)
+            {
+                gobject.SetActive(spawnables.Contains(entry.Key));
+            }
+        }
+
+        collectables.Add("Orb(Clone)");
+        
+        foreach (KeyValuePair<string, List<GameObject>> entry in collectableInstances)
+        {
+            foreach (GameObject gobject in entry.Value)
+            {
+                gobject.SetActive(collectables.Contains(entry.Key));
+            }
+        }
+        
+        if (Global.Instance.orientation == 0)
+        {
+            Invoke("SpawnPlatform", 1.5f);
+        }
+
+        spawnables.TrimExcess();
+        collectables.TrimExcess();
 
         Invoke("InvokeObstacleSpawns", 2f);
         Invoke("InvokeCollectableSpawns", 2f);
     }
 
-    public void LoadVertical(PerspectiveInitializer.ThemeState themeState)
+    public void DisableAll()
     {
-        spawnables.AddRange(new List<ObstacleBase>() { (Resources.Load("Prefabs/" + "Crate") as GameObject).GetComponent<Crate>(),
-                                                           (Resources.Load("Prefabs/" + "Minecart") as GameObject).GetComponent<Minecart>(),
-                                                           (Resources.Load("Prefabs/" + "Stone") as GameObject).GetComponent<Stone>(),
-                                                           (Resources.Load("Prefabs/" + "TNT") as GameObject).GetComponent<TNT>()});
+        foreach (var item in spawnableInstances)
+        {
+            foreach (var item2 in item.Value)
+            {
+                item2.GetComponent<ObstacleBase>().Disable();
+            }
+        }
 
-        collectables.Add((Resources.Load("Prefabs/" + "Orb") as GameObject).GetComponent<Orb>());
-        Init();
+        foreach (var item in collectableInstances)
+        {
+            foreach (var item2 in item.Value)
+            {
+                item2.GetComponent<ObstacleBase>().Disable();
+            }
+        }
     }
 
     public void LoadHorizontal(PerspectiveInitializer.ThemeState themeState)
     {
-        platformManager.Spawn();
-        spawnables.AddRange(new List<ObstacleBase>() { (Resources.Load("Prefabs/" + "Crate") as GameObject).GetComponent<Crate>(),
-                                                           (Resources.Load("Prefabs/" + "Minecart") as GameObject).GetComponent<Minecart>(),
-                                                           (Resources.Load("Prefabs/" + "Stone") as GameObject).GetComponent<Stone>(),
-                                                           (Resources.Load("Prefabs/" + "TNT") as GameObject).GetComponent<TNT>()});
+        platformManager.DisableAll();
+
+        spawnables.Clear();
+        collectables.Clear();
 
         if (themeState == PerspectiveInitializer.ThemeState.Mine)
-            spawnables.Add((Resources.Load("Prefabs/" + "Fireball") as GameObject).GetComponent<Fireball>());
+        {
+            spawnables.Add("Crate(Clone)");
+            spawnables.Add("Fireball(Clone)");
+            spawnables.Add("Pickaxe(Clone)");
+            spawnables.Add("TNT(Clone)");
+            spawnables.Add("BarrelDwarf(Clone)");
+        }
         else
-            spawnables.Add((Resources.Load("Prefabs/" + "Iceball") as GameObject).GetComponent<Iceball>());
+        {
+            spawnables.Add("IceCrate(Clone)");
+            spawnables.Add("Iceball(Clone)");
+            spawnables.Add("Snowball(Clone)");
+            spawnables.Add("Snowman(Clone)");
+            spawnables.Add("BarrelEskimo(Clone)");
+        }
 
-        collectables.AddRange(new List<ObstacleBase>() { (Resources.Load("Prefabs/" + "MineCarVehicle") as GameObject).GetComponent<MineCarVehicle>(),
-                                                             (Resources.Load("Prefabs/" + "Orb") as GameObject).GetComponent<Orb>()});
-        Init();
+        foreach (KeyValuePair<string, List<GameObject>> entry in spawnableInstances)
+        {
+            foreach (GameObject gobject in entry.Value)
+            {
+                gobject.SetActive(spawnables.Contains(entry.Key));
+            }
+        }
+        
+        collectables.Add("MineCarVehicle(Clone)");
+        collectables.Add("Orb(Clone)");
+
+        foreach (KeyValuePair<string, List<GameObject>> entry in collectableInstances)
+        {
+            foreach (GameObject gobject in entry.Value)
+            {
+                if(entry.Key == "MineCarVehicle(Clone)")
+                    gobject.GetComponent<MineCarVehicle>().AdjustToTheme(themeState);
+
+                gobject.SetActive(collectables.Contains(entry.Key));
+            }
+        }
+
+        if (Global.Instance.orientation == 0)
+        {
+            platformManager.AdjustTheme(themeState, ref mineBegin, ref mineMiddle, ref mineEnd, ref iceBegin, ref iceMiddle, ref iceEnd);
+            GameObject.Find("Background Manager").GetComponent<BackgroundManager>().AdjustTheme(themeState);
+            Invoke("SpawnPlatform", 1.5f);
+        }
+
+        spawnables.TrimExcess();
+        collectables.TrimExcess();
+
+        Invoke("InvokeObstacleSpawns", 2f);
+        Invoke("InvokeCollectableSpawns", 2f);
     }
 
     // Update is called once per frame
@@ -179,12 +265,12 @@ public class SpawnManager : MonoBehaviour {
 
     public void InvokeCollectableSpawns()
     {
-        if (GameOverAnimation.GetInstance().m_fAnimationInProgress)
+        if (GameOverAnimation.GetInstance(  ).m_fAnimationInProgress)
             return;
 
-        if (spawnables.Count > 0)
+        if (collectables.Count > 0)
         {
-            ObstacleBase o1 = collectables[(int)Mathf.Round((Random.value * (collectables.Count - 1)))];
+            string o1 = collectables[(int)Mathf.Round((Random.value * (collectables.Count - 1)))];
 
             foreach (GameObject o2 in collectableInstances[o1])
             {

@@ -11,6 +11,7 @@ public class Platform : MonoBehaviour {
     private Collider2D m_collider;
     public bool colliderEnabled = true;
     public bool Taken;
+    private float lastGUIUpdate = 0;
 
     // Use this for initialization
     void Start () {
@@ -20,7 +21,17 @@ public class Platform : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
+        float currentTime = Time.time;
+
+        if (!(currentTime > lastGUIUpdate + 0.2f))
+        {
+            return;
+        }
+
+        lastGUIUpdate = currentTime;
+
         m_collider.enabled = colliderEnabled;
 
         Color c = spriteRenderer.color;

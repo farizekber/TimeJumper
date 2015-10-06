@@ -213,11 +213,14 @@
      <Compile Include="Assets\Scripts\Global\MainMenuScene.cs" />
      <Compile Include="Assets\Scripts\Global\Recolor.cs" />
      <Compile Include="Assets\Scripts\Global\ResourceManager.cs" />
+     <Compile Include="Assets\Scripts\Global\Twirler.cs" />
      <Compile Include="Assets\Scripts\MainCharacter.cs" />
      <Compile Include="Assets\Scripts\Objects\BarrelDwarf.cs" />
+     <Compile Include="Assets\Scripts\Objects\BarrelEskimo.cs" />
      <Compile Include="Assets\Scripts\Objects\Boulder.cs" />
      <Compile Include="Assets\Scripts\Objects\Crate.cs" />
      <Compile Include="Assets\Scripts\Objects\Fireball.cs" />
+     <Compile Include="Assets\Scripts\Objects\IceCrate.cs" />
      <Compile Include="Assets\Scripts\Objects\Iceball.cs" />
      <Compile Include="Assets\Scripts\Objects\MineCarVehicle.cs" />
      <Compile Include="Assets\Scripts\Objects\Minecart.cs" />
@@ -225,6 +228,8 @@
      <Compile Include="Assets\Scripts\Objects\Obstacles.cs" />
      <Compile Include="Assets\Scripts\Objects\Orb.cs" />
      <Compile Include="Assets\Scripts\Objects\Pickaxe.cs" />
+     <Compile Include="Assets\Scripts\Objects\Snowball.cs" />
+     <Compile Include="Assets\Scripts\Objects\Snowman.cs" />
      <Compile Include="Assets\Scripts\Objects\SpawnManager.cs" />
      <Compile Include="Assets\Scripts\Objects\Stone.cs" />
      <Compile Include="Assets\Scripts\Objects\TNT.cs" />

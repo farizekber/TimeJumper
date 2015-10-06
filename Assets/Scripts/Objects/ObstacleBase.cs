@@ -70,6 +70,7 @@ namespace Assets.Scripts
             }
 
             //gobject.transform.localPosition += Global.Instance.GlobalObject.transform.localPosition + Global.Instance.ForegroundObject.transform.localPosition;
+            gobject.GetComponent<ObstacleBase>().Start();
             gobject.GetComponent<Collider2D>().enabled = false;
             gobject.transform.parent = Global.Instance.ForegroundObject.transform;
 
@@ -143,7 +144,7 @@ namespace Assets.Scripts
             rigid.transform.localPosition = new Vector3(-8, 0, 0);
         }
 
-        void OnTriggerEnter2D(Collider2D other)
+        public virtual void OnTriggerEnter2D(Collider2D other)
         {
             if (!active)
             {
@@ -162,11 +163,6 @@ namespace Assets.Scripts
                         gameObject.GetComponent<Rigidbody2D>().transform.localPosition = new Vector3(gameObject.GetComponent<Rigidbody2D>().transform.localPosition.x + 2.0f, gameObject.GetComponent<Rigidbody2D>().transform.localPosition.y, gameObject.GetComponent<Rigidbody2D>().transform.localPosition.z);
                     }
                 }
-            }
-            else if (gameObject.name == "Orb(Clone)" && other.gameObject.name == "Main Character")
-            {
-                Disable();
-                GameObject.Find("Resource Manager").GetComponent<ResourceManager>().IncreaseEnergy();
             }
             else if (other.gameObject.name == "Main Character")
             {

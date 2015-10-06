@@ -30,24 +30,42 @@ namespace Assets.Scripts.Parallaxing
             pieces[0].GetComponent<SpriteRenderer>().sprite = background;
             pieces[1].GetComponent<SpriteRenderer>().sprite = background;
 
-            pieces[0].GetComponent<SpriteRenderer>().material = Resources.Load("Materials/diffuseSprite") as Material;
-            pieces[1].GetComponent<SpriteRenderer>().material = Resources.Load("Materials/diffuseSprite") as Material;
+            if (name == "bg6")
+            {
+                pieces[0].GetComponent<SpriteRenderer>().material = Resources.Load("Materials/defaultSpriteDiffuse") as Material;
+                pieces[1].GetComponent<SpriteRenderer>().material = Resources.Load("Materials/defaultSpriteDiffuse") as Material;
+            }
+            else
+            {
+                pieces[0].GetComponent<SpriteRenderer>().material = Resources.Load("Materials/diffuseSprite") as Material;
+                pieces[1].GetComponent<SpriteRenderer>().material = Resources.Load("Materials/diffuseSprite") as Material;
+            }
 
             pieces[0].GetComponent<SpriteRenderer>().material.SetFloat("_Replace", Replace ? 1.0f : 0.0f);
             pieces[1].GetComponent<SpriteRenderer>().material.SetFloat("_Replace", Replace ? 1.0f : 0.0f);
-            
+
+            if (name == "bg4")
+            {
+                pieces[0].transform.localScale = new Vector3(1, 0.4f, 1);
+                pieces[1].transform.localScale = new Vector3(1, 0.4f, 1);
+            }
+
             pieces[0].transform.parent = transform;
             pieces[1].transform.parent = transform;
 
             pieces[0].transform.localScale = new Vector3(pieces[0].transform.localScale.x * 1.33f, pieces[0].transform.localScale.y, pieces[0].transform.localScale.z);
             pieces[1].transform.localScale = new Vector3(pieces[1].transform.localScale.x * 1.33f, pieces[1].transform.localScale.y, pieces[1].transform.localScale.z);
 
-            pieces[0].transform.localPosition = new Vector3(0f, 0, -0.0001f);
-            pieces[1].transform.localPosition = new Vector3(pieces[0].GetComponent<SpriteRenderer>().bounds.size.x / transform.parent.localScale.x, 0, 0);
-        }
-
-        void Update()
-        {
+            if (name == "bg4")
+            {
+                pieces[0].transform.localPosition = new Vector3(0f, -0.02f, -0.0001f);
+                pieces[1].transform.localPosition = new Vector3(pieces[0].GetComponent<SpriteRenderer>().bounds.size.x / transform.parent.localScale.x, -0.02f, 0f);
+            }
+            else
+            {
+                pieces[0].transform.localPosition = new Vector3(0f, 0, -0.0001f);
+                pieces[1].transform.localPosition = new Vector3(pieces[0].GetComponent<SpriteRenderer>().bounds.size.x / transform.parent.localScale.x, 0, 0);
+            }
         }
     }
 }
