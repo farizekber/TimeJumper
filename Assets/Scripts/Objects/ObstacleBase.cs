@@ -130,7 +130,7 @@ namespace Assets.Scripts
                 rigid.velocity = new Vector2(0, 0);
             }
 
-            if (transform.localPosition.x < -8 || transform.localPosition.x > 15)
+            if (transform.localPosition.x < -12 || transform.localPosition.x > 15)
             {
                 Disable();
             }
@@ -141,7 +141,7 @@ namespace Assets.Scripts
             m_collider.enabled = false;
             active = false;
             rigid.velocity = new Vector2(0, 0);
-            rigid.transform.localPosition = new Vector3(-8, 0, 0);
+            rigid.transform.localPosition = new Vector3(-12, 0, 0);
         }
 
         public virtual void OnTriggerEnter2D(Collider2D other)
