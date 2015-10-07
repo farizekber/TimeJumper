@@ -33,6 +33,18 @@ namespace Assets.Scripts
             energy[2] = GameObject.Find("EnergyBar3");
         }
 
+        public void ProcessTeleportUsage()
+        {
+            if (inVehicle)
+            {
+                inVehicle = false;
+                Global.Instance.speed -= 2;
+            }
+
+            activeEnergy = 0;
+            audSource.PlayOneShot(teleportSound, 3);
+        }
+
         void OnGUI()
         {
             float currentTime = Time.time;

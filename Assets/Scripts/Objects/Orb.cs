@@ -105,8 +105,7 @@ public class Orb : ObstacleBase
                     PerspectiveInitializer.s_Instance.InvokeMethod("LoadVerticalPerspective", 2f);
                 }
 
-                GameObject.Find("Resource Manager").GetComponent<ResourceManager>().RemoveVehicle();
-                GameObject.Find("Resource Manager").GetComponent<ResourceManager>().LowerHealth();
+                GameObject.Find("Resource Manager").GetComponent<ResourceManager>().ProcessTeleportUsage();
                 Global.Instance.IncreaseDistance(500);
             }
         }
