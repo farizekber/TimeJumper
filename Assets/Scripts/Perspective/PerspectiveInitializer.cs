@@ -98,6 +98,11 @@ namespace Assets.Scripts
             SpawnManager.Instance.LoadHorizontal(themeState);
         }
 
+        void disableGesture()
+        {
+            Global.Instance.Gesture.SetActive(false);
+        }
+
         public void SwitchPerspective()
         {
             if (Global.Instance.orientation == 0)
@@ -113,10 +118,14 @@ namespace Assets.Scripts
             else
             {
                 PerspectiveInitializer.s_Instance.CleanPerspective();
-                
+
+                Global.Instance.Gesture.SetActive(true);
+
                 Fader.s_Instance.InvokeMethod("Enable", 1.25f);
                 PerspectiveInitializer.s_Instance.InvokeMethod("LoadHorizontalPerspective", 2f);
                 Fader.s_Instance.InvokeMethod("Disable", 2.5f);
+
+                Invoke("disableGesture", 4f);
             }
             Invoke("SwitchPerspective", 40.0f + (UnityEngine.Random.value * 20.0f));
         }

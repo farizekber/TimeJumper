@@ -106,7 +106,7 @@ namespace Assets.Scripts.Objects
                     }
                 }
 
-                if (rigid.transform.localPosition.x < -8.5f)
+                if (rigid.transform.localPosition.x < -10.5f)
                 {
                     platformCombinationsToRemove.Add(platformCombination);
                 }

@@ -218,15 +218,31 @@ public class MainCharacter : MonoBehaviour {
         
         if(lastButtonPresstime + 10 < currentTime)
         {
-            if (currentSwipe.Enabled && currentSwipe.xDirectionEnd > 12.0f && currentSwipe.xDirectionEnd < 12.8f && currentSwipe.yDirectionEnd > 6.45f)
+            if (Global.Instance.orientation == 0)
             {
-                lastButtonPresstime = currentTime;
-                GameObject.Find("Global").GetComponent<Global>().PauseButton();
+                if (currentSwipe.Enabled && currentSwipe.xDirectionEnd > 12.0f && currentSwipe.xDirectionEnd < 12.8f && currentSwipe.yDirectionEnd > 6.45f)
+                {
+                    lastButtonPresstime = currentTime;
+                    GameObject.Find("Global").GetComponent<Global>().PauseButton();
+                }
+                else if (currentSwipe.Enabled && currentSwipe.xDirectionEnd > 12.8f && currentSwipe.yDirectionEnd > 6.45f)
+                {
+                    lastButtonPresstime = currentTime;
+                    GameObject.Find("Global").GetComponent<Global>().AudioButton();
+                }
             }
-            else if (currentSwipe.Enabled && currentSwipe.xDirectionEnd > 12.8f && currentSwipe.yDirectionEnd > 6.45f)
+            else
             {
-                lastButtonPresstime = currentTime;
-                GameObject.Find("Global").GetComponent<Global>().AudioButton();
+                if (currentSwipe.Enabled && currentSwipe.xDirectionEnd > 12.5f && currentSwipe.yDirectionEnd > 0.75f && currentSwipe.yDirectionEnd < 1.5f)
+                {
+                    lastButtonPresstime = currentTime;
+                    GameObject.Find("Global").GetComponent<Global>().PauseButton();
+                }
+                else if (currentSwipe.Enabled && currentSwipe.xDirectionEnd > 12.5f && currentSwipe.yDirectionEnd < 0.75f)
+                {
+                    lastButtonPresstime = currentTime;
+                    GameObject.Find("Global").GetComponent<Global>().AudioButton();
+                }
             }
         }
 

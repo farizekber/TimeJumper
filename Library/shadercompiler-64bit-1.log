@@ -7,3 +7,7 @@ Cmd: compileSnippet
   api=4 type=0 insize=3274 outsize=1071 kw= ok=1
 Cmd: compileSnippet
   api=4 type=1 insize=3274 outsize=5214 kw= ok=1
+Cmd: compileSnippet
+  api=5 type=0 insize=3274 outsize=28478 kw= ok=1
+Cmd: compileSnippet
+  api=5 type=1 insize=3274 outsize=6 kw= ok=1

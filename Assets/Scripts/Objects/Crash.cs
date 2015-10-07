@@ -23,16 +23,23 @@ public class Crash : MonoBehaviour {
         }
     }
 
+    void disableGesture()
+    {
+        Global.Instance.Gesture.SetActive(false);
+    }
+
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.name == "Main Character")
         {
+            Global.Instance.Gesture.SetActive(true);
             rigid.velocity = new Vector2(0, 0);
             rigid.transform.localPosition = new Vector3(-12, 0, 0);
             PerspectiveInitializer.s_Instance.CleanPerspective();
             Fader.s_Instance.InvokeMethod("Enable", 0f);
             PerspectiveInitializer.s_Instance.InvokeMethod("LoadVerticalPerspective", 0f);
             Fader.s_Instance.InvokeMethod("Disable", 1f);
+            Invoke("disableGesture", 2.5f);
         }
         else if(rigid.transform.localPosition.x > -6.6f)
         {

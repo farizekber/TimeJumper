@@ -39,6 +39,8 @@ public class Global : MonoBehaviour
     public GameObject HealthBar;
     public GameObject HealthBarBackground;
 
+    public GameObject Gesture;
+
     //Performance related.
     System.TimeSpan t;
     char[] str = new char[15];
@@ -112,6 +114,8 @@ public class Global : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        Gesture = GameObject.Find("Gesture");
+        Gesture.SetActive(false);
         HealthBar = GameObject.Find("HealthBar");
         HealthBar.GetComponent<Image>().enabled = false;
         HealthBarBackground = GameObject.Find("HealthBarBackground");

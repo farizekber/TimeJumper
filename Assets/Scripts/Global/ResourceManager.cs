@@ -74,7 +74,7 @@ namespace Assets.Scripts
 
         public void IncreaseEnergy()
         {
-            activeEnergy = Mathf.Clamp(activeEnergy++, 0, 3);
+            activeEnergy = Mathf.Clamp(++activeEnergy, 0, 3);
             GameObject.Find("Divine-Shield").GetComponent<Renderer>().enabled = true;
             audSource.PlayOneShot(pickupSound);
         }

@@ -26,13 +26,6 @@ public class pillarcrash : MonoBehaviour {
 
             crash.GetComponent<Crash>().Trigger();
 
-            /*
-            if (crash.transform.localPosition.x <= 3)
-            {
-                
-            }
-            */
-
             if (rigid.transform.localPosition.y <= -2.58f)
             {
                 rigid.velocity = new Vector2(0, 0);
