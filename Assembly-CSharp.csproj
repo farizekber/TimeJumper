@@ -203,6 +203,7 @@
      <Compile Include="Assets\GooglePlayGames\Platforms\TokenClient.cs" />
      <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
      <Compile Include="Assets\GooglePlayServices.cs" />
+     <Compile Include="Assets\RenderTextureManager.cs" />
      <Compile Include="Assets\Scripts\Dragon.cs" />
      <Compile Include="Assets\Scripts\Global\ApplicationGlobal.cs" />
      <Compile Include="Assets\Scripts\Global\Fader.cs" />
