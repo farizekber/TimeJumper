@@ -3,13 +3,14 @@ using System.Collections;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 using UnityEngine.SocialPlatforms;
+using System.Threading;
 
 public class MainMenuScene : MonoBehaviour
 {
     bool loggedIn = false;
     public AudioClip button;
     private AudioSource audSource;
-    public AudioClip backgroundMusic;
+
     // Use this for initialization
     void Start()
     {
@@ -25,8 +26,6 @@ public class MainMenuScene : MonoBehaviour
             coloredButtons();
         }
         AudioListener.volume -= PlayerPrefs.GetInt("MuteState");
-        // audSource.PlayOneShot(backgroundMusic);
-        // audSource.clip = backgroundMusic;
     }
 
     // Update is called once per frame
@@ -35,9 +34,8 @@ public class MainMenuScene : MonoBehaviour
 
     }
 
-    public void loadPlay()
+    void loadPlay()
     {
-        audSource.Stop();
         audSource.PlayOneShot(button);
         Application.LoadLevel("Loading");
     }
