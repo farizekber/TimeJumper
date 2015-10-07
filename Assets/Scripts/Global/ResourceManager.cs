@@ -15,6 +15,7 @@ namespace Assets.Scripts
         public AudioClip shieldLoss;
         public AudioClip pickupSound;
         public AudioClip gameOverSound;
+        public AudioClip teleportSound;
         private AudioSource audSource;
 
         public bool inVehicle = false;
@@ -123,7 +124,7 @@ namespace Assets.Scripts
             {
                 activeEnergy = 0;
                 GameObject.Find("Divine-Shield").GetComponent<Renderer>().enabled = false;
-                audSource.PlayOneShot(shieldLoss);
+                audSource.PlayOneShot(shieldLoss);                
             }
             else
             {
