@@ -241,6 +241,40 @@ namespace Assets.Scripts.Objects
             spawnedPlatforms.Add(platformCombination);
         }
 
+        public void AdjustTheme(PerspectiveInitializer.ThemeState themeState, ref Sprite mineBegin, ref Sprite mineMiddle, ref Sprite mineEnd, ref Sprite iceBegin, ref Sprite iceMiddle, ref Sprite iceEnd)
+        {
+            if (themeState == PerspectiveInitializer.ThemeState.Mine)
+            {
+                foreach (Platform item in beginComponents)
+                {
+                    item.GetComponent<SpriteRenderer>().sprite = mineBegin;
+                }
+                foreach (Platform item in middleComponents)
+                {
+                    item.GetComponent<SpriteRenderer>().sprite = mineMiddle;
+                }
+                foreach (Platform item in endComponents)
+                {
+                    item.GetComponent<SpriteRenderer>().sprite = mineEnd;
+                }
+            }
+            else
+            {
+                foreach (Platform item in beginComponents)
+                {
+                    item.GetComponent<SpriteRenderer>().sprite = iceBegin;
+                }
+                foreach (Platform item in middleComponents)
+                {
+                    item.GetComponent<SpriteRenderer>().sprite = iceMiddle;
+                }
+                foreach (Platform item in endComponents)
+                {
+                    item.GetComponent<SpriteRenderer>().sprite = iceEnd;
+                }
+            }
+        }
+
         //Move all used platforms back to their original place
         public void DisableAll()
         {

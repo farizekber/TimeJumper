@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Parallaxing
 {
     public class BackgroundManager : MonoBehaviour
     {
+        public Sprite mineFloor;
+        public Sprite iceFloor;
+
         public void UpdateShader()
         {
             for (int i = 0; i < transform.childCount; i++)
@@ -79,7 +83,7 @@ namespace Assets.Scripts.Parallaxing
 
                 if (!backgroundPlane.enabled)
                     continue;
-                
+
                 backgroundPlane.pieces[0].transform.localPosition = new Vector3((backgroundPlane.pieces[0].transform.localPosition.x - (1.0f * Time.fixedDeltaTime * 0.075f * Global.Instance.speed) * backgroundPlane.SpeedModifier), backgroundPlane.pieces[0].transform.localPosition.y, backgroundPlane.pieces[0].transform.localPosition.z);
                 backgroundPlane.pieces[1].transform.localPosition = new Vector3((backgroundPlane.pieces[1].transform.localPosition.x - (1.0f * Time.fixedDeltaTime * 0.075f * Global.Instance.speed) * backgroundPlane.SpeedModifier), backgroundPlane.pieces[1].transform.localPosition.y, backgroundPlane.pieces[1].transform.localPosition.z);
 
@@ -106,6 +110,44 @@ namespace Assets.Scripts.Parallaxing
         {
             Camera.main.transform.localScale = new Vector3(Camera.main.transform.localScale.x * Camera.main.aspect, Camera.main.transform.localScale.y, Camera.main.transform.localScale.z);
             UpdateShader();
+        }
+
+        public void AdjustTheme(PerspectiveInitializer.ThemeState themeState)
+        {
+            if (themeState == PerspectiveInitializer.ThemeState.Mine)
+            {
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    BackgroundPlane backgroundPlane = transform.GetChild(i).gameObject.GetComponent<BackgroundPlane>();
+
+                    if (backgroundPlane.pieces[0] == null)
+                        continue;
+
+                    if (backgroundPlane.name == "bg6")
+                    {
+                        backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = mineFloor;
+                        backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = mineFloor;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    BackgroundPlane backgroundPlane = transform.GetChild(i).gameObject.GetComponent<BackgroundPlane>();
+
+                    if (backgroundPlane.pieces[0] == null)
+                        continue;
+
+                    if (backgroundPlane.name == "bg6")
+                    {
+                        backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = iceFloor;
+                        backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = iceFloor;
+                        break;
+                    }
+                }
+            }
         }
     }
 }

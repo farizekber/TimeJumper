@@ -31,6 +31,7 @@ public class Global : MonoBehaviour
     public static float endingTime;
 
     public bool addingDistance = true;
+    private float lastGUIUpdate = 0;
 
     private AudioSource audioSource;
     private AudioSource foregroundAudioSource;
@@ -44,39 +45,45 @@ public class Global : MonoBehaviour
 
     public void LoadHorizontal(PerspectiveInitializer.ThemeState themeState)
     {
-        orientation = 0;
+        if (orientation != 0)
+        {
+            orientation = 0;
 
-        TimeText.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        TimeText.transform.localPosition = new Vector3(-239, 180, TimeText.transform.localPosition.z);
+            TimeText.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            TimeText.transform.localPosition = new Vector3(-239, 180, TimeText.transform.localPosition.z);
 
-        DistanceText.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        DistanceText.transform.localPosition = new Vector3(-100, 180, DistanceText.transform.localPosition.z);
+            DistanceText.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            DistanceText.transform.localPosition = new Vector3(-100, 180, DistanceText.transform.localPosition.z);
 
-        GameObject muteButton = GameObject.Find("MuteButton");
-        GameObject pauseButton = GameObject.Find("PauseButton");
-        float oldY = muteButton.transform.localPosition.y;
-        muteButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x, oldY * -1, muteButton.transform.localPosition.z);
-        pauseButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x - 40, oldY * -1, pauseButton.transform.localPosition.z);
-        muteButton.transform.rotation = Quaternion.Euler(0, 0, 0);
-        pauseButton.transform.rotation = Quaternion.Euler(0, 0, 0);
+            GameObject muteButton = GameObject.Find("MuteButton");
+            GameObject pauseButton = GameObject.Find("PauseButton");
+            float oldY = muteButton.transform.localPosition.y;
+            muteButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x, oldY * -1, muteButton.transform.localPosition.z);
+            pauseButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x - 40, oldY * -1, pauseButton.transform.localPosition.z);
+            muteButton.transform.rotation = Quaternion.Euler(0, 0, 0);
+            pauseButton.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
     }
 
     public void LoadVertical(PerspectiveInitializer.ThemeState themeState)
     {
-        orientation = 1;
+        if (orientation != 1)
+        {
+            orientation = 1;
 
-        TimeText.transform.localRotation = Quaternion.Euler(0, 0, -90);
-        TimeText.transform.localPosition = new Vector3(-300, 110, TimeText.transform.localPosition.z);
+            TimeText.transform.localRotation = Quaternion.Euler(0, 0, -90);
+            TimeText.transform.localPosition = new Vector3(-300, 110, TimeText.transform.localPosition.z);
 
-        DistanceText.transform.localRotation = Quaternion.Euler(0, 0, -90);
-        DistanceText.transform.localPosition = new Vector3(-300, -40, DistanceText.transform.localPosition.z);
+            DistanceText.transform.localRotation = Quaternion.Euler(0, 0, -90);
+            DistanceText.transform.localPosition = new Vector3(-300, -40, DistanceText.transform.localPosition.z);
 
-        GameObject muteButton = GameObject.Find("MuteButton");
-        GameObject pauseButton = GameObject.Find("PauseButton");
-        muteButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x, muteButton.transform.localPosition.y * -1, muteButton.transform.localPosition.z);
-        pauseButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x, (pauseButton.transform.localPosition.y * -1) + 40, pauseButton.transform.localPosition.z);
-        muteButton.transform.rotation = Quaternion.Euler(0, 0, 270);
-        pauseButton.transform.rotation = Quaternion.Euler(0, 0, 270);
+            GameObject muteButton = GameObject.Find("MuteButton");
+            GameObject pauseButton = GameObject.Find("PauseButton");
+            muteButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x, muteButton.transform.localPosition.y * -1, muteButton.transform.localPosition.z);
+            pauseButton.transform.localPosition = new Vector3(muteButton.transform.localPosition.x, (pauseButton.transform.localPosition.y * -1) + 40, pauseButton.transform.localPosition.z);
+            muteButton.transform.rotation = Quaternion.Euler(0, 0, 270);
+            pauseButton.transform.rotation = Quaternion.Euler(0, 0, 270);
+        }
     }
 
     public void PlayPickupSound()
@@ -125,7 +132,7 @@ public class Global : MonoBehaviour
         foregroundAudioSource = ForegroundObject.GetComponent<AudioSource>();
         audioSource = GetComponent<AudioSource>();
 
-        SpawnManager.Instance.Init();
+        //SpawnManager.Instance.Init();
 
         Screen.autorotateToPortrait = false;
         Screen.autorotateToLandscapeRight = false;
@@ -249,16 +256,25 @@ public class Global : MonoBehaviour
     {
         float currentTime = Time.time;
 
-        if (!(currentTime < lastTime + 0.5f))
+        if (!(currentTime > lastGUIUpdate + 0.75f))
+        {
             return;
+        }
+
+        lastGUIUpdate = currentTime;
 
         updateTimeString(currentTime);
 
-        if ((int)distance > PlayerPrefs.GetInt("Highest Distance"))
+        if (distance > PlayerPrefs.GetInt("Highest Distance"))
         {
             DistanceText.color = new Color(255.0f / 255.0f, 208.0f / 255.0f, 66.0f / 255.0f);
         }
         DistanceText.text = "Distance : " + (int)distance + "m";
+    }
+
+    public void IncreaseDistance(int amount)
+    {
+        distance += amount;
     }
     
     // Update is called once per frame

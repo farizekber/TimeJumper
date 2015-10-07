@@ -11,8 +11,7 @@ namespace Assets.Scripts
     {
         GameObject vehicleHealth;
         GameObject[] energy = new GameObject[3];
-
-
+        
         public AudioClip shieldLoss;
         public AudioClip pickupSound;
         public AudioClip gameOverSound;
@@ -22,6 +21,7 @@ namespace Assets.Scripts
         public int activeEnergy;
         public float activeVehicleHealth = 0.0f;
         public float vehicleHealthLossPerHit = 0.33f;
+        private float lastGUIUpdate = 0;
 
         void Start()
         {
@@ -34,11 +34,25 @@ namespace Assets.Scripts
 
         void OnGUI()
         {
+            float currentTime = Time.time;
+
+            if (!(currentTime > lastGUIUpdate + 0.2f))
+            {
+                return;
+            }
+
+            lastGUIUpdate = currentTime;
+
             if (inVehicle)
             {
                 Global.Instance.HealthBar.GetComponent<Image>().enabled = true;
                 Global.Instance.HealthBarBackground.GetComponent<Image>().enabled = true;
-                GameObject.Find("Main Character").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/InMineCart");
+
+                if (PerspectiveInitializer.s_Instance.themeState == PerspectiveInitializer.ThemeState.Mine)
+                    GameObject.Find("Main Character").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/InMineCart");
+                else
+                    GameObject.Find("Main Character").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/InSledge");
+
                 GameObject.Find("Main Character").GetComponent<Animator>().enabled = false;
             }
             else

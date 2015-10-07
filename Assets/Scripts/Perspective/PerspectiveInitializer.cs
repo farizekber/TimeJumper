@@ -59,7 +59,7 @@ namespace Assets.Scripts
                 behaviour.CancelInvoke();
             }
             
-            SpawnManager.Instance.RemoveAll();
+            SpawnManager.Instance.DisableAll();
         }
 
         public void LoadVerticalPerspective()
@@ -87,7 +87,12 @@ namespace Assets.Scripts
             {
                 PerspectiveInitializer.s_Instance.CleanPerspective();
 
-                GameObject gobject = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "pillar-crash"), new Vector3(3f, 11f, 1f), new Quaternion(0, 0, 0, 0));
+                GameObject gobject;
+                if (themeState == ThemeState.Mine)
+                    gobject = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "pillar-crash"), new Vector3(3f, 11f, 1f), new Quaternion(0, 0, 0, 0));
+                else
+                    gobject = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "ice-pillar-crash"), new Vector3(3f, 11f, 1f), new Quaternion(0, 0, 0, 0));
+
                 gobject.transform.localPosition += Global.Instance.GlobalObject.transform.localPosition + Global.Instance.ForegroundObject.transform.localPosition;
                 gobject.transform.parent = Global.Instance.ForegroundObject.transform;
 

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Fireball : ObstacleBase
 {
-
     private Animator animator;
     private Animator dragonAnimator;
     private SpriteRenderer spriteRenderer;
@@ -31,7 +30,7 @@ public class Fireball : ObstacleBase
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        
+
         animator.speed = (Global.Instance.speed < 0 || !dragonAnimator.GetCurrentAnimatorStateInfo(0).IsName("Firing") ? 0 : Global.Instance.speed);
         //Color c = spriteRenderer.material.color;
         //spriteRenderer.material.color = new Color(c.r, c.g, c.b,  ? 1.0f : 0.0f)
@@ -46,9 +45,7 @@ public class Fireball : ObstacleBase
         }
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Warning"))
-        {
             rigid.velocity = new Vector2(0, 0);
-        }
     }
 
     public override void Activate()
