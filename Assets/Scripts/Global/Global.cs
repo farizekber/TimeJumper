@@ -41,6 +41,9 @@ public class Global : MonoBehaviour
 
     public GameObject Gesture;
 
+    private Text AdditionalDistanceText;
+    private float AdditionalDistanceTextTime = 0;
+
     //Performance related.
     System.TimeSpan t;
     char[] str = new char[15];
@@ -120,7 +123,9 @@ public class Global : MonoBehaviour
         HealthBar.GetComponent<Image>().enabled = false;
         HealthBarBackground = GameObject.Find("HealthBarBackground");
         HealthBarBackground.GetComponent<Image>().enabled = false;
-        
+
+        AdditionalDistanceText = GameObject.Find("AdditionalDistanceText").GetComponent<Text>();
+
         distance = 0;
         startTime = Time.time;
         lastTime = startTime;
@@ -267,6 +272,11 @@ public class Global : MonoBehaviour
 
         lastGUIUpdate = currentTime;
 
+        if (AdditionalDistanceTextTime > Time.time + 5)
+        {
+            AdditionalDistanceText.text = "";
+        }
+
         updateTimeString(currentTime);
 
         if (distance > PlayerPrefs.GetInt("Highest Distance"))
@@ -278,6 +288,8 @@ public class Global : MonoBehaviour
 
     public void IncreaseDistance(int amount)
     {
+        AdditionalDistanceTextTime = Time.time;
+        AdditionalDistanceText.text = "+" + amount;
         distance += amount;
     }
     
