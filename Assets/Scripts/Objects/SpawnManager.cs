@@ -140,13 +140,27 @@ public class SpawnManager : MonoBehaviour {
         {
             spawnables.Add("Crate(Clone)");
             spawnables.Add("TNT(Clone)");
-            spawnables.Add("BarrelDwarf(Clone)");
+            foreach (GameObject go in spawnableInstances["Crate(Clone)"])
+            {
+                go.GetComponent<Animator>().SetBool("IsRotating", true);
+            }
+            foreach (GameObject go in spawnableInstances["TNT(Clone)"])
+            {
+                go.GetComponent<Animator>().SetBool("IsRotating", true);
+            }
         }
         else
         {
             spawnables.Add("IceCrate(Clone)");
             spawnables.Add("Snowman(Clone)");
-            spawnables.Add("BarrelEskimo(Clone)");
+            foreach (GameObject go in spawnableInstances["IceCrate(Clone)"])
+            {
+                go.GetComponent<Animator>().SetBool("IsRotating", true);
+            }
+            foreach (GameObject go in spawnableInstances["Snowman(Clone)"])
+            {
+                go.GetComponent<Animator>().SetBool("IsRotating", true);
+            }
         }
 
         foreach (KeyValuePair<string, List<GameObject>> entry in spawnableInstances)
@@ -212,6 +226,15 @@ public class SpawnManager : MonoBehaviour {
             spawnables.Add("Pickaxe(Clone)");
             spawnables.Add("TNT(Clone)");
             spawnables.Add("BarrelDwarf(Clone)");
+
+            foreach (GameObject go in spawnableInstances["Crate(Clone)"])
+            {
+                go.GetComponent<Animator>().SetBool("IsRotating", false);
+            }
+            foreach (GameObject go in spawnableInstances["TNT(Clone)"])
+            {
+                go.GetComponent<Animator>().SetBool("IsRotating", false);
+            }
         }
         else
         {
@@ -220,6 +243,15 @@ public class SpawnManager : MonoBehaviour {
             spawnables.Add("Snowball(Clone)");
             spawnables.Add("Snowman(Clone)");
             spawnables.Add("BarrelEskimo(Clone)");
+
+            foreach (GameObject go in spawnableInstances["IceCrate(Clone)"])
+            {
+                go.GetComponent<Animator>().SetBool("IsRotating", false);
+            }
+            foreach (GameObject go in spawnableInstances["Snowman(Clone)"])
+            {
+                go.GetComponent<Animator>().SetBool("IsRotating", false);
+            }
         }
 
         foreach (KeyValuePair<string, List<GameObject>> entry in spawnableInstances)

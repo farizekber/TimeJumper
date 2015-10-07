@@ -23,6 +23,10 @@ namespace Assets.Scripts
 
         private GameObject mainCharacter;
         private GameObject dragon;
+        private GameObject normalPillar;
+        private GameObject icePiller;
+        private GameObject normalCrash;
+        private GameObject iceCrash;
 
         public static void FinalizeObject()
         {
@@ -39,6 +43,10 @@ namespace Assets.Scripts
             mainCharacter = GameObject.Find("Main Character");
             dragon = GameObject.Find("Dragon");
             Invoke("SwitchPerspective", 40.0f + (UnityEngine.Random.value * 20.0f));
+            normalPillar = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "pillar-crash"), new Vector3(3f, 11f, 1f), new Quaternion(0, 0, 0, 0));
+            icePiller = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "ice-pillar-crash"), new Vector3(3f, 11f, 1f), new Quaternion(0, 0, 0, 0));
+            normalCrash = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "crash"), new Vector3(-12, 0, 0), new Quaternion(0, 0, 0, 0));
+            iceCrash = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "ice-crash"), new Vector3(-12, 0, 0), new Quaternion(0, 0, 0, 0));
         }
 
         public void InvokeMethod(string methodName, float delay)
@@ -85,20 +93,13 @@ namespace Assets.Scripts
         {
             if (Global.Instance.orientation == 0)
             {
-                PerspectiveInitializer.s_Instance.CleanPerspective();
-
                 GameObject gobject;
                 if (themeState == ThemeState.Mine)
-                    gobject = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "pillar-crash"), new Vector3(3f, 11f, 1f), new Quaternion(0, 0, 0, 0));
+                    gobject = normalPillar;
                 else
-                    gobject = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "ice-pillar-crash"), new Vector3(3f, 11f, 1f), new Quaternion(0, 0, 0, 0));
+                    gobject = icePiller;
 
-                gobject.transform.localPosition += Global.Instance.GlobalObject.transform.localPosition + Global.Instance.ForegroundObject.transform.localPosition;
-                gobject.transform.parent = Global.Instance.ForegroundObject.transform;
-
-                Fader.s_Instance.InvokeMethod("Enable", 2.25f);
-                PerspectiveInitializer.s_Instance.InvokeMethod("LoadVerticalPerspective", 2.75f);
-                Fader.s_Instance.InvokeMethod("Disable", 3.25f);
+                gobject.GetComponent<pillarcrash>().Trigger();
             }
             else
             {
@@ -108,7 +109,6 @@ namespace Assets.Scripts
                 PerspectiveInitializer.s_Instance.InvokeMethod("LoadHorizontalPerspective", 2f);
                 Fader.s_Instance.InvokeMethod("Disable", 2.5f);
             }
-
             Invoke("SwitchPerspective", 40.0f + (UnityEngine.Random.value * 20.0f));
         }
     }

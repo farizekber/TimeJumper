@@ -74,7 +74,7 @@ namespace Assets.Scripts
 
         public void IncreaseEnergy()
         {
-            Mathf.Clamp(activeEnergy++, 0, 3);
+            activeEnergy = Mathf.Clamp(activeEnergy++, 0, 3);
             GameObject.Find("Divine-Shield").GetComponent<Renderer>().enabled = true;
             audSource.PlayOneShot(pickupSound);
         }
@@ -89,7 +89,7 @@ namespace Assets.Scripts
             }
             else
             {
-                Mathf.Clamp(activeVehicleHealth += vehicleHealthLossPerHit, 0, 1);
+                activeVehicleHealth = Mathf.Clamp(activeVehicleHealth += vehicleHealthLossPerHit, 0, 1);
             }
         }
 
@@ -112,7 +112,7 @@ namespace Assets.Scripts
         {
             if (activeVehicleHealth > 0.01 && inVehicle)
             {
-                Mathf.Clamp(activeVehicleHealth -= vehicleHealthLossPerHit, 0, 1);
+                activeVehicleHealth = Mathf.Clamp(activeVehicleHealth -= vehicleHealthLossPerHit, 0, 1);
 
                 if (activeVehicleHealth < 0.01)
                 {
