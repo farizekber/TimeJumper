@@ -27,6 +27,7 @@ namespace Assets.Scripts
         private GameObject icePiller;
         private GameObject normalCrash;
         private GameObject iceCrash;
+        private Vector3 pillarPosition = new Vector3(3f, 11f, -8f);
 
         public static void FinalizeObject()
         {
@@ -42,11 +43,19 @@ namespace Assets.Scripts
         {
             mainCharacter = GameObject.Find("Main Character");
             dragon = GameObject.Find("Dragon");
-            Invoke("SwitchPerspective", 40.0f + (UnityEngine.Random.value * 20.0f));
-            normalPillar = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "pillar-crash"), new Vector3(3f, 11f, 1f), new Quaternion(0, 0, 0, 0));
-            icePiller = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "ice-pillar-crash"), new Vector3(3f, 11f, 1f), new Quaternion(0, 0, 0, 0));
+            normalPillar = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "pillar-crash"), new Vector3(-30f, 11f, -8f), new Quaternion(0, 0, 0, 0));
+            icePiller = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "ice-pillar-crash"), new Vector3(-30f, 11f,-8f), new Quaternion(0, 0, 0, 0));
             normalCrash = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "crash"), new Vector3(-12, 0, 0), new Quaternion(0, 0, 0, 0));
             iceCrash = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "ice-crash"), new Vector3(-12, 0, 0), new Quaternion(0, 0, 0, 0));
+
+            Invoke("repositionPillar", 5);
+            Invoke("SwitchPerspective", 40.0f + (UnityEngine.Random.value * 20.0f));
+        }
+
+        private void repositionPillar()
+        {
+            normalPillar.transform.localPosition = pillarPosition;
+            icePiller.transform.localPosition = pillarPosition;
         }
 
         public void InvokeMethod(string methodName, float delay)

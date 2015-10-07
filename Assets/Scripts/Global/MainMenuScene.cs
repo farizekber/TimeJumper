@@ -23,6 +23,8 @@ public class MainMenuScene : MonoBehaviour
             loggedIn = true;
             coloredButtons();
         }
+
+        AudioListener.volume -= PlayerPrefs.GetInt("MuteState");
     }
 
     // Update is called once per frame

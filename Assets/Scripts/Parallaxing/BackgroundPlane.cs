@@ -39,8 +39,16 @@ namespace Assets.Scripts.Parallaxing
             {
                 //pieces[0].transform.localScale = new Vector3(pieces[0].transform.localScale.x* 1.33f * (Original? 1.0f : 0.66f), pieces[0].transform.localScale.y* 1.4f, pieces[0].transform.localScale.z);
                 //pieces[1].transform.localScale = new Vector3(pieces[1].transform.localScale.x* 1.33f * (Original? 1.0f : 0.66f), pieces[1].transform.localScale.y* 1.4f, pieces[1].transform.localScale.z);
-                pieces[0].transform.localScale = new Vector3(originalScale0.x * 1.33f * (Original ? 1.0f : 0.66f), originalScale0.y * 1.4f, originalScale0.z);
-                pieces[1].transform.localScale = new Vector3(originalScale1.x * 1.33f * (Original ? 1.0f : 0.66f), originalScale1.y * 1.4f, originalScale1.z);
+                pieces[0].transform.localScale = new Vector3(originalScale0.x * 1.66f * (Original ? 1.0f : 0.66f), originalScale0.y * 1.4f, originalScale0.z);
+                pieces[1].transform.localScale = new Vector3(originalScale1.x * 1.66f * (Original ? 1.0f : 0.66f), originalScale1.y * 1.4f, originalScale1.z);
+
+                pieces[0].transform.localPosition = new Vector3(0f, 0, -0.0001f);
+                pieces[1].transform.localPosition = new Vector3(pieces[0].GetComponent<SpriteRenderer>().bounds.size.x / transform.parent.localScale.x, 0, 0);
+            }
+            else if (name == "bg2-Vertical" && !Original)
+            {
+                pieces[0].transform.localScale = new Vector3(originalScale0.x * 1.66f * (Original ? 1.0f : 0.66f), originalScale0.y * 1.6f, originalScale0.z);
+                pieces[1].transform.localScale = new Vector3(originalScale1.x * 1.66f * (Original ? 1.0f : 0.66f), originalScale1.y * 1.6f, originalScale1.z);
 
                 pieces[0].transform.localPosition = new Vector3(0f, 0, -0.0001f);
                 pieces[1].transform.localPosition = new Vector3(pieces[0].GetComponent<SpriteRenderer>().bounds.size.x / transform.parent.localScale.x, 0, 0);
@@ -49,8 +57,8 @@ namespace Assets.Scripts.Parallaxing
             {
                 //pieces[0].transform.localScale = new Vector3(pieces[0].transform.localScale.x * 1.33f * (Original? 1.0f : 0.66f), pieces[0].transform.localScale.y, pieces[0].transform.localScale.z);
                 //pieces[1].transform.localScale = new Vector3(pieces[1].transform.localScale.x * 1.33f * (Original? 1.0f : 0.66f), pieces[1].transform.localScale.y, pieces[1].transform.localScale.z);
-                pieces[0].transform.localScale = new Vector3(originalScale0.x * 1.33f * (Original ? 1.0f : 0.66f), originalScale0.y, originalScale0.z);
-                pieces[1].transform.localScale = new Vector3(originalScale1.x * 1.33f * (Original ? 1.0f : 0.66f), originalScale1.y, originalScale1.z);
+                pieces[0].transform.localScale = new Vector3(originalScale0.x * 1.66f * (Original ? 1.0f : 0.66f), originalScale0.y, originalScale0.z);
+                pieces[1].transform.localScale = new Vector3(originalScale1.x * 1.66f * (Original ? 1.0f : 0.66f), originalScale1.y, originalScale1.z);
 
                 pieces[0].transform.localPosition = new Vector3(0f, 0, -0.0001f);
                 pieces[1].transform.localPosition = new Vector3(pieces[0].GetComponent<SpriteRenderer>().bounds.size.x / transform.parent.localScale.x, 0, 0);
