@@ -60,6 +60,9 @@ public class Global : MonoBehaviour
             DistanceText.transform.localRotation = Quaternion.Euler(0, 0, 0);
             DistanceText.transform.localPosition = new Vector3(-100, 180, DistanceText.transform.localPosition.z);
 
+            AdditionalDistanceText.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            AdditionalDistanceText.transform.localPosition = new Vector3(-100, 156, AdditionalDistanceText.transform.localPosition.z);
+
             GameObject muteButton = GameObject.Find("MuteButton");
             GameObject pauseButton = GameObject.Find("PauseButton");
             float oldY = muteButton.transform.localPosition.y;
@@ -81,6 +84,9 @@ public class Global : MonoBehaviour
 
             DistanceText.transform.localRotation = Quaternion.Euler(0, 0, -90);
             DistanceText.transform.localPosition = new Vector3(-300, -40, DistanceText.transform.localPosition.z);
+
+            AdditionalDistanceText.transform.localRotation = Quaternion.Euler(0, 0, -90);
+            AdditionalDistanceText.transform.localPosition = new Vector3(-260, -40, AdditionalDistanceText.transform.localPosition.z);
 
             GameObject muteButton = GameObject.Find("MuteButton");
             GameObject pauseButton = GameObject.Find("PauseButton");
@@ -272,7 +278,7 @@ public class Global : MonoBehaviour
 
         lastGUIUpdate = currentTime;
 
-        if (AdditionalDistanceTextTime > Time.time + 5)
+        if (AdditionalDistanceTextTime + 5 < Time.time)
         {
             AdditionalDistanceText.text = "";
         }
