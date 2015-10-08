@@ -35,7 +35,7 @@ public class GameOverScene : MonoBehaviour {
             GameObject.Find("Particle System (2)").GetComponent<ParticleSystem>().Play();
             GameObject highscoreObject = GameObject.Find("HighscoreText");
             highscoreObject.GetComponent<SpriteRenderer>().transform.localPosition = new Vector3(highscoreObject.GetComponent<SpriteRenderer>().transform.localPosition.x, highscoreObject.GetComponent<SpriteRenderer>().transform.localPosition.y, -1f);
-            Invoke("playHighscoreSound", 1);
+            Invoke("playHighscoreSound", 0.5f);
         }
 
         ApplicationGlobal.GlobalBackButtonEnabled = false;
