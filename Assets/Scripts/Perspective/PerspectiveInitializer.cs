@@ -48,7 +48,7 @@ namespace Assets.Scripts
             normalCrash = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "crash"), new Vector3(-12, 0, 0), new Quaternion(0, 0, 0, 0));
             iceCrash = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/" + "ice-crash"), new Vector3(-12, 0, 0), new Quaternion(0, 0, 0, 0));
 
-            Invoke("repositionPillar", 5);
+            Invoke("repositionPillar", 30);
             Invoke("SwitchPerspective", 40.0f + (UnityEngine.Random.value * 20.0f));
         }
 

@@ -26,6 +26,20 @@ public class MainMenuScene : MonoBehaviour
             coloredButtons();
         }
         AudioListener.volume -= PlayerPrefs.GetInt("MuteState");
+
+        Social.localUser.Authenticate((bool success) =>
+        {
+            if (success)
+            {
+                coloredButtons();
+                loggedIn = true;
+            }
+            else
+            {
+                grayButtons();
+                loggedIn = false;
+            }
+        });
     }
 
     // Update is called once per frame

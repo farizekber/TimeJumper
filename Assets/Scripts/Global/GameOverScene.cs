@@ -43,7 +43,7 @@ public class GameOverScene : MonoBehaviour {
 	
     void playHighscoreSound()
     {
-        audSource.PlayOneShot(highscore, 0.03f);
+        audSource.PlayOneShot(highscore, 0.5f);
     }
 
 	// Update is called once per frame

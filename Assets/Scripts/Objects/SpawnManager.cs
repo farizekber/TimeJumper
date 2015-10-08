@@ -27,6 +27,8 @@ public class SpawnManager : MonoBehaviour {
     public Sprite mineEnd;
     public Sprite iceEnd;
 
+    private bool rotateHint = false;
+
     void Awake() {
         Instance = this;
     }
@@ -140,27 +142,29 @@ public class SpawnManager : MonoBehaviour {
         {
             spawnables.Add("Crate(Clone)");
             spawnables.Add("TNT(Clone)");
-            foreach (GameObject go in spawnableInstances["Crate(Clone)"])
-            {
-                go.GetComponent<Animator>().SetBool("IsRotating", true);
-            }
-            foreach (GameObject go in spawnableInstances["TNT(Clone)"])
-            {
-                go.GetComponent<Animator>().SetBool("IsRotating", true);
-            }
+            rotateHint = true;
+            //foreach (GameObject go in spawnableInstances["Crate(Clone)"])
+            //{
+            //    go.GetComponent<Animator>().SetBool("IsRotating", true);
+            //}
+            //foreach (GameObject go in spawnableInstances["TNT(Clone)"])
+            //{
+            //    go.GetComponent<Animator>().SetBool("IsRotating", true);
+            //}
         }
         else
         {
             spawnables.Add("IceCrate(Clone)");
             spawnables.Add("Snowman(Clone)");
-            foreach (GameObject go in spawnableInstances["IceCrate(Clone)"])
-            {
-                go.GetComponent<Animator>().SetBool("IsRotating", true);
-            }
-            foreach (GameObject go in spawnableInstances["Snowman(Clone)"])
-            {
-                go.GetComponent<Animator>().SetBool("IsRotating", true);
-            }
+            rotateHint = true;
+            //foreach (GameObject go in spawnableInstances["IceCrate(Clone)"])
+            //{
+            //    go.GetComponent<Animator>().SetBool("IsRotating", true);
+            //}
+            //foreach (GameObject go in spawnableInstances["Snowman(Clone)"])
+            //{
+            //    go.GetComponent<Animator>().SetBool("IsRotating", true);
+            //}
         }
 
         foreach (KeyValuePair<string, List<GameObject>> entry in spawnableInstances)
@@ -227,6 +231,8 @@ public class SpawnManager : MonoBehaviour {
             spawnables.Add("TNT(Clone)");
             spawnables.Add("BarrelDwarf(Clone)");
 
+            rotateHint = false;
+
             foreach (GameObject go in spawnableInstances["Crate(Clone)"])
             {
                 go.GetComponent<Animator>().SetBool("IsRotating", false);
@@ -243,6 +249,8 @@ public class SpawnManager : MonoBehaviour {
             spawnables.Add("Snowball(Clone)");
             spawnables.Add("Snowman(Clone)");
             spawnables.Add("BarrelEskimo(Clone)");
+
+            rotateHint = false;
 
             foreach (GameObject go in spawnableInstances["IceCrate(Clone)"])
             {
@@ -293,6 +301,33 @@ public class SpawnManager : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         platformManager.Update();
+        if (rotateHint)
+        {
+            rotateHint = false;
+
+            if (GameObject.Find("PerspectiveInitializer").GetComponent<PerspectiveInitializer>().themeState == PerspectiveInitializer.ThemeState.Mine)
+            {
+                foreach (GameObject go in spawnableInstances["Crate(Clone)"])
+                {
+                    go.GetComponent<Animator>().SetBool("IsRotating", true);
+                }
+                foreach (GameObject go in spawnableInstances["TNT(Clone)"])
+                {
+                    go.GetComponent<Animator>().SetBool("IsRotating", true);
+                }
+            }
+            else
+            {
+                foreach (GameObject go in spawnableInstances["IceCrate(Clone)"])
+                {
+                    go.GetComponent<Animator>().SetBool("IsRotating", true);
+                }
+                foreach (GameObject go in spawnableInstances["Snowman(Clone)"])
+                {
+                    go.GetComponent<Animator>().SetBool("IsRotating", true);
+                }
+            }
+        }
     }
 
     public void InvokeCollectableSpawns()
