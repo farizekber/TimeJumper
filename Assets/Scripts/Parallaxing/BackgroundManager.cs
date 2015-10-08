@@ -169,81 +169,163 @@ namespace Assets.Scripts.Parallaxing
                     if (backgroundPlane.pieces[0] == null)
                         continue;
 
-                    if (backgroundPlane.name == "bg1")
+                    if (PlayerPrefs.GetInt("UseShader") == 1)
                     {
-                        backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[0];
-                        backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[0];
-                        backgroundPlane.Original = false;
-                        backgroundPlane.SetTransform();
+                        if (backgroundPlane.name == "bg1")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[0];
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[0];
+                            backgroundPlane.Original = false;
+                            backgroundPlane.SetTransform();
+                        }
+                        else if (backgroundPlane.name == "bg2")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[1];
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[1];
+                            backgroundPlane.Original = false;
+                            backgroundPlane.SetTransform();
+                        }
+                        else if (backgroundPlane.name == "bg3")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[2];
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[2];
+                            backgroundPlane.Original = false;
+                            backgroundPlane.SetTransform();
+                        }
+                        else if (backgroundPlane.name == "bg4")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[3];
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[3];
+                            backgroundPlane.Original = false;
+                            backgroundPlane.SetTransform();
+                        }
+                        else if (backgroundPlane.name == "bg5")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[4];
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[4];
+                            backgroundPlane.Original = false;
+                            backgroundPlane.SetTransform();
+                        }
+                        else if (backgroundPlane.name == "bg6")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = iceFloor;
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = iceFloor;
+                            break;
+                        }
+                        else if (backgroundPlane.name == "bg1-Vertical")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[5];
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[5];
+                            backgroundPlane.Original = false;
+                            backgroundPlane.SetTransform();
+                        }
+                        else if (backgroundPlane.name == "bg2-Vertical")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[6];
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[6];
+                            backgroundPlane.Original = false;
+                            backgroundPlane.SetTransform();
+                        }
+                        else if (backgroundPlane.name == "bg3-Vertical")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[7];
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[7];
+                            backgroundPlane.Original = false;
+                            backgroundPlane.SetTransform();
+                        }
+                        else if (backgroundPlane.name == "bg4-Vertical")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[8];
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[8];
+                            backgroundPlane.Original = false;
+                            backgroundPlane.SetTransform();
+                        }
+                        else if (backgroundPlane.name == "bg5-Vertical")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[9];
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[9];
+                            backgroundPlane.Original = false;
+                            backgroundPlane.SetTransform();
+                        }
                     }
-                    else if (backgroundPlane.name == "bg2")
+                    else
                     {
-                        backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[1];
-                        backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[1];
-                        backgroundPlane.Original = false;
-                        backgroundPlane.SetTransform();
-                    }
-                    else if (backgroundPlane.name == "bg3")
-                    {
-                        backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[2];
-                        backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[2];
-                        backgroundPlane.Original = false;
-                        backgroundPlane.SetTransform();
-                    }
-                    else if (backgroundPlane.name == "bg4")
-                    {
-                        backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[3];
-                        backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[3];
-                        backgroundPlane.Original = false;
-                        backgroundPlane.SetTransform();
-                    }
-                    else if (backgroundPlane.name == "bg5")
-                    {
-                        backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[4];
-                        backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[4];
-                        backgroundPlane.Original = false;
-                        backgroundPlane.SetTransform();
-                    }
-                    else if (backgroundPlane.name == "bg6")
-                    {
-                        backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = iceFloor;
-                        backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = iceFloor;
-                        break;
-                    }
-                    else if (backgroundPlane.name == "bg1-Vertical")
-                    {
-                        backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[5];
-                        backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[5];
-                        backgroundPlane.Original = false;
-                        backgroundPlane.SetTransform();
-                    }
-                    else if (backgroundPlane.name == "bg2-Vertical")
-                    {
-                        backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[6];
-                        backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[6];
-                        backgroundPlane.Original = false;
-                        backgroundPlane.SetTransform();
-                    }
-                    else if (backgroundPlane.name == "bg3-Vertical")
-                    {
-                        backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[7];
-                        backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[7];
-                        backgroundPlane.Original = false;
-                        backgroundPlane.SetTransform();
-                    }
-                    else if (backgroundPlane.name == "bg4-Vertical")
-                    {
-                        backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[8];
-                        backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[8];
-                        backgroundPlane.Original = false;
-                        backgroundPlane.SetTransform();
-                    }
-                    else if (backgroundPlane.name == "bg5-Vertical")
-                    {
-                        backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[9];
-                        backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.enhancedBackgroundImages[9];
-                        backgroundPlane.Original = false;
-                        backgroundPlane.SetTransform();
+                        if (backgroundPlane.name == "bg1")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.backupBackgroundImages[0];
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.backupBackgroundImages[0];
+                            backgroundPlane.Original = true;
+                            backgroundPlane.SetTransform();
+                        }
+                        else if (backgroundPlane.name == "bg2")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.backupBackgroundImages[1];
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.backupBackgroundImages[1];
+                            backgroundPlane.Original = true;
+                            backgroundPlane.SetTransform();
+                        }
+                        else if (backgroundPlane.name == "bg3")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.backupBackgroundImages[2];
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.backupBackgroundImages[2];
+                            backgroundPlane.Original = true;
+                            backgroundPlane.SetTransform();
+                        }
+                        else if (backgroundPlane.name == "bg4")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.backupBackgroundImages[3];
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.backupBackgroundImages[3];
+                            backgroundPlane.Original = true;
+                            backgroundPlane.SetTransform();
+                        }
+                        else if (backgroundPlane.name == "bg5")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.backupBackgroundImages[4];
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.backupBackgroundImages[4];
+                            backgroundPlane.Original = true;
+                            backgroundPlane.SetTransform();
+                        }
+                        else if (backgroundPlane.name == "bg6")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = iceFloor;
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = iceFloor;
+                            break;
+                        }
+                        else if (backgroundPlane.name == "bg1-Vertical")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.backupBackgroundImages[5];
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.backupBackgroundImages[5];
+                            backgroundPlane.Original = true;
+                            backgroundPlane.SetTransform();
+                        }
+                        else if (backgroundPlane.name == "bg2-Vertical")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.backupBackgroundImages[6];
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.backupBackgroundImages[6];
+                            backgroundPlane.Original = true;
+                            backgroundPlane.SetTransform();
+                        }
+                        else if (backgroundPlane.name == "bg3-Vertical")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.backupBackgroundImages[7];
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.backupBackgroundImages[7];
+                            backgroundPlane.Original = true;
+                            backgroundPlane.SetTransform();
+                        }
+                        else if (backgroundPlane.name == "bg4-Vertical")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.backupBackgroundImages[8];
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.backupBackgroundImages[8];
+                            backgroundPlane.Original = true;
+                            backgroundPlane.SetTransform();
+                        }
+                        else if (backgroundPlane.name == "bg5-Vertical")
+                        {
+                            backgroundPlane.pieces[0].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.backupBackgroundImages[9];
+                            backgroundPlane.pieces[1].GetComponent<SpriteRenderer>().sprite = RenderTextureManager.instance.backupBackgroundImages[9];
+                            backgroundPlane.Original = true;
+                            backgroundPlane.SetTransform();
+                        }
                     }
                 }
             }

@@ -62,7 +62,10 @@ public class MainCharacter : MonoBehaviour {
     void processInput()
     {
         if (Input.GetKey(KeyCode.Escape))
+        {
+            ApplicationGlobal.GlobalBackButtonEnabled = true;
             Application.LoadLevel("MainMenu");
+        }
 
         foreach (Touch touch in Input.touches)
         {

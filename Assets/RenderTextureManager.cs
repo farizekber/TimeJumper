@@ -8,6 +8,7 @@ public class RenderTextureManager : MonoBehaviour {
     public Material mat;
     public List<Sprite> originalBackgroundImages = new List<Sprite>();
     public List<Sprite> enhancedBackgroundImages = new List<Sprite>();
+    public List<Sprite> backupBackgroundImages = new List<Sprite>();
     public static RenderTextureManager instance;
 
     void OnRenderImage(RenderTexture src, RenderTexture dest)

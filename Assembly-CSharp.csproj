@@ -242,6 +242,7 @@
      <Compile Include="Assets\Scripts\Platforms\Platform.cs" />
      <Compile Include="Assets\Scripts\Platforms\PlatformManager.cs" />
      <Compile Include="Assets\Scripts\Swipe.cs" />
+     <Compile Include="Assets\SettingScene.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-tl\common_strings.xml" />

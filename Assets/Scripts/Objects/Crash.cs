@@ -30,7 +30,7 @@ public class Crash : MonoBehaviour {
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == "Main Character")
+        if (other.gameObject.name == "Main Character" && Time.time - Global.startTime > 30f)
         {
             Global.Instance.Gesture.SetActive(true);
             rigid.velocity = new Vector2(0, 0);
@@ -41,7 +41,7 @@ public class Crash : MonoBehaviour {
             Fader.s_Instance.InvokeMethod("Disable", 1f);
             Invoke("disableGesture", 2.5f);
         }
-        else if(rigid.transform.localPosition.x > -6.6f)
+        else if(rigid.transform.localPosition.x > -6.6f && other.gameObject.name != "Main Character")
         {
             other.gameObject.GetComponent<ObstacleBase>().Disable();
         }

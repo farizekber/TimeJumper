@@ -93,6 +93,12 @@ public class MainMenuScene : MonoBehaviour
         }
     }
 
+    public void SwitchToSettingScreen()
+    {
+        audSource.PlayOneShot(button);
+        Application.LoadLevel("Settings");
+    }
+
     void grayButtons()
     {
         GameObject.Find("AuthenticationCover").GetComponent<SpriteRenderer>().enabled = false;
