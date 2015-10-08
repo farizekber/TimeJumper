@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class SettingScene : MonoBehaviour {
 
-    //0 = shader rendering on
-    //1 = shader rendering off
+    //1 = shader rendering on
+    //0 = shader rendering off
 
 	// Use this for initialization
 	void Start () {
@@ -13,17 +13,17 @@ public class SettingScene : MonoBehaviour {
             GetComponent<Toggle>().isOn = true;
         else
             GetComponent<Toggle>().isOn = false;
+
+        GetComponent<Toggle>().onValueChanged.AddListener(delegate { Toggle(); });
     }
 	
 	// Update is called once per frame
 	void Update () {
-        //GameObject.Find("Text").GetComponent<Text>().text = "" + PlayerPrefs.GetInt("UseShader");
     }
 
     public void Toggle()
     {
-        int i = 1 - PlayerPrefs.GetInt("UseShader");
-        PlayerPrefs.SetInt("UseShader", i);
+        PlayerPrefs.SetInt("UseShader", 1 - PlayerPrefs.GetInt("UseShader"));
     }
 
     public void Back()

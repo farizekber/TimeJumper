@@ -42,6 +42,7 @@ namespace Assets.Scripts
             }
 
             activeEnergy = 0;
+            GameObject.Find("Divine-Shield").GetComponent<Renderer>().enabled = false;
             audSource.PlayOneShot(teleportSound, 3);
         }
 

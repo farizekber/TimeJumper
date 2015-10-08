@@ -21,8 +21,18 @@ public class RenderTextureManager : MonoBehaviour {
     {
         if (instance == null)
         {
-            StartCoroutine(CreateAllRenderTextures());
             instance = this;
+            if (PlayerPrefs.GetInt("UseShader") == 1)
+                StartCoroutine(CreateAllRenderTextures());
+            else
+            {
+                GameObject bg = GameObject.Find("background-1");
+                if (bg != null)
+                {
+                    bg.SetActive(false);
+                }
+                this.gameObject.SetActive(false);
+            }
         }
         else
         {

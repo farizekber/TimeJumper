@@ -40,10 +40,14 @@ public class Crash : MonoBehaviour {
             PerspectiveInitializer.s_Instance.InvokeMethod("LoadVerticalPerspective", 0f);
             Fader.s_Instance.InvokeMethod("Disable", 1f);
             Invoke("disableGesture", 2.5f);
+            Global.Instance.IncreaseDistance(500);
         }
-        else if(rigid.transform.localPosition.x > -6.6f && other.gameObject.name != "Main Character")
+        else if(Time.time - Global.startTime > 30f)
         {
-            other.gameObject.GetComponent<ObstacleBase>().Disable();
+            if (rigid.transform.localPosition.x > -6.6f && other.gameObject.name != "Main Character")
+            {
+                other.gameObject.GetComponent<ObstacleBase>().Disable();
+            }
         }
     }
 
