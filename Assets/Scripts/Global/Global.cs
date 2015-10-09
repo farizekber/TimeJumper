@@ -304,12 +304,12 @@ public class Global : MonoBehaviour
     {
         // PlayerPrefs.SetInt("Highest Distance", 0);
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-            speed--;
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-            speed++;
+        //if (Input.GetKeyDown(KeyCode.LeftArrow))
+        //    speed--;
+        //else if (Input.GetKeyDown(KeyCode.RightArrow))
+        //    speed++;
 
-        GameOverAnimation.GetInstance().Update();
+        GameOverManager.GetInstance().Update();
 
         float currentTime = Time.time;
         if ((int)currentTime % 5 == 0 && (currentTime - lastSpeedIncrease) > 1.5f)

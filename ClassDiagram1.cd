@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="global.ApplicationGlobal" Collapsed="true">
+    <Position X="25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Scripts\Global\ApplicationGlobal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.Fader" Collapsed="true">
+    <Position X="1" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAIAAAACAAAAAAAgEACAEgAAAAAAAAAAAgAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\VisualEffects\Fader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.GameOverManager" Collapsed="true">
+    <Position X="20" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAgAAAAABAAAgAAAAEABCAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\GameOverManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.ResourceManager" Collapsed="true">
+    <Position X="18.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACEAABAACAAAAQAhEAAAAIDAABAAAAAIACgIQAAggA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\ResourceManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameOverScene" Collapsed="true">
+    <Position X="17" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAACBAICAAAAAAAAAAAAAAACACAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Scripts\SceneSpecific\GameOverScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Global" Collapsed="true">
+    <Position X="18.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBABgAACAAAQAACAQgggkjFEAAEyEAQBTCEQAYIEA=</HashCode>
+      <FileName>Assets\Scripts\Global\Global.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GooglePlayServices" Collapsed="true">
+    <Position X="25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACRAAAAACAAEAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Assets\Scripts\Global\GooglePlayServices.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoadingScene" Collapsed="true">
+    <Position X="17" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SceneSpecific\LoadingScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainCharacter" Collapsed="true">
+    <Position X="6" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JBQAAABAgiAAQAAAAAEAECACAAhAACCAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\Input\MainCharacter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainMenuScene" Collapsed="true">
+    <Position X="17" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAACBAACQAAAAAAABAAAABAAAAAAAAAAAACAAAAgA=</HashCode>
+      <FileName>Assets\Scripts\SceneSpecific\MainMenuScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Recolor" Collapsed="true">
+    <Position X="1" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAQAAAAAAAAAAAAIAABAAAAAEAAgAAAgAAAAA=</HashCode>
+      <FileName>Assets\Scripts\VisualEffects\Recolor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RenderTextureManager" Collapsed="true">
+    <Position X="1" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAFAAAACAAAAgAAIAAAgAAAgBAAEEAAAAAAAAAAAE=</HashCode>
+      <FileName>Assets\Scripts\VisualEffects\RenderTextureManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SettingScene" Collapsed="true">
+    <Position X="17" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQAAAAAACAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SceneSpecific\SettingScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Twirler" Collapsed="true">
+    <Position X="1" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAABAAAAAAAAAAAACAAARAAAEAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\VisualEffects\Twirler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BarrelDwarf" Collapsed="true">
+    <Position X="6" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Models\BarrelDwarf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BarrelEskimo" Collapsed="true">
+    <Position X="12.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Models\BarrelEskimo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crash" Collapsed="true">
+    <Position X="8" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAABAQAAAAAAAAAEBAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Models\Crash.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crate" Collapsed="true">
+    <Position X="12.25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Models\Crate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dragon" Collapsed="true">
+    <Position X="6" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAAAgACAEAQAAAAAAQAADAAQAGAAAQABAAAACAkA=</HashCode>
+      <FileName>Assets\Scripts\Models\Dragon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fireball" Collapsed="true">
+    <Position X="6" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAiAAACBAAAAAAAAAAAAAABAAAAAAAAQAAAA=</HashCode>
+      <FileName>Assets\Scripts\Models\Fireball.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Iceball" Collapsed="true">
+    <Position X="6" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAiAAACBIAAAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Assets\Scripts\Models\Iceball.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IceCrate" Collapsed="true">
+    <Position X="12.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Models\IceCrate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Minecart" Collapsed="true">
+    <Position X="6" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Models\Minecart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MineCarVehicle" Collapsed="true">
+    <Position X="6" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAACAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Models\MineCarVehicle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Orb" Collapsed="true">
+    <Position X="6" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAiAAAABAAAAAAAABAEAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Models\Orb.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pickaxe" Collapsed="true">
+    <Position X="6" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAiAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Models\Pickaxe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pillar" Collapsed="true">
+    <Position X="10" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAABAQAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Models\Pillar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowball" Collapsed="true">
+    <Position X="12.25" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Models\Snowball.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snowman" Collapsed="true">
+    <Position X="12.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Models\Snowman.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpawnManager" Collapsed="true">
+    <Position X="18.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAAAGEAAgQAQBFCAAACgggAgECASAASAABAAEA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\SpawnManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Stone" Collapsed="true">
+    <Position X="12.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Models\Stone.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TNT" Collapsed="true">
+    <Position X="12.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Models\TNT.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.ObstacleBase">
+    <Position X="9" Y="7.25" Width="1.5" />
+    <NestedTypes>
+      <Struct Name="Assets.Scripts.ObstacleBase.SpawnData" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Models\ObstacleBase.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAiAAACBBgAEAAAAAAkAABAAAAEAgAACAAAA=</HashCode>
+      <FileName>Assets\Scripts\Models\ObstacleBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.Parallaxing.BackgroundManager" Collapsed="true">
+    <Position X="18.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAgAAAAAAAAAAAAAAAAAAgAAIAAACIAAAEAA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\Parallaxing\BackgroundManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.Parallaxing.BackgroundPlane" Collapsed="true">
+    <Position X="12.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACDAABAAAAAAAAAABAAAAAAgAAAAAAQQIAQ=</HashCode>
+      <FileName>Assets\Scripts\Controllers\Parallaxing\BackgroundPlane.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.PerspectiveInitializer" Collapsed="true">
+    <Position X="18.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAACAECACAEAAADAgkABEEAACAAAAAAAAEAEAAIAEA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\PerspectiveInitializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Platform" Collapsed="true">
+    <Position X="18.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAAEACAAACAAAAAAAAABAAAAAAAAAAAgAAAEAAQ=</HashCode>
+      <FileName>Assets\Scripts\Controllers\Platforms\Platform.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.Objects.PlatformManager" Collapsed="true">
+    <Position X="20" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAIgBACAAAABAAAEIAAEAAAAAAAAAAAAQAACAAUA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\Platforms\PlatformManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.Swipe" Collapsed="true">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgBIMAAAAAAAAAAACAAQAAAADAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\Input\Swipe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
