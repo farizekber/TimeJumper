@@ -26,9 +26,7 @@ public class GameOverScene : MonoBehaviour {
         GetComponentsInChildren<Text>().Where(s => s.name == "Distance2").First().text = (int)Global.distance + "m";
         GetComponentsInChildren<Text>().Where(s => s.name == "HighestDistance2").First().text = PlayerPrefs.GetInt("Highest Distance") + "m";
 
-        int HighScoreBool = PlayerPrefs.GetInt("IsNewHighScore");
-
-        if (HighScoreBool == 1)
+        if (PlayerPrefs.GetInt("IsNewHighScore") == 1)
         {
             GameObject.Find("Particle System").GetComponent<ParticleSystem>().Play();
             GameObject.Find("Particle System (1)").GetComponent<ParticleSystem>().Play();
@@ -59,12 +57,14 @@ public class GameOverScene : MonoBehaviour {
     public void loadPlay()
     {
         audSource.PlayOneShot(button);
+        ApplicationGlobal.GlobalBackButtonEnabled = true;
         Application.LoadLevel("Loading");
     }
 
     public void loadMenu()
     {
         audSource.PlayOneShot(button);
+        ApplicationGlobal.GlobalBackButtonEnabled = true;
         Application.LoadLevel("MainMenu");
     }
 

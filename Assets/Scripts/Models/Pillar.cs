@@ -17,7 +17,6 @@ public class Pillar : MonoBehaviour {
 	void Update () {
         if (rigid.transform.localPosition.y <= 3.58f)
         {
-
             GameObject crash;
             if (GameObject.Find("PerspectiveInitializer").GetComponent<PerspectiveInitializer>().themeState == PerspectiveInitializer.ThemeState.Mine)
                 crash = GameObject.Find("Crash(Clone)");

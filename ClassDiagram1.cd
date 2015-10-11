@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="global.ApplicationGlobal" Collapsed="true">
-    <Position X="25" Y="1.5" Width="1.5" />
+    <Position X="12.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
       <FileName>Assets\Scripts\Global\ApplicationGlobal.cs</FileName>
@@ -15,56 +15,56 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Assets.Scripts.GameOverManager" Collapsed="true">
-    <Position X="20" Y="1" Width="1.5" />
+    <Position X="20.25" Y="1" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAQAAAAgAAAAABAAAgAAAAEABCAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Controllers\GameOverManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Assets.Scripts.ResourceManager" Collapsed="true">
-    <Position X="18.25" Y="4.75" Width="1.5" />
+    <Position X="20.25" Y="3.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AACEAABAACAAAAQAhEAAAAIDAABAAAAAIACgIQAAggA=</HashCode>
       <FileName>Assets\Scripts\Controllers\ResourceManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameOverScene" Collapsed="true">
-    <Position X="17" Y="7.75" Width="1.5" />
+    <Position X="23" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAACBAICAAAAAAAAAAAAAAACACAAAAAAAAAAAAAgA=</HashCode>
       <FileName>Assets\Scripts\SceneSpecific\GameOverScene.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Global" Collapsed="true">
-    <Position X="18.25" Y="3.25" Width="1.5" />
+    <Position X="12.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQBABgAACAAAQAACAQgggkjFEAAEyEAQBTCEQAYIEA=</HashCode>
       <FileName>Assets\Scripts\Global\Global.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GooglePlayServices" Collapsed="true">
-    <Position X="25" Y="0.75" Width="1.5" />
+    <Position X="12.5" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAACRAAAAACAAEAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
       <FileName>Assets\Scripts\Global\GooglePlayServices.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LoadingScene" Collapsed="true">
-    <Position X="17" Y="5.75" Width="1.5" />
+    <Position X="23" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAACAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\SceneSpecific\LoadingScene.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MainCharacter" Collapsed="true">
-    <Position X="6" Y="4" Width="1.5" />
+    <Position X="15.25" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>JBQAAABAgiAAQAAAAAEAECACAAhAACCAAAAAAAAAAEA=</HashCode>
       <FileName>Assets\Scripts\Controllers\Input\MainCharacter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MainMenuScene" Collapsed="true">
-    <Position X="17" Y="8.75" Width="1.5" />
+    <Position X="23" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABQAACBAACQAAAAAAABAAAABAAAAAAAAAAAACAAAAgA=</HashCode>
       <FileName>Assets\Scripts\SceneSpecific\MainMenuScene.cs</FileName>
@@ -85,7 +85,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SettingScene" Collapsed="true">
-    <Position X="17" Y="6.75" Width="1.5" />
+    <Position X="23" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQQAAAAAACAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\SceneSpecific\SettingScene.cs</FileName>
@@ -113,7 +113,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Crash" Collapsed="true">
-    <Position X="8" Y="5" Width="1.5" />
+    <Position X="10.25" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAACAAABAQAAAAAAAAAEBAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Models\Crash.cs</FileName>
@@ -183,7 +183,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Pillar" Collapsed="true">
-    <Position X="10" Y="5" Width="1.5" />
+    <Position X="12.25" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAACAAABAQAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Models\Pillar.cs</FileName>
@@ -204,7 +204,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SpawnManager" Collapsed="true">
-    <Position X="18.25" Y="1.75" Width="1.5" />
+    <Position X="17.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACQAAAAAAGEAAgQAQBFCAAACgggAgECASAASAABAAEA=</HashCode>
       <FileName>Assets\Scripts\Controllers\SpawnManager.cs</FileName>
@@ -239,42 +239,42 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Assets.Scripts.Parallaxing.BackgroundManager" Collapsed="true">
-    <Position X="18.25" Y="4" Width="1.5" />
+    <Position X="15.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAAgAAAAAAAAAAAAAAAAAAgAAIAAACIAAAEAA=</HashCode>
       <FileName>Assets\Scripts\Controllers\Parallaxing\BackgroundManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Assets.Scripts.Parallaxing.BackgroundPlane" Collapsed="true">
-    <Position X="12.25" Y="5" Width="1.5" />
+    <Position X="15.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACDAABAAAAAAAAAABAAAAAAgAAAAAAQQIAQ=</HashCode>
       <FileName>Assets\Scripts\Controllers\Parallaxing\BackgroundPlane.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Assets.Scripts.PerspectiveInitializer" Collapsed="true">
-    <Position X="18.25" Y="2.5" Width="1.5" />
+    <Position X="20.25" Y="2.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>BAAACAECACAEAAADAgkABEEAACAAAAAAAAEAEAAIAEA=</HashCode>
       <FileName>Assets\Scripts\Controllers\PerspectiveInitializer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Platform" Collapsed="true">
-    <Position X="18.25" Y="1" Width="1.5" />
+    <Position X="17.75" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQACAAEACAAACAAAAAAAAABAAAAAAAAAAAgAAAEAAQ=</HashCode>
       <FileName>Assets\Scripts\Controllers\Platforms\Platform.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Assets.Scripts.Objects.PlatformManager" Collapsed="true">
-    <Position X="20" Y="1.75" Width="1.5" />
+    <Position X="20.25" Y="1.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAQCAIgBACAAAABAAAEIAAEAAAAAAAAAAAAQAACAAUA=</HashCode>
       <FileName>Assets\Scripts\Controllers\Platforms\PlatformManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Assets.Scripts.Swipe" Collapsed="true">
-    <Position X="11" Y="1.5" Width="1.5" />
+    <Position X="15.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAgBIMAAAAAAAAAAACAAQAAAADAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Controllers\Input\Swipe.cs</FileName>

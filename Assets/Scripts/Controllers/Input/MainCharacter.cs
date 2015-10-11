@@ -171,11 +171,11 @@ public class MainCharacter : MonoBehaviour {
                     rigid.AddForce(new Vector2(0, 100f));
                 }
             }
-            else
-            {
-                rigid.velocity = new Vector2(0, 0);
-                rigid.AddForce(new Vector2(0, (Input.GetMouseButtonDown(0) ? 1 : -1) * 100.0f));
-            }
+            //else Debugging purposes
+            //{
+            //    rigid.velocity = new Vector2(0, 0);
+            //    rigid.AddForce(new Vector2(0, (Input.GetMouseButtonDown(0) ? 1 : -1) * 100.0f));
+            //}
         }
     }
 
@@ -217,7 +217,9 @@ public class MainCharacter : MonoBehaviour {
             currentTime = 0;
             lastButtonPresstime = 0;
         }
-        
+
+        bool buttonClicked = false;
+
         if(lastButtonPresstime + 10 < currentTime)
         {
             if (Global.Instance.orientation == 0)
@@ -226,11 +228,13 @@ public class MainCharacter : MonoBehaviour {
                 {
                     lastButtonPresstime = currentTime;
                     GameObject.Find("Global").GetComponent<Global>().PauseButton();
+                    buttonClicked = true;
                 }
                 else if (currentSwipe.Enabled && currentSwipe.xDirectionEnd > 12.8f && currentSwipe.yDirectionEnd > 6.45f)
                 {
                     lastButtonPresstime = currentTime;
                     GameObject.Find("Global").GetComponent<Global>().AudioButton();
+                    buttonClicked = true;
                 }
             }
             else
@@ -239,19 +243,24 @@ public class MainCharacter : MonoBehaviour {
                 {
                     lastButtonPresstime = currentTime;
                     GameObject.Find("Global").GetComponent<Global>().PauseButton();
+                    buttonClicked = true;
                 }
                 else if (currentSwipe.Enabled && currentSwipe.xDirectionEnd > 12.5f && currentSwipe.yDirectionEnd < 0.75f)
                 {
                     lastButtonPresstime = currentTime;
                     GameObject.Find("Global").GetComponent<Global>().AudioButton();
+                    buttonClicked = true;
                 }
             }
         }
 
-        if (Global.Instance.orientation == 0)
-            processHorizontalPerspective();
-        else
-            processVerticalPerspective();
+        if (!buttonClicked && lastButtonPresstime + 10 < currentTime)
+        {
+            if (Global.Instance.orientation == 0)
+                processHorizontalPerspective();
+            else
+                processVerticalPerspective();
+        }
 
         keepWithinScreen();
     }
